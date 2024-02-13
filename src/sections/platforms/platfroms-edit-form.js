@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Dialog from "@mui/material/Dialog";
 import Box from "@mui/material/Box";
@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Swal from "sweetalert2";
 
-const PlatfromAddForm = ({ onClose, fetchUpdatedData }) => {
+const EditPlatformForm = ({ platform, onClose, fetchUpdatedData }) => {
   const [formData, setFormData] = useState({
     name: "",
     icon: null,
@@ -14,10 +14,23 @@ const PlatfromAddForm = ({ onClose, fetchUpdatedData }) => {
     activeColor: "",
   });
 
+  useEffect(() => {
+    if (platform) {
+      setFormData({
+        name: platform.name || "",
+        icon: platform.icon || "",
+        background: platform.background || "",
+        activeColor: platform.activeColor || "",
+      });
+    }
+  }, [platform]);
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
     setFormData((prevData) => ({
       ...prevData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
@@ -45,15 +58,15 @@ const PlatfromAddForm = ({ onClose, fetchUpdatedData }) => {
       formDataToSend.append("background", formData.background);
       formDataToSend.append("activeColor", formData.activeColor);
 
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACK_END}/platform/create`,
+      const response = await axios.put(
+        `${process.env.NEXT_PUBLIC_BACK_END}/platform/${platform._id}`,
         formDataToSend
       );
       fetchUpdatedData();
 
       Swal.fire({
         title: "Done",
-        text: `${response.data.name} Add it successfully!`,
+        text: `${response.data.name} Update it successfully!`,
         icon: "success",
       });
 
@@ -69,7 +82,7 @@ const PlatfromAddForm = ({ onClose, fetchUpdatedData }) => {
   };
 
   return (
-    <Dialog open={true} onClose={onClose}>
+    <Dialog open={!!platform} onClose={onClose}>
       <Box
         sx={{
           p: 4,
@@ -79,7 +92,7 @@ const PlatfromAddForm = ({ onClose, fetchUpdatedData }) => {
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <h2 style={{ color: "var(--second-blue)", fontSize: "25px" }}>Platform Details</h2>
+        <h2 style={{ color: "var(--second-blue)" }}>Platform Details</h2>
         <form onSubmit={handleSubmit}>
           <TextField
             label="Name"
@@ -90,23 +103,16 @@ const PlatfromAddForm = ({ onClose, fetchUpdatedData }) => {
             fullWidth
             margin="normal"
             placeholder="Enter the platform name"
-            style={{ fontSize: "20px" }}
           />
 
-          <div style={{ display: "flex", flexDirection: "column", marginBottom: "20px" }}>
-            <label
-              htmlFor="icon"
-              style={{ marginTop: "15px", marginBottom: "10px", fontSize: "20px" }}
-            >
+          <div style={{ display: "flex", flexDirection: "column", marginBottom: "12px" }}>
+            <label htmlFor="icon" style={{ marginTop: "15px", marginBottom: "15px" }}>
               Upload an icon
             </label>
             <input accept="image/*" id="icon" type="file" name="icon" onChange={handleIconChange} />
           </div>
           <div style={{ display: "flex", flexDirection: "column", marginBottom: "12px" }}>
-            <label
-              htmlFor="back"
-              style={{ marginTop: "15px", marginBottom: "10px", fontSize: "20px" }}
-            >
+            <label htmlFor="back" style={{ marginTop: "15px", marginBottom: "15px" }}>
               Upload a background
             </label>
             <input
@@ -131,14 +137,7 @@ const PlatfromAddForm = ({ onClose, fetchUpdatedData }) => {
           <Button
             variant="contained"
             type="submit"
-            style={{
-              backgroundColor: "var(--second-blue)",
-              color: "white",
-              marginTop: "30px",
-              fontSize: "16px",
-              width: "100%",
-              borderRadius: "30px"
-            }}
+            style={{ backgroundColor: "#163357", color: "white", marginTop: "10px" }}
           >
             Add Platform
           </Button>
@@ -148,4 +147,4 @@ const PlatfromAddForm = ({ onClose, fetchUpdatedData }) => {
   );
 };
 
-export default PlatfromAddForm;
+export default EditPlatformForm;

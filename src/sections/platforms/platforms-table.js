@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
-import { format } from "date-fns";
+import axios from "axios";
+import Swal from "sweetalert2";
 import {
   Avatar,
   Box,
   Card,
-  Checkbox,
   Stack,
   Table,
   TableBody,
@@ -16,27 +16,56 @@ import {
 } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
 import { getInitials } from "src/utils/get-initials";
-import { width } from "@mui/system";
+import { useState } from "react";
+import EditProfileForm from "./platfroms-edit-form";
 
 export const PlatformsTable = (props) => {
+  const [isPlatformFormOpen, setIsPlatformFormOpen] = useState(false);
+  const [selectedPlaform, setSelectedPlaform] = useState(null);
+
   const {
     count = 0,
     items = [],
-    onDeselectAll,
-    onDeselectOne,
     onPageChange = () => {},
     onRowsPerPageChange,
-    onSelectAll,
-    onSelectOne,
     page = 0,
     rowsPerPage = 0,
     selected = [],
+    fetchUpdatedData,
   } = props;
 
-  console.log("items: ", items);
+  const handleEditClick = (plaform) => {
+    setIsPlatformFormOpen(true);
+    setSelectedPlaform(plaform);
+  };
 
-  const selectedSome = selected.length > 0 && selected.length < items.length;
-  const selectedAll = items.length > 0 && selected.length === items.length;
+  const handleDeleteClick = async (plaform) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FF0000",
+      cancelButtonColor: "#00306e",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`${process.env.NEXT_PUBLIC_BACK_END}/platform/${plaform._id}`);
+          fetchUpdatedData();
+
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+          onClose();
+        } catch (error) {
+          console.error("Error deleting platforms:", error);
+        }
+      }
+    });
+  };
 
   return (
     <Card>
@@ -45,17 +74,17 @@ export const PlatformsTable = (props) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Id</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>background</TableCell>
-                <TableCell>Active color</TableCell>
-                <TableCell>Created At</TableCell>
+                <TableCell style={{ fontSize: "14px" }}>Id</TableCell>
+                <TableCell style={{ fontSize: "14px" }}>Name</TableCell>
+                <TableCell style={{ fontSize: "14px" }}>background</TableCell>
+                <TableCell style={{ fontSize: "14px" }}>Active color</TableCell>
+                <TableCell style={{ fontSize: "14px" }}>Created At</TableCell>
+                <TableCell style={{ fontSize: "14px" }}>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {items.map((platform) => {
                 const isSelected = selected.includes(platform._id);
-                // const createdAt = format(platform.createdAt, "dd/MM/yyyy");
                 const createdAt = platform.createdAt;
                 const formattedDate = new Date(createdAt).toLocaleDateString("en-GB", {
                   day: "2-digit",
@@ -65,28 +94,67 @@ export const PlatformsTable = (props) => {
 
                 return (
                   <TableRow hover key={platform._id} selected={isSelected}>
-                    <TableCell>{platform._id}</TableCell>
+                    <TableCell style={{ fontSize: "16px" }}>{platform._id}</TableCell>
                     <TableCell>
                       <Stack alignItems="center" direction="row" spacing={2}>
-                        <Avatar src={`${process.env.NEXT_PUBLIC_BACK_END}/${platform.icon}`}>
+                        <Avatar
+                          src={`${process.env.NEXT_PUBLIC_BACK_END}/${platform.icon}`}
+                          style={{ fontSize: "16px", width: "40px", height: "40px" }}
+                        >
                           {getInitials(platform.name)}
                         </Avatar>
-                        <Typography variant="subtitle2">{platform.name}</Typography>
+                        <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
+                          {platform.name}
+                        </Typography>
                       </Stack>
                     </TableCell>
                     <TableCell>
                       <img
                         src={`${process.env.NEXT_PUBLIC_BACK_END}/${platform.background}`}
                         alt=""
-                        style={{ maxWidth: "150px", maxHeight: "200px" }}
+                        style={{ maxWidth: "125px", maxHeight: "200px" }}
                       />
                     </TableCell>
-                    <TableCell>{platform.activeColor}</TableCell>
-                    <TableCell>{formattedDate}</TableCell>
+                    <TableCell style={{ fontSize: "16px" }}>{platform.activeColor}</TableCell>
+                    <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
+                    <TableCell>
+                      <div style={{ display: "flex", gap: "8px" }}>
+                        <div
+                          onClick={() => handleEditClick(platform)}
+                          style={{ cursor: "pointer" }}
+                        >
+                          <img
+                            src="/assets/icons/pen-to-square-solid (1).svg"
+                            style={{ width: "22px" }}
+                            alt=""
+                          />
+                        </div>
+                        <div
+                          onClick={() => handleDeleteClick(platform)}
+                          style={{ cursor: "pointer" }}
+                        >
+                          {/* <DeleteIcon /> */}
+                          <img
+                            src="/assets/icons/trash-can-solid.svg"
+                            style={{ width: "20px" }}
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                    </TableCell>
                   </TableRow>
                 );
               })}
             </TableBody>
+            <section>
+              {isPlatformFormOpen && (
+                <EditProfileForm
+                  platform={selectedPlaform}
+                  onClose={() => setIsPlatformFormOpen(false)}
+                  fetchUpdatedData={fetchUpdatedData}
+                />
+              )}
+            </section>
           </Table>
         </Box>
       </Scrollbar>

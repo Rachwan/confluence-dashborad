@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState, useEffect } from "react";
 import axios from "axios";
 import Head from "next/head";
-import { subDays, subHours } from "date-fns";
 import ArrowDownOnSquareIcon from "@heroicons/react/24/solid/ArrowDownOnSquareIcon";
 import ArrowUpOnSquareIcon from "@heroicons/react/24/solid/ArrowUpOnSquareIcon";
 import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
@@ -13,8 +12,6 @@ import { PlatformsTable } from "src/sections/platforms/platforms-table";
 import { PlatformsSearch } from "src/sections/platforms/platforms-search";
 import { applyPagination } from "src/utils/apply-pagination";
 import PlatformAddForm from "src/sections/platforms/platforms-add-form";
-
-const now = new Date();
 
 const Page = () => {
   const [platformsData, setPlatformsData] = useState([]);
@@ -57,9 +54,8 @@ const Page = () => {
     setRowsPerPage(event.target.value);
   }, []);
 
-  ////////////////////////////////
   const [isAddFormOpen, setIsAddFormOpen] = useState(false);
-  // const [isBrandFormOpen, setIsBrandFormOpen] = useState(false);
+
   const handleAddClick = () => {
     setIsAddFormOpen(true);
   };
@@ -67,7 +63,6 @@ const Page = () => {
   const handleAddFormClose = () => {
     setIsAddFormOpen(false);
   };
-  ////////////////////////////////
 
   return (
     <>
@@ -94,6 +89,7 @@ const Page = () => {
                         <ArrowUpOnSquareIcon />
                       </SvgIcon>
                     }
+                    style={{ fontSize: "16px" }}
                   >
                     Import
                   </Button>
@@ -104,6 +100,7 @@ const Page = () => {
                         <ArrowDownOnSquareIcon />
                       </SvgIcon>
                     }
+                    style={{ fontSize: "16px" }}
                   >
                     Export
                   </Button>
@@ -116,6 +113,11 @@ const Page = () => {
                       <PlusIcon />
                     </SvgIcon>
                   }
+                  style={{
+                    fontSize: "16px",
+                    backgroundColor: "var(--second-blue)",
+                    borderRadius: "30px",
+                  }}
                   variant="contained"
                 >
                   Add Platform
@@ -135,22 +137,13 @@ const Page = () => {
               page={page}
               rowsPerPage={rowsPerPage}
               selected={platformsSelection.selected}
+              fetchUpdatedData={fetchPlatformsData}
             />
           </Stack>
         </Container>
         <section>
-          {/* {isBrandFormOpen && (
-            <EditBrandForm
-              brand={selectedBrand}
-              onClose={() => setIsBrandFormOpen(false)}
-              fetchUpdatedData={fetchPlatformsData} // Pass the function to fetch updated data
-            />
-          )} */}
           {isAddFormOpen && (
-            <PlatformAddForm
-              onClose={handleAddFormClose}
-              fetchUpdatedData={fetchPlatformsData} // Pass the function to fetch updated data
-            />
+            <PlatformAddForm onClose={handleAddFormClose} fetchUpdatedData={fetchPlatformsData} />
           )}
         </section>
       </Box>

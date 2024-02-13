@@ -10,9 +10,18 @@ input::file-selector-button {
   outline: none;
   cursor: pointer;
   padding: 5px 10px;
-  border-radius: 2px;
+  border-radius: 4px;
   transition: var(--main-transition);
 }
 input::file-selector-button:hover {
   background-color: var(--black-color);
+}
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm  {
+  border: none !important;
+  outline: none !important;
+}
+
+.css-1uruvu9-MuiInputBase-root-MuiOutlinedInput-root {
+  border-radius: 30px !important;
 }
