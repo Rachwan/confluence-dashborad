@@ -1,0 +1,64 @@
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 50px;
+  width: 50%;
+}
+.content img {
+  max-width: 75%;
+}
+.content .message {
+  text-align: left;
+  font-size: 25px;
+}
+.mainImage {
+  width: 50%;
+}
+.mainImage img {
+  max-width: 100%;
+}
+.button__wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.button {
+  color: var(--white-color);
+  padding: 12px 25px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  border-radius: 30px;
+  display: block;
+  width: fit-content;
+  cursor: pointer;
+  transition: var(--main-transition);
+  background: var(--main-blue);
+}
+.button:hover {
+  background: var(--black-color);
+}
+
+@media (max-width: 767px) {
+  .mainImage {
+    display: none;
+  }
+  .content {
+    width: 100%;
+  }
+}

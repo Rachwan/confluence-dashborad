@@ -6,9 +6,14 @@ import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material';
 import { useSelection } from 'src/hooks/use-selection';
+
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
-import { CustomersTable } from 'src/sections/customer/customers-table';
-import { CustomersSearch } from 'src/sections/customer/customers-search';
+// import { CustomersTable } from 'src/sections/customer/customers-table';
+// import { CustomersSearch } from 'src/sections/customer/customers-search';
+// import { InfluencersTable } from 'src/sections/influencer/influencers-table.js';
+// import { InfluencersSearch } from 'src/sections/influencer/influencers-search.js';
+import { InfluencersTable } from 'src/sections/influencer/influencer-table';
+import { InfluencersSearch } from 'src/sections/influencer/influencer-search';
 import { applyPagination } from 'src/utils/apply-pagination';
 
 const now = new Date();
@@ -156,7 +161,7 @@ const data = [
   }
 ];
 
-const useCustomers = (page, rowsPerPage) => {
+const useInfluencers = (page, rowsPerPage) => {
   return useMemo(
     () => {
       return applyPagination(data, page, rowsPerPage);
@@ -165,21 +170,21 @@ const useCustomers = (page, rowsPerPage) => {
   );
 };
 
-const useCustomerIds = (customers) => {
+const useInfluencerIds = (influencers) => {
   return useMemo(
     () => {
-      return customers.map((customer) => customer.id);
+      return influencers.map((influencer) => influencer.id);
     },
-    [customers]
+    [influencers]
   );
 };
 
 const Page = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const customers = useCustomers(page, rowsPerPage);
-  const customersIds = useCustomerIds(customers);
-  const customersSelection = useSelection(customersIds);
+  const influencers = useInfluencers(page, rowsPerPage);
+  const influencersIds = useInfluencerIds(influencers);
+  const influencersSelection = useSelection(influencersIds);
 
   const handlePageChange = useCallback(
     (event, value) => {
@@ -199,7 +204,7 @@ const Page = () => {
     <>
       <Head>
         <title>
-          Customers | Devias Kit
+          Influencers | Devias Kit
         </title>
       </Head>
       <Box
@@ -218,7 +223,7 @@ const Page = () => {
             >
               <Stack spacing={1}>
                 <Typography variant="h4">
-                  Customers
+                influencers
                 </Typography>
                 <Stack
                   alignItems="center"
@@ -260,19 +265,19 @@ const Page = () => {
                 </Button>
               </div>
             </Stack>
-            <CustomersSearch />
-            <CustomersTable
+            <InfluencersSearch />
+            <InfluencersTable
               count={data.length}
-              items={customers}
-              onDeselectAll={customersSelection.handleDeselectAll}
-              onDeselectOne={customersSelection.handleDeselectOne}
+              items={influencers}
+              onDeselectAll={influencersSelection.handleDeselectAll}
+              onDeselectOne={influencersSelection.handleDeselectOne}
               onPageChange={handlePageChange}
               onRowsPerPageChange={handleRowsPerPageChange}
-              onSelectAll={customersSelection.handleSelectAll}
-              onSelectOne={customersSelection.handleSelectOne}
+              onSelectAll={influencersSelection.handleSelectAll}
+              onSelectOne={influencersSelection.handleSelectOne}
               page={page}
               rowsPerPage={rowsPerPage}
-              selected={customersSelection.selected}
+              selected={influencersSelection.selected}
             />
           </Stack>
         </Container>
