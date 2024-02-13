@@ -12,22 +12,23 @@ import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import { PlatformsTable } from "src/sections/platforms/platforms-table";
 import { PlatformsSearch } from "src/sections/platforms/platforms-search";
 import { applyPagination } from "src/utils/apply-pagination";
+import PlatformAddForm from "src/sections/platforms/platforms-add-form";
 
 const now = new Date();
 
 const Page = () => {
   const [platformsData, setPlatformsData] = useState([]);
 
-  useEffect(() => {
-    const fetchPlatformsData = async () => {
-      try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/platform/all`);
-        setPlatformsData(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const fetchPlatformsData = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/platform/all`);
+      setPlatformsData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  useEffect(() => {
     fetchPlatformsData();
   }, []);
 
@@ -55,6 +56,18 @@ const Page = () => {
   const handleRowsPerPageChange = useCallback((event) => {
     setRowsPerPage(event.target.value);
   }, []);
+
+  ////////////////////////////////
+  const [isAddFormOpen, setIsAddFormOpen] = useState(false);
+  // const [isBrandFormOpen, setIsBrandFormOpen] = useState(false);
+  const handleAddClick = () => {
+    setIsAddFormOpen(true);
+  };
+
+  const handleAddFormClose = () => {
+    setIsAddFormOpen(false);
+  };
+  ////////////////////////////////
 
   return (
     <>
@@ -96,7 +109,7 @@ const Page = () => {
                   </Button>
                 </Stack>
               </Stack>
-              <div>
+              <div onClick={handleAddClick}>
                 <Button
                   startIcon={
                     <SvgIcon fontSize="small">
@@ -105,7 +118,7 @@ const Page = () => {
                   }
                   variant="contained"
                 >
-                  Add
+                  Add Platform
                 </Button>
               </div>
             </Stack>
@@ -125,6 +138,21 @@ const Page = () => {
             />
           </Stack>
         </Container>
+        <section>
+          {/* {isBrandFormOpen && (
+            <EditBrandForm
+              brand={selectedBrand}
+              onClose={() => setIsBrandFormOpen(false)}
+              fetchUpdatedData={fetchPlatformsData} // Pass the function to fetch updated data
+            />
+          )} */}
+          {isAddFormOpen && (
+            <PlatformAddForm
+              onClose={handleAddFormClose}
+              fetchUpdatedData={fetchPlatformsData} // Pass the function to fetch updated data
+            />
+          )}
+        </section>
       </Box>
     </>
   );

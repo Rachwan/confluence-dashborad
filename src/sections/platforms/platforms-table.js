@@ -78,7 +78,7 @@ export const PlatformsTable = (props) => {
                       <img
                         src={`${process.env.NEXT_PUBLIC_BACK_END}/${platform.background}`}
                         alt=""
-                        style={{ maxWidth: "200px", maxHeight: "200px" }}
+                        style={{ maxWidth: "150px", maxHeight: "200px" }}
                       />
                     </TableCell>
                     <TableCell>{platform.activeColor}</TableCell>

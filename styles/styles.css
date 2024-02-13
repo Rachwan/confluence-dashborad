@@ -2,3 +2,17 @@
 .css-va78e6 {
   font-size: 18px !important;
 }
+
+input::file-selector-button {
+  background-color: var(--second-blue);
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 2px;
+  transition: var(--main-transition);
+}
+input::file-selector-button:hover {
+  background-color: var(--black-color);
+}
