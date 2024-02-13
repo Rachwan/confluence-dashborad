@@ -8,12 +8,14 @@ import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/materia
 import { useSelection } from 'src/hooks/use-selection';
 
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout';
+
 // import { CustomersTable } from 'src/sections/customer/customers-table';
 // import { CustomersSearch } from 'src/sections/customer/customers-search';
 // import { InfluencersTable } from 'src/sections/influencer/influencers-table.js';
 // import { InfluencersSearch } from 'src/sections/influencer/influencers-search.js';
-import { InfluencersTable } from 'src/sections/influencer/influencer-table';
-import { InfluencersSearch } from 'src/sections/influencer/influencer-search';
+
+import { InfluencersTable } from 'src/sections/influencers/influencers-table';
+import { InfluencersSearch } from 'src/sections/influencers/influencers-search';
 import { applyPagination } from 'src/utils/apply-pagination';
 
 const now = new Date();
