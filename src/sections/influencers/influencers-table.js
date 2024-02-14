@@ -155,7 +155,7 @@ export const InfluencersTable = (props) => {
                     </TableCell>
                     <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
                     <TableCell>
-                      <div style={{ position: "relative", left: "20px" }}>
+                      <div style={{ position: "relative", left: "20px", width: "fit-content" }}>
                         {/* <div
                           onClick={() => handleEditClick(influencer)}
                           style={{ cursor: "pointer" }}

@@ -73,6 +73,24 @@ export const items = [
     ),
   },
   {
+    title: "Soon",
+    path: "/soon",
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    ),
+  },
+  {
+    title: "Subscribers",
+    path: "/subscribers",
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    ),
+  },
+  {
     title: "Account",
     path: "/account",
     icon: (

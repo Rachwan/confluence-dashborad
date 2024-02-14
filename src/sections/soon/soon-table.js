@@ -2,22 +2,18 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import Swal from "sweetalert2";
 import {
-  Avatar,
   Box,
   Card,
-  Stack,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TablePagination,
   TableRow,
-  Typography,
 } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
-import { getInitials } from "src/utils/get-initials";
 
-export const BusinessesTable = (props) => {
+export const SoonTable = (props) => {
   const {
     count = 0,
     items = [],
@@ -29,7 +25,7 @@ export const BusinessesTable = (props) => {
     fetchUpdatedData,
   } = props;
 
-  const handleDeleteClick = async (business) => {
+  const handleDeleteClick = async (soon) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -41,7 +37,7 @@ export const BusinessesTable = (props) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`${process.env.NEXT_PUBLIC_BACK_END}/user/${business._id}`);
+          await axios.delete(`${process.env.NEXT_PUBLIC_BACK_END}/soon/${soon._id}`);
           fetchUpdatedData();
 
           Swal.fire({
@@ -51,7 +47,7 @@ export const BusinessesTable = (props) => {
           });
           onClose();
         } catch (error) {
-          console.error("Error deleting business:", error);
+          console.error("Error deleting soon:", error);
         }
       }
     });
@@ -65,17 +61,15 @@ export const BusinessesTable = (props) => {
             <TableHead>
               <TableRow>
                 <TableCell style={{ fontSize: "14px" }}>Id</TableCell>
-                <TableCell style={{ fontSize: "14px" }}>Name</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Email</TableCell>
-                <TableCell style={{ fontSize: "14px" }}>Number</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Created At</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((business) => {
-                const isSelected = selected.includes(business._id);
-                const createdAt = business.createdAt;
+              {items.map((soon) => {
+                const isSelected = selected.includes(soon._id);
+                const createdAt = soon.createdAt;
                 const formattedDate = new Date(createdAt).toLocaleDateString("en-GB", {
                   day: "2-digit",
                   month: "2-digit",
@@ -83,30 +77,13 @@ export const BusinessesTable = (props) => {
                 });
 
                 return (
-                  <TableRow hover key={business._id} selected={isSelected}>
-                    <TableCell style={{ fontSize: "16px" }}>{business._id}</TableCell>
-                    <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
-                        <Avatar
-                          src={`${process.env.NEXT_PUBLIC_BACK_END}/${business.profile}`}
-                          style={{ fontSize: "16px", width: "60px", height: "60px" }}
-                        >
-                          {getInitials(business.name)}
-                        </Avatar>
-                        <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
-                          {business.name}
-                        </Typography>
-                      </Stack>
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>{business.email}</TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>{business.number}</TableCell>
+                  <TableRow hover key={soon._id} selected={isSelected}>
+                    <TableCell style={{ fontSize: "16px" }}>{soon._id}</TableCell>
+                    <TableCell style={{ fontSize: "16px" }}>{soon.email}</TableCell>
                     <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
                     <TableCell>
-                      <div style={{ position: "relative", left: "20px", width: "fit-content" }}>
-                        <div
-                          onClick={() => handleDeleteClick(business)}
-                          style={{ cursor: "pointer" }}
-                        >
+                      <div style={{ position: "relative", left: "20px", width: 'fit-content' }}>
+                        <div onClick={() => handleDeleteClick(soon)} style={{ cursor: "pointer" }}>
                           <img
                             src="/assets/icons/trash-can-solid.svg"
                             style={{ width: "20px" }}
@@ -135,7 +112,7 @@ export const BusinessesTable = (props) => {
   );
 };
 
-BusinessesTable.propTypes = {
+SoonTable.propTypes = {
   count: PropTypes.number,
   items: PropTypes.array,
   onDeselectAll: PropTypes.func,
