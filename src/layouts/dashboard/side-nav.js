@@ -2,7 +2,7 @@ import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import PropTypes from "prop-types";
 import ArrowTopRightOnSquareIcon from "@heroicons/react/24/solid/ArrowTopRightOnSquareIcon";
-// import ChevronUpDownIcon from '@heroicons/react/24/solid/ChevronUpDownIcon';
+import ChevronUpDownIcon from "@heroicons/react/24/solid/ChevronUpDownIcon";
 import {
   Box,
   Button,
@@ -44,7 +44,7 @@ export const SideNav = (props) => {
         }}
       >
         <Box sx={{ p: 3 }}>
-          <Box
+          {/* <Box
             component={NextLink}
             href="/"
             sx={{
@@ -56,10 +56,16 @@ export const SideNav = (props) => {
           >
             <img src="/assets/logos/confluence-footer.svg" alt="" />
             <Typography
-            sx={{
-              color: "white", fontSize: "25px", fontWeight: "bold", marginLeft: "20px"
-            }}>Confluence</Typography>
-          </Box>
+              sx={{
+                color: "white",
+                fontSize: "25px",
+                fontWeight: "bold",
+                marginLeft: "20px",
+              }}
+            >
+              Confluence
+            </Typography>
+          </Box> */}
           <Box
             sx={{
               alignItems: "center",
@@ -72,13 +78,13 @@ export const SideNav = (props) => {
               p: "12px",
             }}
           >
-              {/* <Typography
+            {/* <Typography
                 color="inherit"
                 fontSize="20px"
                 variant="subtitle1"
               >
                 Confluence
-              </Typography> */}
+              </Typography>
               <Typography
                 // color="neutral.400"
                 fontSize="20px"
@@ -86,11 +92,30 @@ export const SideNav = (props) => {
                 variant="body2"
               >
                 Dashboard
-              </Typography>
-            {/* <SvgIcon
-              fontSize="small"
-              sx={{ color: 'neutral.500' }}
+              </Typography> */}
+            <Box
+              component={NextLink}
+              href="/"
+              sx={{
+                display: "inline-flex",
+                justifyContent: "center",
+                height: 32,
+                width: "100%",
+              }}
             >
+              <img src="/assets/logos/confluence-footer.svg" alt="" />
+              <Typography
+                sx={{
+                  color: "white",
+                  fontSize: "25px",
+                  fontWeight: "bold",
+                  marginLeft: "20px",
+                }}
+              >
+                Confluence
+              </Typography>
+            </Box>
+            {/* <SvgIcon fontSize="small" sx={{ color: "neutral.500" }}>
               <ChevronUpDownIcon />
             </SvgIcon> */}
           </Box>
