@@ -92,7 +92,7 @@ const EditCategoryForm = ({ category, onClose, fetchUpdatedData }) => {
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <h2 style={{ color: "var(--second-blue)" }}>category Details</h2>
+        <h2 style={{ color: "var(--second-blue)", fontSize: "25px" }}>Category Details</h2>
         <form onSubmit={handleSubmit}>
           <TextField
             label="Name"

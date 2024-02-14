@@ -28,6 +28,15 @@ export const items = [
     ),
   },
   {
+    title: "Companies",
+    path: "/companies",
+    icon: (
+      <SvgIcon fontSize="small">
+        <ShoppingBagIcon />
+      </SvgIcon>
+    ),
+  },
+  {
     title: "Platforms",
     path: "/platforms",
     icon: (
@@ -46,11 +55,11 @@ export const items = [
     ),
   },
   {
-    title: "Companies",
-    path: "/companies",
+    title: "Cities",
+    path: "/cities",
     icon: (
       <SvgIcon fontSize="small">
-        <ShoppingBagIcon />
+        <UsersIcon />
       </SvgIcon>
     ),
   },

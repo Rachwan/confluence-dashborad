@@ -137,9 +137,16 @@ const EditPlatformForm = ({ platform, onClose, fetchUpdatedData }) => {
           <Button
             variant="contained"
             type="submit"
-            style={{ backgroundColor: "#163357", color: "white", marginTop: "10px" }}
+            style={{
+              backgroundColor: "var(--second-blue)",
+              color: "white",
+              marginTop: "30px",
+              fontSize: "16px",
+              width: "100%",
+              borderRadius: "30px",
+            }}
           >
-            Add Platform
+            Edit Platform
           </Button>
         </form>
       </Box>
