@@ -22,7 +22,7 @@ const Page = () => {
         `${process.env.NEXT_PUBLIC_BACK_END}/user/get/influencer`
       );
       setinfluencersData(response.data);
-      console.log(response.data);
+      console.log("response.data:", response.data);
     } catch (error) {
       console.error(error);
     }

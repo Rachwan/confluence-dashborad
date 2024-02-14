@@ -17,11 +17,11 @@ import {
 import { Scrollbar } from "src/components/scrollbar";
 import { getInitials } from "src/utils/get-initials";
 import { useState } from "react";
-import EditInfluencerForm from "./influencers-edit-form";
+// import EditInfluencerForm from "./influencers-edit-form";
 
 export const InfluencersTable = (props) => {
-  const [isInfluencerFormOpen, setIsInfluencerFormOpen] = useState(false);
-  const [selectedInfluencer, setSelectedInfluencer] = useState(null);
+  // const [isInfluencerFormOpen, setIsInfluencerFormOpen] = useState(false);
+  // const [selectedInfluencer, setSelectedInfluencer] = useState(null);
 
   const {
     count = 0,
@@ -34,10 +34,10 @@ export const InfluencersTable = (props) => {
     fetchUpdatedData,
   } = props;
 
-  const handleEditClick = (infleuncer) => {
-    setIsInfluencerFormOpen(true);
-    setSelectedInfluencer(infleuncer);
-  };
+  // const handleEditClick = (infleuncer) => {
+  //   setIsInfluencerFormOpen(true);
+  //   setSelectedInfluencer(infleuncer);
+  // };
 
   const handleDeleteClick = async (infleuncer) => {
     Swal.fire({
@@ -51,7 +51,7 @@ export const InfluencersTable = (props) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`${process.env.NEXT_PUBLIC_BACK_END}/infleuncer/${infleuncer._id}`);
+          await axios.delete(`${process.env.NEXT_PUBLIC_BACK_END}/user/${infleuncer._id}`);
           fetchUpdatedData();
 
           Swal.fire({
@@ -155,8 +155,8 @@ export const InfluencersTable = (props) => {
                     </TableCell>
                     <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
                     <TableCell>
-                      <div style={{ display: "flex", gap: "8px" }}>
-                        <div
+                      <div style={{ position: "relative", left: "20px" }}>
+                        {/* <div
                           onClick={() => handleEditClick(influencer)}
                           style={{ cursor: "pointer" }}
                         >
@@ -165,7 +165,7 @@ export const InfluencersTable = (props) => {
                             style={{ width: "22px" }}
                             alt=""
                           />
-                        </div>
+                        </div> */}
                         <div
                           onClick={() => handleDeleteClick(influencer)}
                           style={{ cursor: "pointer" }}
@@ -182,7 +182,7 @@ export const InfluencersTable = (props) => {
                 );
               })}
             </TableBody>
-            <section>
+            {/* <section>
               {isInfluencerFormOpen && (
                 <EditInfluencerForm
                   Influencer={selectedInfluencer}
@@ -190,7 +190,7 @@ export const InfluencersTable = (props) => {
                   fetchUpdatedData={fetchUpdatedData}
                 />
               )}
-            </section>
+            </section> */}
           </Table>
         </Box>
       </Scrollbar>

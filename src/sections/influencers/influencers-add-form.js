@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Dialog from "@mui/material/Dialog";
 import Box from "@mui/material/Box";
@@ -9,10 +9,69 @@ import Swal from "sweetalert2";
 const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
   const [formData, setFormData] = useState({
     name: "",
-    icon: null,
+    email: "",
+    password: "",
+    age: "",
+    number: "",
+    platforms: [],
+    profile: null,
     background: null,
-    activeColor: "",
+    cityId: "",
+    categoryId: "",
   });
+
+  /* Fethcing neccessary data */
+  const [categoriesData, setCategoriesData] = useState([]);
+
+  const fetchCategoriesData = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/category/all`);
+      setCategoriesData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategoriesData();
+  }, []);
+
+  /* */
+
+  const [platformsData, setPlatformsData] = useState([]);
+
+  const fetchPlatformsData = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/platform/all`);
+      setPlatformsData(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPlatformsData();
+  }, []);
+
+  /* */
+
+  const [citiesData, setCitiesData] = useState([]);
+
+  const fetchCitiesData = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/city/all`);
+      setCitiesData(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCitiesData();
+  }, []);
+
+  /* Fetching ends here */
 
   const handleChange = (e) => {
     setFormData((prevData) => ({
@@ -21,10 +80,34 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
     }));
   };
 
-  const handleIconChange = (e) => {
+  const handlePlatformsChange = (e, thePlatform) => {
+    const { name, value } = e.target;
+
+    const existingPlatform = formData.platforms.find(
+      (platform) => platform.platformId === thePlatform._id
+    );
+
+    const updatedPlatforms = formData.platforms.map((platform) =>
+      platform.platformId === thePlatform._id ? { ...platform, followers: value } : platform
+    );
+
+    if (!existingPlatform) {
+      updatedPlatforms.push({
+        platformId: thePlatform._id,
+        followers: value,
+      });
+    }
+
     setFormData((prevData) => ({
       ...prevData,
-      icon: e.target.files[0],
+      platforms: updatedPlatforms,
+    }));
+  };
+
+  const handleProfileChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      profile: e.target.files[0],
     }));
   };
 
@@ -39,15 +122,14 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
     e.preventDefault();
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("icon", formData.icon);
-      formDataToSend.append("background", formData.background);
-      formDataToSend.append("activeColor", formData.activeColor);
-
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACK_END}/platform/create`,
-        formDataToSend
+        `${process.env.NEXT_PUBLIC_BACK_END}/user/add/influencer`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       fetchUpdatedData();
 
@@ -64,7 +146,7 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
         title: "Oops...",
         text: "Something went wrong! Try again.",
       });
-      console.error("Error adding plaform:", error);
+      console.error("Error adding influencer:", error);
     }
   };
 
@@ -80,7 +162,7 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
         }}
       >
         <h2 style={{ color: "var(--second-blue)", fontSize: "25px" }}>Influencer Details</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
           <TextField
             label="Name"
             type="text"
@@ -89,25 +171,124 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
             onChange={handleChange}
             fullWidth
             margin="normal"
-            placeholder="Enter the Influencer name"
+            placeholder="Influencer name"
+            style={{ fontSize: "20px" }}
+          />
+          <TextField
+            label="Email"
+            type="email"
+            name="email"
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            placeholder="Influencer email"
+            style={{ fontSize: "20px" }}
+          />
+          <TextField
+            label="Password"
+            type="password"
+            name="password"
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            placeholder="Influencer password"
+            style={{ fontSize: "20px" }}
+          />
+          <TextField
+            label="Age"
+            type="text"
+            name="age"
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            placeholder="Influencer age"
+            style={{ fontSize: "20px" }}
+          />
+          <TextField
+            label="Phone"
+            type="text"
+            name="number"
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            placeholder="Influencer number"
             style={{ fontSize: "20px" }}
           />
 
+          {/* Category */}
+          <div>
+            <label htmlFor="dropdown">Category</label>
+            <select name="categoryId" id="dropdown" onChange={handleChange}>
+              <option value="">Select a Category</option>
+              {categoriesData
+                ? categoriesData.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))
+                : "Loding Categories"}
+            </select>
+          </div>
+
+          {/* City */}
+          <div>
+            <label htmlFor="cdropdown">City</label>
+            <select name="cityId" id="cdropdown" onChange={handleChange}>
+              <option value="">Select a City</option>
+              {citiesData
+                ? citiesData.map((city) => (
+                    <option key={city._id} value={city._id}>
+                      {city.name}
+                    </option>
+                  ))
+                : "Loding Cities"}
+            </select>
+          </div>
+
+          {/* Platforms */}
+          <div>
+            <label htmlFor="pdropdown">Platforms</label>
+            {platformsData
+              ? platformsData.map((platform, index) => (
+                  <>
+                    <TextField
+                      key={platform._id}
+                      label={`${platform.name}`}
+                      type="number"
+                      name={platform._id}
+                      onChange={(e) => handlePlatformsChange(e, platform)}
+                      fullWidth
+                      margin="normal"
+                      placeholder={`Number of followers`}
+                      style={{ fontSize: "20px" }}
+                    />
+                  </>
+                ))
+              : "Loading Platforms"}
+          </div>
+
+          {/* Images */}
           <div style={{ display: "flex", flexDirection: "column", marginBottom: "20px" }}>
             <label
-              htmlFor="icon"
+              htmlFor="pro"
               style={{ marginTop: "15px", marginBottom: "10px", fontSize: "20px" }}
             >
-              Upload an icon
+              Upload the profile
             </label>
-            <input accept="image/*" id="icon" type="file" name="icon" onChange={handleIconChange} />
+            <input
+              accept="image/*"
+              id="pro"
+              type="file"
+              name="profile"
+              onChange={handleProfileChange}
+            />
           </div>
           <div style={{ display: "flex", flexDirection: "column", marginBottom: "12px" }}>
             <label
               htmlFor="back"
               style={{ marginTop: "15px", marginBottom: "10px", fontSize: "20px" }}
             >
-              Upload a background
+              Upload the background
             </label>
             <input
               accept="image/*"
@@ -117,16 +298,6 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
               onChange={handleBackgroundChange}
             />
           </div>
-          <TextField
-            label="Active Color"
-            type="text"
-            name="activeColor"
-            value={formData.activeColor}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-            placeholder="Enter the Active Color"
-          />
 
           <Button
             variant="contained"
@@ -137,7 +308,7 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
               marginTop: "30px",
               fontSize: "16px",
               width: "100%",
-              borderRadius: "30px"
+              borderRadius: "30px",
             }}
           >
             Add Influencer

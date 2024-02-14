@@ -17,7 +17,7 @@ input::file-selector-button:hover {
   background-color: var(--black-color);
 }
 
-div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm  {
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   border: none !important;
   outline: none !important;
 }
