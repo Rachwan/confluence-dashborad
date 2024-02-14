@@ -27,15 +27,15 @@ export const items = [
       </SvgIcon>
     ),
   },
-  {
-    title: "Companies",
-    path: "/companies",
-    icon: (
-      <SvgIcon fontSize="small">
-        <ShoppingBagIcon />
-      </SvgIcon>
-    ),
-  },
+  // {
+  //   title: "Companies",
+  //   path: "/companies",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <ShoppingBagIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
   {
     title: "Businesses",
     path: "/businesses",
@@ -59,7 +59,7 @@ export const items = [
     path: "/categories",
     icon: (
       <SvgIcon fontSize="small">
-        <UsersIcon />
+        <UserIcon />
       </SvgIcon>
     ),
   },
@@ -77,7 +77,7 @@ export const items = [
     path: "/soon",
     icon: (
       <SvgIcon fontSize="small">
-        <UsersIcon />
+        <UserIcon />
       </SvgIcon>
     ),
   },
@@ -87,6 +87,33 @@ export const items = [
     icon: (
       <SvgIcon fontSize="small">
         <UsersIcon />
+      </SvgIcon>
+    ),
+  },
+  {
+    title: "My Info Details",
+    path: "/influencer-details",
+    icon: (
+      <SvgIcon fontSize="small">
+        <UserIcon />
+      </SvgIcon>
+    ),
+  },
+  {
+    title: "My Collaborations",
+    path: "/soon",
+    icon: (
+      <SvgIcon fontSize="small">
+        <UsersIcon />
+      </SvgIcon>
+    ),
+  },
+  {
+    title: "Add Collaboration",
+    path: "/soon",
+    icon: (
+      <SvgIcon fontSize="small">
+        <UserIcon />
       </SvgIcon>
     ),
   },
@@ -108,31 +135,31 @@ export const items = [
       </SvgIcon>
     ),
   },
-  {
-    title: "Login",
-    path: "/auth/login",
-    icon: (
-      <SvgIcon fontSize="small">
-        <LockClosedIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Register",
-    path: "/auth/register",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserPlusIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Error",
-    path: "/404",
-    icon: (
-      <SvgIcon fontSize="small">
-        <XCircleIcon />
-      </SvgIcon>
-    ),
-  },
+  // {
+  //   title: "Login",
+  //   path: "/auth/login",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <LockClosedIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
+  // {
+  //   title: "Register",
+  //   path: "/auth/register",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserPlusIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
+  // {
+  //   title: "Error",
+  //   path: "/404",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <XCircleIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
 ];

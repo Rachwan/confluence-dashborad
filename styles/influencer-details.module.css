@@ -1,0 +1,67 @@
+.form {
+  width: 100%;
+}
+.all__inputs {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+.all__inputs > div {
+  width: 50%;
+}
+/* All inputs */
+.input__title {
+}
+.input,
+.platform__input {
+  margin: 0;
+}
+
+/* Inputs */
+.inputs {
+}
+.input {
+}
+
+/* Platforms */
+.platforms {
+}
+.platform__input {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+  .form {
+    width: 100%;
+  }
+  .all__inputs {
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  }
+  .all__inputs > div {
+    width: 100%;
+  }
+  /* All inputs */
+  .input__title {
+  }
+  .input,
+  .platform__input {
+    margin: 0;
+  }
+
+  /* Inputs */
+  .inputs {
+  }
+  .input {
+  }
+
+  /* Platforms */
+  .platforms {
+  }
+  .platform__input {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+}

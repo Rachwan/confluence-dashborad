@@ -25,3 +25,58 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 .css-1uruvu9-MuiInputBase-root-MuiOutlinedInput-root {
   border-radius: 30px !important;
 }
+
+/* Styles for the select options */
+.select__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.upload .label,
+.select__wrapper .label {
+  font-size: 20px;
+  font-weight: 500;
+  color: #111927;
+}
+.select__wrapper .arrow {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: transparent;
+  border-radius: 8px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e5e7eb;
+  overflow: hidden;
+  background-color: transparent;
+  padding: 0 8px 0;
+  margin-bottom: 15px;
+}
+.select__wrapper .arrow:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+.select__wrapper .select {
+  display: block;
+  min-width: 0;
+  width: 100%;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #111927;
+  box-sizing: border-box;
+  border: none;
+  overflow: hidden;
+  background-color: transparent;
+  padding: 16px 0;
+  height: 100%;
+  cursor: pointer;
+}
+.select__wrapper .select:focus {
+  outline: none;
+  cursor: pointer;
+}
+.select__wrapper .option__title,
+.select__wrapper option.option {
+  cursor: pointer;
+  font-size: 15px;
+  background-color: #fff;
+}
