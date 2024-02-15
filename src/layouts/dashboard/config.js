@@ -18,15 +18,15 @@ export const items = [
       </SvgIcon>
     ),
   },
-  {
-    title: "Influencers",
-    path: "/influencers",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UsersIcon />
-      </SvgIcon>
-    ),
-  },
+  // {
+  //   title: "Influencers",
+  //   path: "/influencers",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UsersIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
   // {
   //   title: "Companies",
   //   path: "/companies",
@@ -36,60 +36,60 @@ export const items = [
   //     </SvgIcon>
   //   ),
   // },
-  {
-    title: "Businesses",
-    path: "/businesses",
-    icon: (
-      <SvgIcon fontSize="small">
-        <ShoppingBagIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Platforms",
-    path: "/platforms",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UsersIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Categories",
-    path: "/categories",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Cities",
-    path: "/cities",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UsersIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Soon",
-    path: "/soon",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: "Subscribers",
-    path: "/subscribers",
-    icon: (
-      <SvgIcon fontSize="small">
-        <UsersIcon />
-      </SvgIcon>
-    ),
-  },
+  // {
+  //   title: "Businesses",
+  //   path: "/businesses",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <ShoppingBagIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
+  // {
+  //   title: "Platforms",
+  //   path: "/platforms",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UsersIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
+  // {
+  //   title: "Categories",
+  //   path: "/categories",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
+  // {
+  //   title: "Cities",
+  //   path: "/cities",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UsersIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
+  // {
+  //   title: "Soon",
+  //   path: "/soon",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
+  // {
+  //   title: "Subscribers",
+  //   path: "/subscribers",
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UsersIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
   {
     title: "My Info Details",
     path: "/influencer-details",

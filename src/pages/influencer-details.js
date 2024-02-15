@@ -211,10 +211,11 @@ const Page = () => {
                         name="categoryId"
                         id="dropdown"
                         onChange={handleChange}
+                        value={formData.categoryId || ""}
                         className="select"
                       >
                         <option value="" className="option__title">
-                          Select a Category
+                          {user?.categoryId ? user.categoryId.name : "Select a Category"}
                         </option>
                         {categoriesData
                           ? categoriesData.map((category) => (
@@ -236,11 +237,12 @@ const Page = () => {
                       <select
                         name="cityId"
                         id="cdropdown"
+                        value={formData.cityId || ""}
                         onChange={handleChange}
                         className="select"
                       >
                         <option value="" className="option__title">
-                          Select a City
+                          {user?.cityId ? user.cityId.name : "Select a City"}
                         </option>
                         {citiesData
                           ? citiesData.map((city) => (

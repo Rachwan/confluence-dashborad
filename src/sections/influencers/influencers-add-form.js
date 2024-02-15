@@ -216,33 +216,45 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
           />
 
           {/* Category */}
-          <div>
-            <label htmlFor="dropdown">Category</label>
-            <select name="categoryId" id="dropdown" onChange={handleChange}>
-              <option value="">Select a Category</option>
-              {categoriesData
-                ? categoriesData.map((category) => (
-                    <option key={category._id} value={category._id}>
-                      {category.name}
-                    </option>
-                  ))
-                : "Loding Categories"}
-            </select>
+          <div className="select__wrapper">
+            <label className="label" htmlFor="dropdown">
+              Category
+            </label>
+            <div className="arrow">
+              <select className="select" name="categoryId" id="dropdown" onChange={handleChange}>
+                <option value="" className="option__title">
+                  Select a Category
+                </option>
+                {categoriesData
+                  ? categoriesData.map((category) => (
+                      <option key={category._id} value={category._id} className="option">
+                        {category.name}
+                      </option>
+                    ))
+                  : "Loding Categories"}
+              </select>
+            </div>
           </div>
 
           {/* City */}
-          <div>
-            <label htmlFor="cdropdown">City</label>
-            <select name="cityId" id="cdropdown" onChange={handleChange}>
-              <option value="">Select a City</option>
-              {citiesData
-                ? citiesData.map((city) => (
-                    <option key={city._id} value={city._id}>
-                      {city.name}
-                    </option>
-                  ))
-                : "Loding Cities"}
-            </select>
+          <div className="select__wrapper">
+            <label className="label" htmlFor="cdropdown">
+              City
+            </label>
+            <div className="arrow">
+              <select className="select" name="cityId" id="cdropdown" onChange={handleChange}>
+                <option value="" className="option__title">
+                  Select a City
+                </option>
+                {citiesData
+                  ? citiesData.map((city) => (
+                      <option key={city._id} value={city._id} className="option">
+                        {city.name}
+                      </option>
+                    ))
+                  : "Loding Cities"}
+              </select>
+            </div>
           </div>
 
           {/* Platforms */}
