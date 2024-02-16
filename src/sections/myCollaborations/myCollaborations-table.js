@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import axios from "axios";
+import Link from "next/link";
 import Swal from "sweetalert2";
 import {
   Box,
@@ -77,6 +78,7 @@ export const MyCollaborationsTable = (props) => {
             <TableHead>
               <TableRow>
                 <TableCell style={{ fontSize: "14px" }}>Id</TableCell>
+                <TableCell style={{ fontSize: "14px" }}>Link</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Title</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Background</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>description</TableCell>
@@ -108,6 +110,11 @@ export const MyCollaborationsTable = (props) => {
                   return (
                     <TableRow hover key={myCollaboration._id} selected={isSelected}>
                       <TableCell style={{ fontSize: "16px" }}>{myCollaboration._id}</TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        <Link href={"/"} style={{ textDecoration: "underline" }}>
+                          Page Link
+                        </Link>
+                      </TableCell>
                       <TableCell>
                         <Stack alignItems="center" direction="row" spacing={2}>
                           <Typography variant="subtitle2" style={{ fontSize: "16px" }}>

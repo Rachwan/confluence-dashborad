@@ -18,9 +18,7 @@ export const UserProvider = ({ children }) => {
     try {
       setCheckUser(true);
 
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACK_END}/logged-in-user`
-      );
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/logged-in-user`);
       setUser(response.data.user);
       console.log("Fetched user data:", response.data.user);
       setUserUpdated(false);
@@ -49,7 +47,8 @@ export const UserProvider = ({ children }) => {
         fetchUserData,
         checkUser,
         setUserUpdated,
-      }}>
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

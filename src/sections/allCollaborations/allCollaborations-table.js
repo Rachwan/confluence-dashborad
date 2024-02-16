@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Link from "next/link";
 import {
   Box,
   Card,
@@ -16,6 +17,7 @@ import {
 import { Scrollbar } from "src/components/scrollbar";
 import { useState } from "react";
 import EditAllCollaborationForm from "./allCollaborations-edit-form";
+import Link from "next/link";
 
 export const AllCollaborationsTable = (props) => {
   const [isAllCollaborationFormOpen, setIsAllCollaborationFormOpen] = useState(false);
@@ -78,6 +80,7 @@ export const AllCollaborationsTable = (props) => {
                 <TableCell style={{ fontSize: "14px" }}>Collaboration Id</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>User Name</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>User Id</TableCell>
+                <TableCell style={{ fontSize: "14px" }}>Link</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Title</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Background</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>description</TableCell>
@@ -107,6 +110,11 @@ export const AllCollaborationsTable = (props) => {
                     </TableCell>
                     <TableCell style={{ fontSize: "16px" }}>
                       {allCollaboration.userId ? allCollaboration.userId._id : "NNNN/AAAA"}
+                    </TableCell>
+                    <TableCell style={{ fontSize: "16px" }}>
+                      <Link href={"/"} style={{ textDecoration: "underline" }}>
+                        Page Link
+                      </Link>
                     </TableCell>
                     <TableCell>
                       <Stack alignItems="center" direction="row" spacing={2}>
