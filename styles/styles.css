@@ -34,8 +34,8 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 }
 .upload .label,
 .select__wrapper .label {
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 600;
   color: #111927;
 }
 .select__wrapper .arrow {
@@ -79,4 +79,27 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   cursor: pointer;
   font-size: 15px;
   background-color: #fff;
+}
+
+/* .css-nw5nzo {
+  padding-bottom: 0 !important;
+} */
+
+.css-geod0p-MuiPaper-root-MuiDialog-paper {
+  max-height: calc(100% - 150px) !important;
+}
+
+.css-5vum82-MuiButtonBase-root-MuiCheckbox-root.Mui-checked,
+.css-5vum82-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
+  color: var(--second-blue) !important;
+}
+
+/* Edit form */
+.css-1vzw10j {
+  width: 500px !important;
+}
+
+input[type="file"]:focus {
+  outline: 2px solid var(--second-blue);
+  border-radius: 6px;
 }

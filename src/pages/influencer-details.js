@@ -149,7 +149,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Cities | Confluence</title>
+        <title>Influencer Details | Confluence</title>
       </Head>
       <Box
         component="main"

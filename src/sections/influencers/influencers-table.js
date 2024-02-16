@@ -143,8 +143,7 @@ export const InfluencersTable = (props) => {
                                 src={`${process.env.NEXT_PUBLIC_BACK_END}/${platform.platformId.icon}`}
                                 alt=""
                               />
-                              <pre>:</pre>
-                              {platform.followers}
+                              : {platform.followers}
                             </p>
                           </li>
                         ))}
