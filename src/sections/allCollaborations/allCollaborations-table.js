@@ -36,7 +36,6 @@ export const AllCollaborationsTable = (props) => {
     console.log("allCollaboration line 35:", allCollaboration);
     setIsAllCollaborationFormOpen(true);
     setSelectedAllCollaboration(allCollaboration);
-    console.log("worked");
   };
 
   const handleDeleteClick = async (allCollaboration) => {
@@ -146,7 +145,7 @@ export const AllCollaborationsTable = (props) => {
                           gap: "20px",
                         }}
                       >
-                        {allCollaboration.images.map((img, index) => (
+                        {/* {allCollaboration.images.map((img, index) => (
                           <li key={index}>
                             <img
                               src={`${process.env.NEXT_PUBLIC_BACK_END}/${img}`}
@@ -158,7 +157,51 @@ export const AllCollaborationsTable = (props) => {
                               alt=""
                             />
                           </li>
-                        ))}
+                        ))} */}
+                        <li>
+                          <img
+                            src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.firstImage}`}
+                            alt=""
+                            style={{
+                              maxWidth: "200px",
+                              maxHeight: "200px",
+                              boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                            }}
+                          />
+                        </li>
+                        <li>
+                          <img
+                            src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.secondImage}`}
+                            alt=""
+                            style={{
+                              maxWidth: "200px",
+                              maxHeight: "200px",
+                              boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                            }}
+                          />
+                        </li>
+                        <li>
+                          <img
+                            src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.thirdImage}`}
+                            alt=""
+                            style={{
+                              maxWidth: "200px",
+                              maxHeight: "200px",
+                              boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                            }}
+                          />
+                        </li>
+                        <li>
+                          <img
+                            src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.fourthImage}`}
+                            alt=""
+                            style={{
+                              maxWidth: "200px",
+                              maxHeight: "200px",
+                              boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                            }}
+                          />
+                        </li>
                       </ul>
                     </TableCell>
                     <TableCell style={{ fontSize: "16px" }}>

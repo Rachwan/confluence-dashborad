@@ -146,19 +146,63 @@ export const MyCollaborationsTable = (props) => {
                           }}
                         >
                           {/* {console.log("myCollaboration.images", myCollaboration.images)} */}
-                          {myCollaboration.images.map((img) => (
-                            <li key={myCollaboration._id}>
-                              <img
-                                src={`${process.env.NEXT_PUBLIC_BACK_END}/${img}`}
-                                style={{
-                                  maxWidth: "200px",
-                                  maxHeight: "200px",
-                                  boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
-                                }}
-                                alt=""
-                              />
-                            </li>
-                          ))}
+                          {/* {myCollaboration.images.map((img, index) => (
+                          <li key={index}>
+                            <img
+                              src={`${process.env.NEXT_PUBLIC_BACK_END}/${img}`}
+                              style={{
+                                maxWidth: "200px",
+                                maxHeight: "200px",
+                                boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                              }}
+                              alt=""
+                            />
+                          </li>
+                        ))} */}
+                          <li>
+                            <img
+                              src={`${process.env.NEXT_PUBLIC_BACK_END}/${myCollaboration.firstImage}`}
+                              alt=""
+                              style={{
+                                maxWidth: "200px",
+                                maxHeight: "200px",
+                                boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                              }}
+                            />
+                          </li>
+                          <li>
+                            <img
+                              src={`${process.env.NEXT_PUBLIC_BACK_END}/${myCollaboration.secondImage}`}
+                              alt=""
+                              style={{
+                                maxWidth: "200px",
+                                maxHeight: "200px",
+                                boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                              }}
+                            />
+                          </li>
+                          <li>
+                            <img
+                              src={`${process.env.NEXT_PUBLIC_BACK_END}/${myCollaboration.thirdImage}`}
+                              alt=""
+                              style={{
+                                maxWidth: "200px",
+                                maxHeight: "200px",
+                                boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                              }}
+                            />
+                          </li>
+                          <li>
+                            <img
+                              src={`${process.env.NEXT_PUBLIC_BACK_END}/${myCollaboration.fourthImage}`}
+                              alt=""
+                              style={{
+                                maxWidth: "200px",
+                                maxHeight: "200px",
+                                boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                              }}
+                            />
+                          </li>
                         </ul>
                       </TableCell>
                       <TableCell style={{ fontSize: "16px" }}>

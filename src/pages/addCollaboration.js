@@ -14,13 +14,36 @@ const Page = () => {
   const [formData, setFormData] = useState({
     title: "",
     background: null,
+    firstImage: null,
+    secondImage: null,
+    thirdImage: null,
+    fourthImage: null,
     description: "",
     platforms: [],
     singleTitle: "",
-    images: [null],
+    // images: [null],
     additional: [],
-    userId: user._id,
+    // userId: user._id,
   });
+
+  const [imagePreviews, setImagePreviews] = useState({
+    firstImage: null,
+    secondImage: null,
+    thirdImage: null,
+    fourthImage: null,
+  });
+
+  const handleImageChange = (imageKey, e) => {
+    const file = e.target.files[0];
+    setFormData((prevData) => ({
+      ...prevData,
+      [imageKey]: file,
+    }));
+    setImagePreviews((prevPreviews) => ({
+      ...prevPreviews,
+      [imageKey]: URL.createObjectURL(file),
+    }));
+  };
 
   /* Platforms */
   const [platformsData, setPlatformsData] = useState([]);
@@ -62,19 +85,20 @@ const Page = () => {
   };
 
   // 4 Images baby
-  const [selectedImages, setSelectedImages] = useState(Array(4).fill(null));
+  // const [selectedImages, setSelectedImages] = useState(Array(4).fill(null));
 
-  const handleImageChange = (index, e) => {
-    const file = e.target.files[0];
-    const newImages = [...selectedImages];
-    newImages[index] = file;
-    setSelectedImages(newImages);
-
-    setFormData((prevData) => ({
-      ...prevData,
-      images: newImages, // Use the latest state value
-    }));
-  };
+  // const handleImageChange = (index, e) => {
+  //   const file = e.target.files[0];
+  //   const newImages = [...selectedImages];
+  //   newImages[index] = file;
+  //   setSelectedImages(newImages);
+  //   console.log(formData.images);
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     images: newImages,
+  //   }));
+  //   console.log(formData.images);
+  // };
   // ----------------
 
   /* Additionals */
@@ -108,6 +132,7 @@ const Page = () => {
       background: e.target.files[0],
     }));
   };
+  /* --------- */
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -129,9 +154,7 @@ const Page = () => {
           icon: "success",
         });
       }
-      console.log(formData);
     } catch (error) {
-      console.log(formData);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -259,7 +282,7 @@ const Page = () => {
                 placeholder="Enter the the single title"
               />
               {/* 4 Images */}
-              <div>
+              {/* <div>
                 <h2 style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}>
                   Update the image you want:
                 </h2>
@@ -296,7 +319,40 @@ const Page = () => {
                     )}
                   </div>
                 ))}
-              </div>
+              </div> */}
+              {Object.keys(imagePreviews).map((imageKey) => (
+                <div
+                  key={imageKey}
+                  style={{ display: "flex", flexDirection: "column", marginBottom: "12px" }}
+                >
+                  <label
+                    htmlFor={imageKey}
+                    style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}
+                  >
+                    Upload {imageKey.charAt(0).toUpperCase() + imageKey.slice(1)}
+                  </label>
+                  <input
+                    accept="image/*"
+                    type="file"
+                    id={imageKey}
+                    name={imageKey}
+                    onChange={(e) => handleImageChange(imageKey, e)}
+                    style={{ marginBottom: "10px" }}
+                  />
+                  {imagePreviews[imageKey] && (
+                    <img
+                      src={imagePreviews[imageKey]}
+                      alt={`${imageKey.charAt(0).toUpperCase() + imageKey.slice(1)} Image Preview`}
+                      style={{
+                        maxWidth: "30%",
+                        objectFit: "cover",
+                        marginBottom: "10px",
+                        marginTop: "10px",
+                      }}
+                    />
+                  )}
+                </div>
+              ))}
               <div>
                 <h2 style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}>
                   Additional Items:
