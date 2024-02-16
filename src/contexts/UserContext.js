@@ -36,6 +36,10 @@ export const UserProvider = ({ children }) => {
     setUser(null);
   };
 
+  if (!user) {
+    return <div>Loading image will here...</div>;
+  }
+
   return (
     <UserContext.Provider
       value={{
