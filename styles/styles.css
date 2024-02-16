@@ -103,3 +103,10 @@ input[type="file"]:focus {
   outline: 2px solid var(--second-blue);
   border-radius: 6px;
 }
+
+.css-17uk3vh {
+  transition: 0.1s !important;
+}
+.css-17uk3vh:hover {
+  color: white !important;
+}

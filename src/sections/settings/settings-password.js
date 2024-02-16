@@ -175,7 +175,7 @@ export const SettingsPassword = () => {
             />
             <TextField
               fullWidth
-              label="Old password"
+              label="Old Password"
               name="oldPasswordInput"
               type="password"
               value={oldPassword}
@@ -186,7 +186,7 @@ export const SettingsPassword = () => {
             />
             <TextField
               fullWidth
-              label="Password"
+              label="New Password"
               name="password"
               type="password"
               value={newPassword}
