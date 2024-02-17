@@ -17,7 +17,6 @@ import {
 import { Scrollbar } from "src/components/scrollbar";
 import { useState } from "react";
 import EditAllCollaborationForm from "./allCollaborations-edit-form";
-import Link from "next/link";
 
 export const AllCollaborationsTable = (props) => {
   const [isAllCollaborationFormOpen, setIsAllCollaborationFormOpen] = useState(false);

@@ -110,3 +110,17 @@ input[type="file"]:focus {
 .css-17uk3vh:hover {
   color: white !important;
 }
+.css-k6zr9g-MuiBadge-badge {
+  background-color: var(--second-blue) !important;
+}
+
+.css-14xerxl-MuiButtonBase-root-MuiButton-root {
+  background-color: #fafafa !important;
+  color: var(--second-blue) !important;
+  border-radius: 30px !important;
+  transition: 0.3s !important;
+}
+.css-14xerxl-MuiButtonBase-root-MuiButton-root:hover {
+  background-color: var(--second-blue) !important;
+  color: #fafafa !important;
+}

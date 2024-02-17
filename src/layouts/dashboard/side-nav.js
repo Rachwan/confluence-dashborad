@@ -99,17 +99,23 @@ export const SideNav = (props) => {
               sx={{
                 display: "inline-flex",
                 justifyContent: "center",
+                alignItems: "center",
+                gap: "5px",
                 height: 32,
                 width: "100%",
               }}
             >
-              <img src="/assets/logos/confluence-footer.svg" alt="" />
+              <img
+                src="/assets/logos/confluence-footer.svg"
+                alt=""
+                style={{ width: "25px", height: "25px" }}
+              />
               <Typography
                 sx={{
                   color: "white",
-                  fontSize: "25px",
+                  fontSize: "30px",
                   fontWeight: "bold",
-                  marginLeft: "20px",
+                  textTransform: "uppercase",
                 }}
               >
                 Confluence
@@ -162,25 +168,6 @@ export const SideNav = (props) => {
             py: 3,
           }}
         >
-          <Typography color="neutral.100" variant="subtitle2">
-            Need more features?
-          </Typography>
-          <Typography color="neutral.500" variant="body2">
-            Check out our Pro solution template.
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              mt: 2,
-              mx: "auto",
-              width: "160px",
-              "& img": {
-                width: "100%",
-              },
-            }}
-          >
-            <img alt="Go to pro" src="/assets/devias-kit-pro.png" />
-          </Box>
           <Button
             component="a"
             endIcon={
@@ -189,12 +176,12 @@ export const SideNav = (props) => {
               </SvgIcon>
             }
             fullWidth
-            href="https://material-kit-pro-react.devias.io/"
-            sx={{ mt: 2 }}
+            href={`${process.env.NEXT_PUBLIC_MAIN_WEB}`}
+            sx={{ mt: 2, fontSize: "16px" }}
             target="_blank"
             variant="contained"
           >
-            Pro Live Preview
+            Confluence Website
           </Button>
         </Box>
       </Box>

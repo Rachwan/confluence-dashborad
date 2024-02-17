@@ -9,15 +9,15 @@ import { UserContext } from "src/contexts/UserContext";
 import styles from "../../styles/influencer-details.module.css";
 
 const Page = () => {
-  const { user, setUser, fetchUserData } = useContext(UserContext);
+  const { user, fetchUserData } = useContext(UserContext);
   const [formData, setFormData] = useState({
-    age: "",
-    number: "",
-    platforms: [],
-    profile: null,
-    background: null,
-    cityId: "",
-    categoryId: "",
+    age: user.age ? user.age : "",
+    number: user.number ? user.number : "",
+    platforms: user.platforms ? user.platforms : [],
+    profile: user.profile ? user.profile : null,
+    background: user.background ? user.background : null,
+    cityId: user.cityId ? user.cityId._id : "",
+    categoryId: user.categoryId ? user.categoryId._id : "",
   });
 
   /* Fethcing neccessary data */
@@ -117,8 +117,78 @@ const Page = () => {
     }));
   };
 
+  /* Regex */
+  const phoneRegex = /^\d{8,}$/;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    /* Validations */
+    if (!formData.age) {
+      Swal.fire({
+        title: "Have you inserted your age?",
+        text: "Please insert your age.",
+        icon: "question",
+      });
+      return;
+    }
+    if (!formData.number) {
+      Swal.fire({
+        title: "Have you inserted your phone?",
+        text: "Please insert your phone.",
+        icon: "question",
+      });
+      return;
+    }
+    if (!phoneRegex.test(formData.number)) {
+      Swal.fire({
+        title: "Have you provided a valid phone?",
+        text: "Please insert a valid phone (at least 8 digits).",
+        icon: "question",
+      });
+      return;
+    }
+    if (formData.categoryId === "") {
+      Swal.fire({
+        title: "Have you selected your category?",
+        text: "Please select your category.",
+        icon: "question",
+      });
+      return;
+    }
+    if (formData.cityId === "") {
+      Swal.fire({
+        title: "Have your selected you city?",
+        text: "Please select your city.",
+        icon: "question",
+      });
+      return;
+    }
+    if (formData.profile == null) {
+      Swal.fire({
+        title: "Have you uploaded you profile?",
+        text: "Please upload your profile picture.",
+        icon: "question",
+      });
+      return;
+    }
+    if (formData.background == null) {
+      Swal.fire({
+        title: "Have you uploaded you background?",
+        text: "Please upload your background picture.",
+        icon: "question",
+      });
+      return;
+    }
+
+    if (formData.platforms.length === 0) {
+      Swal.fire({
+        title: "Have you inserted any platform followers?",
+        text: "Please insert at least one platfrom.",
+        icon: "question",
+      });
+      return;
+    }
     try {
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_BACK_END}/user/${user._id}`,
@@ -142,7 +212,7 @@ const Page = () => {
         title: "Oops...",
         text: "Something went wrong! Try again.",
       });
-      console.error("Error adding influencer:", error);
+      console.error("Error updaing influencer:", error);
     }
   };
 
@@ -184,6 +254,7 @@ const Page = () => {
                     label="Age"
                     type="text"
                     name="age"
+                    value={formData.age}
                     onChange={handleChange}
                     fullWidth
                     margin="normal"
@@ -194,6 +265,7 @@ const Page = () => {
                     label="Phone"
                     type="text"
                     name="number"
+                    value={formData.number}
                     onChange={handleChange}
                     fullWidth
                     margin="normal"
@@ -214,7 +286,10 @@ const Page = () => {
                         value={formData.categoryId || ""}
                         className="select"
                       >
-                        <option value="" className="option__title">
+                        <option
+                          value={user.categoryId ? user.categoryId : ""}
+                          className="option__title"
+                        >
                           {user?.categoryId ? user.categoryId.name : "Select a Category"}
                         </option>
                         {categoriesData
@@ -241,7 +316,7 @@ const Page = () => {
                         onChange={handleChange}
                         className="select"
                       >
-                        <option value="" className="option__title">
+                        <option value={user.cityId ? user.cityId : ""} className="option__title">
                           {user?.cityId ? user.cityId.name : "Select a City"}
                         </option>
                         {citiesData

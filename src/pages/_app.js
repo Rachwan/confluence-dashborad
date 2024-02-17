@@ -32,8 +32,9 @@ const App = (props) => {
     <UserProvider>
       <CacheProvider value={emotionCache}>
         <Head>
-          <title>Devias Kit</title>
+          <title>Confluence</title>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
+          <link rel="icon" href="/confluence.svg" />
         </Head>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <AuthProvider>
