@@ -19,7 +19,7 @@ export const SettingsPassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
   const [formData, setFormData] = useState({
-    email: user.email,
+    email: user?.email,
   });
 
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -107,7 +107,7 @@ export const SettingsPassword = () => {
     }
 
     try {
-      const response = await axios.put(`${process.env.NEXT_PUBLIC_BACK_END}/user/${user._id}`, {
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_BACK_END}/user/${user?._id}`, {
         ...formData,
         password: newPassword,
         oldPasswordInput: oldPassword,

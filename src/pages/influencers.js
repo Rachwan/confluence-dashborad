@@ -15,12 +15,11 @@ import InfluencerAddForm from "src/sections/influencers/influencers-add-form";
 
 const Page = () => {
   const [influencersData, setinfluencersData] = useState([]);
+  const [filteredBusinesses, setFilteredBusinesses] = useState([]);
 
   const fetchinfluencersData = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACK_END}/user/get/influencer`
-      );
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/user/get/influencer`);
       setinfluencersData(response.data);
       console.log("response.data:", response.data);
     } catch (error) {
@@ -35,19 +34,21 @@ const Page = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const useInfluencers = (page, rowsPerPage) => {
+  const useInfluencers = (page, rowsPerPage, filteredData) => {
     return useMemo(() => {
-      return applyPagination(influencersData, page, rowsPerPage);
-    }, [influencersData, page, rowsPerPage]);
+      return applyPagination(filteredData, page, rowsPerPage);
+    }, [filteredData, page, rowsPerPage]);
   };
 
   const useInfluencersIds = (influencers) => {
     return useMemo(() => {
-      return influencers.map((infleuncer) => infleuncer.id);
+      return influencers.map((influencer) => influencer?.id);
     }, [influencers]);
   };
 
-  const influencersSelection = useSelection(useInfluencersIds(useInfluencers(page, rowsPerPage)));
+  const influencersSelection = useSelection(
+    useInfluencersIds(useInfluencers(page, rowsPerPage, filteredBusinesses))
+  );
 
   const handlePageChange = useCallback((event, value) => {
     setPage(value);
@@ -56,6 +57,59 @@ const Page = () => {
   const handleRowsPerPageChange = useCallback((event) => {
     setRowsPerPage(event.target.value);
   }, []);
+
+  /* Search Filter Stuff*/
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = useCallback((newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+  }, []);
+
+  useEffect(() => {
+    const filteredData = influencersData.filter((influencer) => {
+      console.log("influencer:", influencer); // Log the influencer object
+      console.log("---------------------");
+      const idMatch = influencer?._id.toLowerCase().includes(searchTerm.toLowerCase());
+      const nameMatch = influencer?.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const emailMatch = influencer?.email.toLowerCase().includes(searchTerm.toLowerCase());
+      const numberMatch = influencer?.number && influencer?.number.toString().includes(searchTerm);
+      const ageMatch = influencer?.age && influencer?.age.toString().includes(searchTerm);
+
+      // Check for platforms
+      const platformMatch = influencer?.platforms.some(
+        (platform) =>
+          platform.platformId?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          platform.followers.toString().includes(searchTerm)
+      );
+
+      // Check for city
+      const cityMatch =
+        influencer?.cityId &&
+        influencer?.cityId.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+      // Check for category
+      const categoryMatch =
+        influencer?.categoryId &&
+        influencer?.categoryId.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+      return (
+        idMatch ||
+        nameMatch ||
+        emailMatch ||
+        numberMatch ||
+        ageMatch ||
+        platformMatch ||
+        cityMatch ||
+        categoryMatch
+      );
+    });
+
+    setFilteredBusinesses(filteredData);
+    console.log("Filtered Businesses:", filteredData);
+  }, [influencersData, searchTerm]);
+
+  /* ------------------ */
 
   const [isAddFormOpen, setIsAddFormOpen] = useState(false);
 
@@ -127,10 +181,12 @@ const Page = () => {
                 </Button>
               </div>
             </Stack>
-            <InfluencersSearch />
+            <InfluencersSearch onSearch={handleSearch} />
             <InfluencersTable
-              count={influencersData.length}
-              items={useInfluencers(page, rowsPerPage)}
+              // count={influencersData.length}
+              // items={useInfluencers(page, rowsPerPage)}
+              count={filteredBusinesses.length}
+              items={useInfluencers(page, rowsPerPage, filteredBusinesses)}
               onDeselectAll={influencersSelection.handleDeselectAll}
               onDeselectOne={influencersSelection.handleDeselectOne}
               onPageChange={handlePageChange}

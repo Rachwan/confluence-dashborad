@@ -11,13 +11,13 @@ import styles from "../../styles/influencer-details.module.css";
 const Page = () => {
   const { user, fetchUserData } = useContext(UserContext);
   const [formData, setFormData] = useState({
-    age: user.age ? user.age : "",
-    number: user.number ? user.number : "",
-    platforms: user.platforms ? user.platforms : [],
-    profile: user.profile ? user.profile : null,
-    background: user.background ? user.background : null,
-    cityId: user.cityId ? user.cityId._id : "",
-    categoryId: user.categoryId ? user.categoryId._id : "",
+    age: user?.age ? user?.age : "",
+    number: user?.number ? user?.number : "",
+    platforms: user?.platforms ? user?.platforms : [],
+    profile: user?.profile ? user?.profile : null,
+    background: user?.background ? user?.background : null,
+    cityId: user?.cityId ? user?.cityId._id : "",
+    categoryId: user?.categoryId ? user?.categoryId._id : "",
   });
 
   /* Fethcing neccessary data */
@@ -191,7 +191,7 @@ const Page = () => {
     }
     try {
       const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_BACK_END}/user/${user._id}`,
+        `${process.env.NEXT_PUBLIC_BACK_END}/user/${user?._id}`,
         formData,
         {
           headers: {
@@ -287,10 +287,10 @@ const Page = () => {
                         className="select"
                       >
                         <option
-                          value={user.categoryId ? user.categoryId : ""}
+                          value={user?.categoryId ? user?.categoryId : ""}
                           className="option__title"
                         >
-                          {user?.categoryId ? user.categoryId.name : "Select a Category"}
+                          {user?.categoryId ? user?.categoryId.name : "Select a Category"}
                         </option>
                         {categoriesData
                           ? categoriesData.map((category) => (
@@ -316,8 +316,8 @@ const Page = () => {
                         onChange={handleChange}
                         className="select"
                       >
-                        <option value={user.cityId ? user.cityId : ""} className="option__title">
-                          {user?.cityId ? user.cityId.name : "Select a City"}
+                        <option value={user?.cityId ? user?.cityId : ""} className="option__title">
+                          {user?.cityId ? user?.cityId.name : "Select a City"}
                         </option>
                         {citiesData
                           ? citiesData.map((city) => (

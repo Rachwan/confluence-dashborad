@@ -106,9 +106,9 @@ export const SideNav = (props) => {
               }}
             >
               <img
-                src="/assets/logos/confluence-footer.svg"
+                src="/logoTwo.svg"
                 alt=""
-                style={{ width: "25px", height: "25px" }}
+                style={{ width: "24px", height: "24px", transform: "translateY(2px)" }}
               />
               <Typography
                 sx={{

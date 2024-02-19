@@ -15,6 +15,7 @@ import Link from "next/link";
 
 const Page = () => {
   const [allCollaborationsData, setAllCollaborationsData] = useState([]);
+  const [filteredBusinesses, setFilteredBusinesses] = useState([]);
 
   const fetchAllCollaborationsData = async () => {
     try {
@@ -33,10 +34,10 @@ const Page = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const useAllCollaborations = (page, rowsPerPage) => {
+  const useAllCollaborations = (page, rowsPerPage, filteredData) => {
     return useMemo(() => {
-      return applyPagination(allCollaborationsData, page, rowsPerPage);
-    }, [allCollaborationsData, page, rowsPerPage]);
+      return applyPagination(filteredData, page, rowsPerPage);
+    }, [filteredData, page, rowsPerPage]);
   };
 
   const useAllCollaborationsIds = (allCollaborations) => {
@@ -46,7 +47,7 @@ const Page = () => {
   };
 
   const allCollaborationsSelection = useSelection(
-    useAllCollaborationsIds(useAllCollaborations(page, rowsPerPage))
+    useAllCollaborationsIds(useAllCollaborations(page, rowsPerPage, filteredBusinesses))
   );
 
   const handlePageChange = useCallback((event, value) => {
@@ -56,6 +57,45 @@ const Page = () => {
   const handleRowsPerPageChange = useCallback((event) => {
     setRowsPerPage(event.target.value);
   }, []);
+
+  /* Search Filter Stuff*/
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = useCallback((newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+  }, []);
+
+  useEffect(() => {
+    const filteredData = allCollaborationsData.filter((collaboration) => {
+      const idMatch = collaboration?._id?.toLowerCase().includes(searchTerm?.toLowerCase());
+      const titleMatch = collaboration?.title?.toLowerCase().includes(searchTerm?.toLowerCase());
+      const descriptionMatch = collaboration?.description
+        ?.toLowerCase()
+        .includes(searchTerm?.toLowerCase());
+
+      // Additional fields in the "additional" array
+      const additionalMatch = collaboration?.additional?.some((item) => {
+        const nameMatch = item?.name?.toLowerCase().includes(searchTerm?.toLowerCase());
+        const detailMatch = item?.detail?.toLowerCase().includes(searchTerm?.toLowerCase());
+        return nameMatch || detailMatch;
+      });
+
+      // Platforms array
+      const platformsMatch = collaboration?.platforms?.some((platform) =>
+        platform?.toLowerCase().includes(searchTerm?.toLowerCase())
+      );
+
+      // Add more fields as needed
+
+      return idMatch || titleMatch || descriptionMatch || additionalMatch || platformsMatch;
+    });
+
+    setFilteredBusinesses(filteredData);
+    console.log("Filtered Businesses:", filteredData);
+  }, [allCollaborationsData, searchTerm]);
+
+  /* ------------------ */
 
   return (
     <>
@@ -117,10 +157,12 @@ const Page = () => {
                 </Button>
               </Link>
             </Stack>
-            <AllCollaborationsSearch />
+            <AllCollaborationsSearch onSearch={handleSearch} />
             <AllCollaborationsTable
-              count={allCollaborationsData.length}
-              items={useAllCollaborations(page, rowsPerPage)}
+              // count={allCollaborationsData.length}
+              // items={useAllCollaborations(page, rowsPerPage)}
+              count={filteredBusinesses.length}
+              items={useAllCollaborations(page, rowsPerPage, filteredBusinesses)}
               onDeselectAll={allCollaborationsSelection.handleDeselectAll}
               onDeselectOne={allCollaborationsSelection.handleDeselectOne}
               onPageChange={handlePageChange}

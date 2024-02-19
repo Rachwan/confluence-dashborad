@@ -89,7 +89,7 @@ export const TopNav = (props) => {
             <Avatar
               onClick={accountPopover.handleOpen}
               ref={accountPopover.anchorRef}
-              src={`${process.env.NEXT_PUBLIC_BACK_END}/${user.profile}`}
+              src={`${process.env.NEXT_PUBLIC_BACK_END}/${user?.profile}`}
               style={{
                 fontSize: "16px",
                 width: "45px",
@@ -98,7 +98,7 @@ export const TopNav = (props) => {
                 boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
               }}
             >
-              {getInitials(user.name)}
+              {getInitials(user?.name)}
             </Avatar>
           </Stack>
         </Stack>

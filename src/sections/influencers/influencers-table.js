@@ -128,19 +128,19 @@ export const InfluencersTable = (props) => {
                     </TableCell>
                     <TableCell style={{ fontSize: "16px" }}>
                       <ul>
-                        {influencer.platforms.map((platform) => (
-                          <li key={platform.platformId._id}>
+                        {influencer.platforms?.map((platform) => (
+                          <li key={platform.platformId?._id}>
                             <p
                               style={{
                                 display: "flex",
-                                justifyContent: "center",
+                                justifyContent: "flex-start",
                                 alignItems: "center",
                                 gap: "5px",
                               }}
                             >
                               <img
                                 style={{ width: "20px", height: "20px", display: "flex" }}
-                                src={`${process.env.NEXT_PUBLIC_BACK_END}/${platform.platformId.icon}`}
+                                src={`${process.env.NEXT_PUBLIC_BACK_END}/${platform.platformId?.icon}`}
                                 alt=""
                               />
                               : {platform.followers}

@@ -111,7 +111,11 @@ export const AllCollaborationsTable = (props) => {
                       {allCollaboration.userId ? allCollaboration.userId._id : "NNNN/AAAA"}
                     </TableCell>
                     <TableCell style={{ fontSize: "16px" }}>
-                      <Link href={"/"} style={{ textDecoration: "underline" }}>
+                      <Link
+                        href={`${process.env.NEXT_PUBLIC_MAIN_WEB}/collaboration/${allCollaboration.title}`}
+                        target="_blank"
+                        style={{ textDecoration: "underline" }}
+                      >
                         Page Link
                       </Link>
                     </TableCell>

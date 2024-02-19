@@ -34,9 +34,9 @@ export const UserProvider = ({ children }) => {
     setUser(null);
   };
 
-  if (!user) {
-    return <div>Loading image will here...</div>;
-  }
+  // if (!user) {
+  //   return <div>Loading image will be here...</div>;
+  // }
 
   return (
     <UserContext.Provider

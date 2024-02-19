@@ -59,12 +59,21 @@ const CategoryAddForm = ({ onClose, fetchUpdatedData }) => {
 
       onClose();
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong! Try again.",
-      });
-      console.error("Error adding plaform:", error);
+      if (error.response && error.response.status === 500) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "One filed or more is missing.",
+        });
+        console.error("Error adding plaform:", error);
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong! Try again.",
+        });
+        console.error("Error adding plaform:", error);
+      }
     }
   };
 
@@ -137,7 +146,7 @@ const CategoryAddForm = ({ onClose, fetchUpdatedData }) => {
               marginTop: "30px",
               fontSize: "16px",
               width: "100%",
-              borderRadius: "30px"
+              borderRadius: "30px",
             }}
           >
             Add Category

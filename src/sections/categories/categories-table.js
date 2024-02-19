@@ -75,7 +75,7 @@ export const CategoriesTable = (props) => {
             <TableHead>
               <TableRow>
                 <TableCell style={{ fontSize: "14px" }}>Id</TableCell>
-                <TableCell style={{ fontSize: "14px" }}>Name</TableCell>
+                <TableCell style={{ fontSize: "14px" }}>Icon & Name</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>background</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Active color</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Created At</TableCell>
@@ -97,12 +97,10 @@ export const CategoriesTable = (props) => {
                     <TableCell style={{ fontSize: "16px" }}>{category._id}</TableCell>
                     <TableCell>
                       <Stack alignItems="center" direction="row" spacing={2}>
-                        <Avatar
+                        <img
                           src={`${process.env.NEXT_PUBLIC_BACK_END}/${category.icon}`}
                           style={{ fontSize: "16px", width: "40px", height: "40px" }}
-                        >
-                          {getInitials(category.name)}
-                        </Avatar>
+                        />
                         <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
                           {category.name}
                         </Typography>

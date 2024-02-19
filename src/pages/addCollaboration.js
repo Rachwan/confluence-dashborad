@@ -23,7 +23,7 @@ const Page = () => {
     singleTitle: "",
     // images: [null],
     additional: [],
-    // userId: user._id,
+    userId: user?._id,
   });
 
   const [imagePreviews, setImagePreviews] = useState({
@@ -63,15 +63,18 @@ const Page = () => {
   }, []);
 
   const handlePlatformChange = (platformName) => {
-    setSelectedPlatforms((prevSelected) =>
-      prevSelected.includes(platformName)
+    setSelectedPlatforms((prevSelected) => {
+      const updatedSelected = prevSelected.includes(platformName)
         ? prevSelected.filter((id) => id !== platformName)
-        : [...prevSelected, platformName]
-    );
-    setFormData((prevData) => ({
-      ...prevData,
-      platforms: selectedPlatforms,
-    }));
+        : [...prevSelected, platformName];
+
+      setFormData((prevData) => ({
+        ...prevData,
+        platforms: updatedSelected,
+      }));
+
+      return updatedSelected;
+    });
   };
   /* --------------------- */
 
@@ -206,6 +209,9 @@ const Page = () => {
               >
                 For Collaboration Post:
               </h2>
+              <h2 style={{ fontSize: "20px", margin: "15px 0 0", fontWeight: "500" }}>
+                Title post
+              </h2>
               <TextField
                 label="Title"
                 type="text"
@@ -216,7 +222,7 @@ const Page = () => {
                 margin="normal"
                 placeholder="Enter the main title"
               />
-              <div style={{ display: "flex", flexDirection: "column", marginBottom: "12px" }}>
+              <div style={{ display: "flex", flexDirection: "column", marginBottom: "30px" }}>
                 <label
                   htmlFor="back"
                   style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}
@@ -231,20 +237,10 @@ const Page = () => {
                   onChange={handleBackgroundChange}
                 />
               </div>
-              <TextField
-                label="Description"
-                type="text"
-                name="description"
-                // value={formData.name}
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
-                placeholder="Enter the description"
-              />
               {/* Platforms */}
               <div>
                 <h1 style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}>
-                  Select platforms:
+                  Select the platforms to show
                 </h1>
                 {platformsData.map((platform) => (
                   <FormControlLabel
@@ -271,6 +267,9 @@ const Page = () => {
               >
                 For Collaboration Details:
               </h2>
+              <h2 style={{ fontSize: "20px", margin: "15px 0 0", fontWeight: "500" }}>
+                Collaboration Title
+              </h2>
               <TextField
                 label="Single Title"
                 type="text"
@@ -281,6 +280,9 @@ const Page = () => {
                 margin="normal"
                 placeholder="Enter the the single title"
               />
+              <h2 style={{ fontSize: "20px", margin: "15px 0 0", fontWeight: "500" }}>
+                Upload the 4 images
+              </h2>
               {/* 4 Images */}
               {/* <div>
                 <h2 style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}>
@@ -327,9 +329,16 @@ const Page = () => {
                 >
                   <label
                     htmlFor={imageKey}
-                    style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}
+                    style={{ fontSize: "18px", margin: "15px 0", fontWeight: "500" }}
                   >
-                    Upload {imageKey.charAt(0).toUpperCase() + imageKey.slice(1)}
+                    {/* Upload the {imageKey.charAt(0).toUpperCase() + imageKey.slice(1)} */}
+                    Upload the{" "}
+                    {imageKey.charAt(0).toLowerCase() +
+                      imageKey
+                        .slice(1)
+                        .replace(/([A-Z])/g, " $1")
+                        .toLowerCase()}
+                    :
                   </label>
                   <input
                     accept="image/*"
@@ -353,6 +362,19 @@ const Page = () => {
                   )}
                 </div>
               ))}
+              <h2 style={{ fontSize: "20px", margin: "15px 0 0", fontWeight: "500" }}>
+                Collaboration Description
+              </h2>
+              <TextField
+                label="Description"
+                type="text"
+                name="description"
+                // value={formData.name}
+                onChange={handleChange}
+                fullWidth
+                margin="normal"
+                placeholder="Enter the description"
+              />
               <div>
                 <h2 style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}>
                   Additional Items:

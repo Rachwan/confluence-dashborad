@@ -18,6 +18,7 @@ import Link from "next/link";
 const Page = () => {
   const { user } = useContext(UserContext);
   const [myCollaborationsData, setmyCollaborationsData] = useState([]);
+  const [filteredBusinesses, setFilteredBusinesses] = useState([]);
 
   const fetchMyCollaborationsData = async () => {
     try {
@@ -38,10 +39,10 @@ const Page = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const useMyCollaborations = (page, rowsPerPage) => {
+  const useMyCollaborations = (page, rowsPerPage, filteredData) => {
     return useMemo(() => {
-      return applyPagination(myCollaborationsData, page, rowsPerPage);
-    }, [myCollaborationsData, page, rowsPerPage]);
+      return applyPagination(filteredData, page, rowsPerPage);
+    }, [filteredData, page, rowsPerPage]);
   };
 
   const useMyCollaborationsIds = (MyCollaborations) => {
@@ -51,7 +52,7 @@ const Page = () => {
   };
 
   const myCollaborationsSelection = useSelection(
-    useMyCollaborationsIds(useMyCollaborations(page, rowsPerPage))
+    useMyCollaborationsIds(useMyCollaborations(page, rowsPerPage, filteredBusinesses))
   );
 
   const handlePageChange = useCallback((event, value) => {
@@ -61,6 +62,45 @@ const Page = () => {
   const handleRowsPerPageChange = useCallback((event) => {
     setRowsPerPage(event.target.value);
   }, []);
+
+  /* Search Filter Stuff*/
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = useCallback((newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+  }, []);
+
+  useEffect(() => {
+    const filteredData = myCollaborationsData.filter((collaboration) => {
+      const idMatch = collaboration?._id.toLowerCase().includes(searchTerm.toLowerCase());
+      const titleMatch = collaboration?.title.toLowerCase().includes(searchTerm.toLowerCase());
+      const descriptionMatch = collaboration?.description
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+
+      // Additional fields in the "additional" array
+      const additionalMatch = collaboration?.additional?.some((item) => {
+        const nameMatch = item?.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const detailMatch = item?.detail.toLowerCase().includes(searchTerm.toLowerCase());
+        return nameMatch || detailMatch;
+      });
+
+      // Platforms array
+      const platformsMatch = collaboration?.platforms?.some((platform) =>
+        platform.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      // Add more fields as needed
+
+      return idMatch || titleMatch || descriptionMatch || additionalMatch || platformsMatch;
+    });
+
+    setFilteredBusinesses(filteredData);
+    console.log("Filtered Businesses:", filteredData);
+  }, [myCollaborationsData, searchTerm]);
+
+  /* ------------------ */
 
   return (
     <>
@@ -122,10 +162,12 @@ const Page = () => {
                 </Button>
               </Link>
             </Stack>
-            <MyCollaborationsSearch />
+            <MyCollaborationsSearch onSearch={handleSearch} />
             <MyCollaborationsTable
-              count={myCollaborationsData.length}
-              items={useMyCollaborations(page, rowsPerPage)}
+              // count={myCollaborationsData.length}
+              // items={useMyCollaborations(page, rowsPerPage)}
+              count={filteredBusinesses.length}
+              items={useMyCollaborations(page, rowsPerPage, filteredBusinesses)}
               onDeselectAll={myCollaborationsSelection.handleDeselectAll}
               onDeselectOne={myCollaborationsSelection.handleDeselectOne}
               onPageChange={handlePageChange}

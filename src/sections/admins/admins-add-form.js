@@ -33,10 +33,27 @@ const adminAddForm = ({ onClose, fetchUpdatedData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (formData.categoryId === "") {
+      Swal.fire({
+        title: "Have you selected your category?",
+        text: "Please select your category.",
+        icon: "question",
+      });
+      return;
+    }
+    if (formData.cityId === "") {
+      Swal.fire({
+        title: "Have your selected you city?",
+        text: "Please select your city.",
+        icon: "question",
+      });
+      return;
+    }
+
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACK_END}/user/register`,
-        formData,
+        `${process.env.NEXT_PUBLIC_BACK_END}/user/add/user`,
+        { ...formData, role: "admin" },
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -53,12 +70,20 @@ const adminAddForm = ({ onClose, fetchUpdatedData }) => {
       console.log(formData);
       onClose();
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong! Try again.",
-      });
-      console.error("Error adding admin:", error);
+      if (error.response && error.response.status === 400) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Email alerady exist.",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong! Try again.",
+        });
+        console.error("Error adding admin:", error);
+      }
     }
   };
 

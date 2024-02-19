@@ -15,6 +15,7 @@ import CategoryAddForm from "src/sections/categories/categories-add-form";
 
 const Page = () => {
   const [categoriesData, setCategoriesData] = useState([]);
+  const [filteredBusinesses, setFilteredBusinesses] = useState([]);
 
   const fetchCategoriesData = async () => {
     try {
@@ -32,10 +33,10 @@ const Page = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const useCategories = (page, rowsPerPage) => {
+  const useCategories = (page, rowsPerPage, filteredData) => {
     return useMemo(() => {
-      return applyPagination(categoriesData, page, rowsPerPage);
-    }, [categoriesData, page, rowsPerPage]);
+      return applyPagination(filteredData, page, rowsPerPage);
+    }, [filteredData, page, rowsPerPage]);
   };
 
   const useCategoriesIds = (categories) => {
@@ -44,7 +45,9 @@ const Page = () => {
     }, [categories]);
   };
 
-  const categoriesSelection = useSelection(useCategoriesIds(useCategories(page, rowsPerPage)));
+  const categoriesSelection = useSelection(
+    useCategoriesIds(useCategories(page, rowsPerPage, filteredBusinesses))
+  );
 
   const handlePageChange = useCallback((event, value) => {
     setPage(value);
@@ -53,6 +56,33 @@ const Page = () => {
   const handleRowsPerPageChange = useCallback((event) => {
     setRowsPerPage(event.target.value);
   }, []);
+
+  /* Search Filter Stuff*/
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = useCallback((newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+  }, []);
+
+  useEffect(() => {
+    const filteredData = categoriesData.filter((influencer) => {
+      console.log("influencer:", influencer); // Log the influencer object
+      console.log("---------------------");
+      const idMatch = influencer?._id.toLowerCase().includes(searchTerm.toLowerCase());
+      const nameMatch = influencer?.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const activeColorMatch = influencer?.activeColor
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+
+      return idMatch || nameMatch || activeColorMatch;
+    });
+
+    setFilteredBusinesses(filteredData);
+    console.log("Filtered Businesses:", filteredData);
+  }, [categoriesData, searchTerm]);
+
+  /* ------------------ */
 
   const [isAddFormOpen, setIsAddFormOpen] = useState(false);
 
@@ -124,19 +154,21 @@ const Page = () => {
                 </Button>
               </div>
             </Stack>
-            <CategoriesSearch />
+            <CategoriesSearch onSearch={handleSearch} />
             <CategoriesTable
-              count={categoriesData.length}
-              items={useCategories(page, rowsPerPage)}
-              onDeselectAll={categoriesData.handleDeselectAll}
-              onDeselectOne={categoriesData.handleDeselectOne}
+              // count={categoriesData.length}
+              // items={useCategories(page, rowsPerPage)}
+              count={filteredBusinesses.length}
+              items={useCategories(page, rowsPerPage, filteredBusinesses)}
+              onDeselectAll={categoriesSelection.handleDeselectAll}
+              onDeselectOne={categoriesSelection.handleDeselectOne}
               onPageChange={handlePageChange}
               onRowsPerPageChange={handleRowsPerPageChange}
-              onSelectAll={categoriesData.handleSelectAll}
-              onSelectOne={categoriesData.handleSelectOne}
+              onSelectAll={categoriesSelection.handleSelectAll}
+              onSelectOne={categoriesSelection.handleSelectOne}
               page={page}
               rowsPerPage={rowsPerPage}
-              selected={categoriesData.selected}
+              selected={categoriesSelection.selected}
               fetchUpdatedData={fetchCategoriesData}
             />
           </Stack>

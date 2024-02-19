@@ -35,8 +35,8 @@ const BusinessAddForm = ({ onClose, fetchUpdatedData }) => {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACK_END}/user/register`,
-        formData,
+        `${process.env.NEXT_PUBLIC_BACK_END}/user/add/user`,
+        {...formData, role: "business"},
         {
           headers: {
             "Content-Type": "multipart/form-data",

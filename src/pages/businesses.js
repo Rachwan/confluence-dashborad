@@ -15,6 +15,7 @@ import BusinessAddForm from "src/sections/businesses/businesses-add-form";
 
 const Page = () => {
   const [businessesData, setBusinessesData] = useState([]);
+  const [filteredBusinesses, setFilteredBusinesses] = useState([]);
 
   const fetchBusinessesData = async () => {
     try {
@@ -33,10 +34,10 @@ const Page = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const useBusinesses = (page, rowsPerPage) => {
+  const useBusinesses = (page, rowsPerPage, filteredData) => {
     return useMemo(() => {
-      return applyPagination(businessesData, page, rowsPerPage);
-    }, [businessesData, page, rowsPerPage]);
+      return applyPagination(filteredData, page, rowsPerPage);
+    }, [filteredData, page, rowsPerPage]);
   };
 
   const useBusinessesIds = (businesses) => {
@@ -45,7 +46,9 @@ const Page = () => {
     }, [businesses]);
   };
 
-  const businessesSelection = useSelection(useBusinessesIds(useBusinesses(page, rowsPerPage)));
+  const businessesSelection = useSelection(
+    useBusinessesIds(useBusinesses(page, rowsPerPage, filteredBusinesses))
+  );
 
   const handlePageChange = useCallback((event, value) => {
     setPage(value);
@@ -54,6 +57,32 @@ const Page = () => {
   const handleRowsPerPageChange = useCallback((event) => {
     setRowsPerPage(event.target.value);
   }, []);
+
+  /* Search Filter Stuff*/
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = useCallback((newSearchTerm) => {
+    setSearchTerm(newSearchTerm);
+  }, []);
+
+  useEffect(() => {
+    const filteredData = businessesData.filter((business) => {
+      console.log("Business:", business); // Log the business object
+      console.log("---------------------");
+      const idMatch = business._id.toLowerCase().includes(searchTerm.toLowerCase());
+      const nameMatch = business.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const emailMatch = business.email.toLowerCase().includes(searchTerm.toLowerCase());
+      const numberMatch = business.number && business.number.toString().includes(searchTerm);
+
+      return idMatch || nameMatch || emailMatch || numberMatch;
+    });
+
+    setFilteredBusinesses(filteredData);
+    console.log("Filtered Businesses:", filteredData);
+  }, [businessesData, searchTerm]);
+
+  /* ------------------ */
 
   const [isAddFormOpen, setIsAddFormOpen] = useState(false);
 
@@ -125,10 +154,10 @@ const Page = () => {
                 </Button>
               </div>
             </Stack>
-            <BusinessesSearch />
+            <BusinessesSearch onSearch={handleSearch} />
             <BusinessesTable
-              count={businessesData.length}
-              items={useBusinesses(page, rowsPerPage)}
+              count={filteredBusinesses.length}
+              items={useBusinesses(page, rowsPerPage, filteredBusinesses)}
               onDeselectAll={businessesSelection.handleDeselectAll}
               onDeselectOne={businessesSelection.handleDeselectOne}
               onPageChange={handlePageChange}

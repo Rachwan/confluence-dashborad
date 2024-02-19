@@ -123,8 +123,8 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACK_END}/user/add/influencer`,
-        formData,
+        `${process.env.NEXT_PUBLIC_BACK_END}/user/add/user`,
+        {...formData, role: "influencer"},
         {
           headers: {
             "Content-Type": "multipart/form-data",
