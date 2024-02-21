@@ -1,0 +1,25 @@
+.logo {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  top: 0;
+  left: 0;
+  z-index: 20000;
+}
+.logo img {
+  width: 50px;
+  animation: rotateY infinite 0.6s linear;
+}
+
+@keyframes rotateY {
+  0% {
+    transform: rotateY(360deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}

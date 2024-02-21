@@ -13,8 +13,6 @@ import { AdminsSearch } from "src/sections/admins/admins-search";
 import { applyPagination } from "src/utils/apply-pagination";
 import AdminAddForm from "src/sections/admins/admins-add-form";
 
-const role = "admin";
-
 const Page = () => {
   const [adminsData, setAdminsData] = useState([]);
 
@@ -154,6 +152,6 @@ const Page = () => {
   );
 };
 
-Page.getLayout = (page, role) => <DashboardLayout role={role}>{page}</DashboardLayout>;
+Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
 
 export default Page;
