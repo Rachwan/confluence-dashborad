@@ -207,7 +207,17 @@ export const SettingsPassword = () => {
         </CardContent>
         <Divider />
         <CardActions sx={{ justifyContent: "flex-end" }}>
-          <Button variant="contained" onClick={handleSubmit}>
+          <Button
+            variant="contained"
+            onClick={handleSubmit}
+            style={{
+              fontSize: "16px",
+              backgroundColor: "var(--second-blue)",
+              borderRadius: "30px",
+              border: "none",
+              outline: "none",
+            }}
+          >
             Update
           </Button>
         </CardActions>

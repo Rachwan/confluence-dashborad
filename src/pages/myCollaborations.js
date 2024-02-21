@@ -14,6 +14,7 @@ import { MyCollaborationsTable } from "src/sections/myCollaborations/myCollabora
 import { MyCollaborationsSearch } from "src/sections/myCollaborations/myCollaborations-search";
 import { applyPagination } from "src/utils/apply-pagination";
 import Link from "next/link";
+import { CSVLink } from "react-csv";
 
 const Page = () => {
   const { user } = useContext(UserContext);
@@ -122,25 +123,31 @@ const Page = () => {
                 <Stack alignItems="center" direction="row" spacing={1}>
                   <Button
                     color="inherit"
-                    startIcon={
-                      <SvgIcon fontSize="small">
-                        <ArrowUpOnSquareIcon />
-                      </SvgIcon>
-                    }
-                    style={{ fontSize: "16px" }}
+                    style={{ fontSize: "16px", display: "flex", alignItems: "center", gap: "4px" }}
                   >
-                    Import
+                    <SvgIcon fontSize="small" style={{ color: "#0000EE" }}>
+                      <ArrowDownOnSquareIcon />
+                    </SvgIcon>
+                    <span style={{ transform: "translateY(2px)", color: "#0000EE" }}>Import</span>
                   </Button>
                   <Button
                     color="inherit"
-                    startIcon={
-                      <SvgIcon fontSize="small">
-                        <ArrowDownOnSquareIcon />
-                      </SvgIcon>
-                    }
-                    style={{ fontSize: "16px" }}
+                    style={{ fontSize: "16px", display: "flex", alignItems: "center", gap: "4px" }}
                   >
-                    Export
+                    <SvgIcon fontSize="small" style={{ color: "#0000EE" }}>
+                      <ArrowUpOnSquareIcon />
+                    </SvgIcon>
+                    <CSVLink
+                      style={{ transform: "translateY(2px)" }}
+                      data={filteredBusinesses}
+                      headers={[
+                        { label: "Title", key: "title" },
+                        { label: "Description", key: "description" },
+                      ]}
+                      filename={"my_collaborations.csv"}
+                    >
+                      Export
+                    </CSVLink>
                   </Button>
                 </Stack>
               </Stack>
