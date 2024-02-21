@@ -1,3 +1,4 @@
+// import { useEffect } from "react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import PropTypes from "prop-types";
@@ -22,12 +23,14 @@ import { SideNavItem } from "./side-nav-item";
 import { color, width } from "@mui/system";
 import { useContext } from "react";
 import { UserContext } from "src/contexts/UserContext";
+// import { useRouter } from "next/router";
 
 export const SideNav = (props) => {
   const { user } = useContext(UserContext);
   const { open, onClose } = props;
   const pathname = usePathname();
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
+  // const router = useRouter();
 
   let items;
   let array = [
@@ -275,6 +278,12 @@ export const SideNav = (props) => {
     // Default menu items
     items = [];
   }
+  // useEffect(() => {
+  //   if (user && user?.role === "business") {
+  //     router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}`);
+  //   }
+  // }, []);
+
   const content = (
     <Scrollbar
       sx={{
@@ -358,6 +367,11 @@ export const SideNav = (props) => {
             {items.map((item) => {
               const active = item.path ? pathname === item.path : false;
 
+              // if (user && user?.role === "business") {
+              //   router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}`);
+              //   return null;
+              // }
+
               return (
                 <SideNavItem
                   active={active}
@@ -372,7 +386,6 @@ export const SideNav = (props) => {
             })}
           </Stack>
         </Box>
-        <Divider sx={{ borderColor: "neutral.700" }} />
         <Box
           sx={{
             px: 2,
