@@ -75,6 +75,8 @@ const Page = () => {
       const emailMatch = influencer?.email.toLowerCase().includes(searchTerm.toLowerCase());
       const numberMatch = influencer?.number && influencer?.number.toString().includes(searchTerm);
       const ageMatch = influencer?.age && influencer?.age.toString().includes(searchTerm);
+      const totalFollowersMatch =
+        influencer?.totalFollowers && influencer?.totalFollowers.toString().includes(searchTerm);
 
       // Check for platforms
       const platformMatch = influencer?.platforms.some(
@@ -99,6 +101,7 @@ const Page = () => {
         emailMatch ||
         numberMatch ||
         ageMatch ||
+        totalFollowersMatch ||
         platformMatch ||
         cityMatch ||
         categoryMatch

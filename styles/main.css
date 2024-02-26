@@ -55,7 +55,16 @@ a {
   width: 90%;
 }
 .dashIcon {
-  color: #9da4ae;
   width: 20px;
   height: 20px;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--main-blue-hover);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--second-blue);
 }

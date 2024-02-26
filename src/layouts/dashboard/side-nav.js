@@ -38,7 +38,7 @@ export const SideNav = (props) => {
       title: "My Info Details",
       path: "/influencer-details",
       icon: (
-        <SvgIcon fontSize="small">
+        <SvgIcon fontSize="small" className="css-ks6xm0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"

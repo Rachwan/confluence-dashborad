@@ -7,11 +7,14 @@ import TextField from "@mui/material/TextField";
 import Swal from "sweetalert2";
 import { UserContext } from "src/contexts/UserContext";
 import styles from "../../styles/influencer-details.module.css";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 const Page = () => {
   const { user, fetchUserData } = useContext(UserContext);
   const [formData, setFormData] = useState({
     age: user?.age ? user?.age : "",
+    gender: user?.gender ? user?.gender : "",
     number: user?.number ? user?.number : "",
     platforms: user?.platforms ? user?.platforms : [],
     profile: user?.profile ? user?.profile : null,
@@ -79,6 +82,13 @@ const Page = () => {
     }));
   };
 
+  const handleCheckboxChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      gender: e.target.checked ? e.target.value : "",
+    }));
+  };
+
   const handlePlatformsChange = (e, thePlatform) => {
     const { name, value } = e.target;
 
@@ -94,6 +104,32 @@ const Page = () => {
       updatedPlatforms.push({
         platformId: thePlatform._id,
         followers: value,
+      });
+    }
+
+    setFormData((prevData) => ({
+      ...prevData,
+      platforms: updatedPlatforms,
+    }));
+  };
+
+  const handlePlatformsLinkChange = (e, thePlatform) => {
+    const { name, value } = e.target;
+
+    const existingPlatform = formData.platforms.find(
+      (platform) => platform.platformId === thePlatform._id
+    );
+
+    const updatedPlatforms = formData.platforms.map((platform) =>
+      platform.platformId === thePlatform._id
+        ? { ...platform, link: value } // Add link to the platform
+        : platform
+    );
+
+    if (!existingPlatform) {
+      updatedPlatforms.push({
+        platformId: thePlatform._id,
+        link: value,
       });
     }
 
@@ -128,6 +164,14 @@ const Page = () => {
       Swal.fire({
         title: "Have you inserted your age?",
         text: "Please insert your age.",
+        icon: "question",
+      });
+      return;
+    }
+    if (!formData.gender || formData.gender === "") {
+      Swal.fire({
+        title: "Have you selected your gender?",
+        text: "Please select your gender.",
         icon: "question",
       });
       return;
@@ -249,7 +293,9 @@ const Page = () => {
               <div className={styles.all__inputs}>
                 {/* All Info Besides Platfroms */}
                 <div className={styles.inputs}>
-                  <h2 className={styles.input__title}>Personal Info</h2>
+                  <h2 className={styles.input__title} style={{ fontSize: "22px" }}>
+                    Personal Info
+                  </h2>
                   <TextField
                     label="Age"
                     type="text"
@@ -259,8 +305,41 @@ const Page = () => {
                     fullWidth
                     margin="normal"
                     placeholder="Insert your age"
-                    style={{ marginBottom: "15px" }}
+                    style={{ marginBottom: "15px", width: "100%" }}
                   />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      alignItems: "center",
+                      gap: "30px",
+                      marginBottom: "15px",
+                    }}
+                  >
+                    <p style={{ fontSize: "17px" }}>Gender:</p>
+                    <div>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={formData.gender === "Male"}
+                            onChange={(e) => handleCheckboxChange(e)}
+                            value="Male"
+                          />
+                        }
+                        label="Male"
+                      />
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={formData.gender === "Female"}
+                            onChange={(e) => handleCheckboxChange(e)}
+                            value="Female"
+                          />
+                        }
+                        label="Female"
+                      />
+                    </div>
+                  </div>
                   <TextField
                     label="Phone"
                     type="text"
@@ -337,8 +416,8 @@ const Page = () => {
                       style={{
                         marginTop: "15px",
                         marginBottom: "10px",
-                        fontSize: "20px",
-                        fontWeight: "500",
+                        fontSize: "22px",
+                        fontWeight: "600",
                         color: "#111927",
                       }}
                     >
@@ -358,8 +437,8 @@ const Page = () => {
                       style={{
                         marginTop: "15px",
                         marginBottom: "10px",
-                        fontSize: "20px",
-                        fontWeight: "500",
+                        fontSize: "22px",
+                        fontWeight: "600",
                         color: "#111927",
                       }}
                     >
@@ -376,20 +455,46 @@ const Page = () => {
                 </div>
                 {/* Platforms */}
                 <div className={styles.platfroms}>
-                  <h2 className={styles.input__title}>Platforms</h2>
+                  <h2 className={styles.input__title} style={{ fontSize: "22px" }}>
+                    Platforms
+                  </h2>
                   {platformsData
                     ? platformsData.map((platform, index) => (
                         <>
-                          <TextField
-                            key={platform._id}
-                            label={`${platform.name}`}
-                            type="number"
-                            name={platform._id}
-                            onChange={(e) => handlePlatformsChange(e, platform)}
-                            fullWidth
-                            placeholder={`Number of followers`}
-                            style={{ marginTop: "15px", marginBottom: "0px" }}
-                          />
+                          <h4 style={{ fontSize: "17px", margin: "15px 0 -8px" }}>
+                            {platform?.name}
+                          </h4>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              gap: "15px",
+                            }}
+                            className={styles.platfroms__inputs}
+                          >
+                            <TextField
+                              label={`${platform.name} Link`}
+                              type="text"
+                              name={`${platform._id}_link`} // Use a unique name for each link field
+                              onChange={(e) => handlePlatformsLinkChange(e, platform)}
+                              fullWidth
+                              placeholder={`Link`}
+                              style={{ marginTop: "15px", marginBottom: "0px", width: "50%" }}
+                              className={styles.platfrom__input}
+                            />
+                            <TextField
+                              key={platform._id}
+                              label={`${platform.name} Followers`}
+                              type="number"
+                              name={platform._id}
+                              onChange={(e) => handlePlatformsChange(e, platform)}
+                              fullWidth
+                              placeholder={`Number of followers`}
+                              style={{ marginTop: "15px", marginBottom: "0px", width: "50%" }}
+                              className={styles.platfrom__input}
+                            />
+                          </div>
                         </>
                       ))
                     : "Loading Platforms"}

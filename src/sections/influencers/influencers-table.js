@@ -67,6 +67,10 @@ export const InfluencersTable = (props) => {
     });
   };
 
+  const getTotalFollowers = (array) => {
+    return array.reduce((sum, platform) => sum + platform.followers, 0);
+  };
+
   return (
     <Card>
       <Scrollbar>
@@ -80,9 +84,10 @@ export const InfluencersTable = (props) => {
                 <TableCell style={{ fontSize: "14px" }}>Background</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Number</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Age</TableCell>
+                <TableCell style={{ fontSize: "14px" }}>Category</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>City</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Platforms</TableCell>
-                <TableCell style={{ fontSize: "14px" }}>Category</TableCell>
+                <TableCell style={{ fontSize: "14px" }}>Total Followers</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Created At</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Actions</TableCell>
               </TableRow>
@@ -124,6 +129,9 @@ export const InfluencersTable = (props) => {
                     <TableCell style={{ fontSize: "16px" }}>{influencer.number}</TableCell>
                     <TableCell style={{ fontSize: "16px" }}>{influencer.age}</TableCell>
                     <TableCell style={{ fontSize: "16px" }}>
+                      {influencer.categoryId?.name || "No Category Yet"}
+                    </TableCell>
+                    <TableCell style={{ fontSize: "16px" }}>
                       {influencer.cityId?.name || "No City Yet"}
                     </TableCell>
                     <TableCell style={{ fontSize: "16px" }}>
@@ -150,7 +158,7 @@ export const InfluencersTable = (props) => {
                       </ul>
                     </TableCell>
                     <TableCell style={{ fontSize: "16px" }}>
-                      {influencer.categoryId?.name || "No Category Yet"}
+                      {influencer?.totalFollowers || getTotalFollowers(influencer?.platforms)}
                     </TableCell>
                     <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
                     <TableCell>

@@ -8,6 +8,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
 import Head from "next/head";
+import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 
 const Page = () => {
   const { user } = useContext(UserContext);
@@ -20,7 +21,6 @@ const Page = () => {
     fourthImage: null,
     description: "",
     platforms: [],
-    singleTitle: "",
     // images: [null],
     additional: [],
     userId: user?._id,
@@ -139,7 +139,7 @@ const Page = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(formData);
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACK_END}/collaboration/create`,
@@ -199,12 +199,13 @@ const Page = () => {
             <form style={{ width: "100%" }} enctype="multipart/form-data" onSubmit={handleSubmit}>
               <h2
                 style={{
-                  fontSize: "20px",
                   marginTop: "20px",
                   marginBottom: "10px",
                   borderBottom: "1px solid var(--second-blue)",
                   paddingBottom: "10px",
                   width: "fit-content",
+                  fontSize: "22px",
+                  fontWeight: "600",
                 }}
               >
                 For Collaboration Post:
@@ -257,12 +258,13 @@ const Page = () => {
               </div>
               <h2
                 style={{
-                  fontSize: "20px",
                   marginTop: "40px",
                   marginBottom: "10px",
                   borderBottom: "1px solid var(--second-blue)",
                   paddingBottom: "10px",
                   width: "fit-content",
+                  fontSize: "22px",
+                  fontWeight: "600",
                 }}
               >
                 For Collaboration Details:
@@ -271,16 +273,13 @@ const Page = () => {
                 Collaboration Title
               </h2>
               <TextField
-                label="Single Title"
-                type="text"
-                name="singleTitle"
-                // value={formData.name}
-                onChange={handleChange}
+                label="Main title"
+                value={formData.title}
                 fullWidth
                 margin="normal"
-                placeholder="Enter the the single title"
+                inputProps={{ readOnly: true }}
               />
-              <h2 style={{ fontSize: "20px", margin: "15px 0 0", fontWeight: "500" }}>
+              <h2 style={{ fontSize: "22px", margin: "15px 0 0", fontWeight: "600" }}>
                 Upload the 4 images
               </h2>
               {/* 4 Images */}
@@ -362,21 +361,28 @@ const Page = () => {
                   )}
                 </div>
               ))}
-              <h2 style={{ fontSize: "20px", margin: "15px 0 0", fontWeight: "500" }}>
+              <h2 style={{ fontSize: "22px", margin: "15px 0 0", fontWeight: "600" }}>
                 Collaboration Description
               </h2>
-              <TextField
+              <TextareaAutosize
                 label="Description"
                 type="text"
                 name="description"
-                // value={formData.name}
                 onChange={handleChange}
-                fullWidth
-                margin="normal"
                 placeholder="Enter the description"
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  marginTop: "10px",
+                  height: "150px",
+                  border: "2px solid var(--second-blue)",
+                  minWidth: "100%",
+                  maxWidth: "100%",
+                  borderRadius: "4px",
+                }}
               />
               <div>
-                <h2 style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}>
+                <h2 style={{ fontSize: "22px", margin: "15px 0", fontWeight: "600" }}>
                   Additional Items:
                 </h2>
                 {additionalItems.map((item, index) => (

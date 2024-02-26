@@ -31,7 +31,7 @@
   margin-bottom: 8px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .form {
     width: 100%;
   }
@@ -63,5 +63,14 @@
   .platform__input {
     margin-top: 16px;
     margin-bottom: 8px;
+  }
+}
+@media (max-width: 600px) {
+  .platfroms__inputs {
+    flex-direction: column;
+    gap: 0;
+  }
+  .platfroms__inputs .platfrom__input {
+    width: 100% !important;
   }
 }

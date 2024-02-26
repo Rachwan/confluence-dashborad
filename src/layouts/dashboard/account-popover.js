@@ -22,9 +22,9 @@ export const AccountPopover = (props) => {
           text: "Sad to see you going.",
           icon: "success",
         });
-        setTimeout(() => {
-          router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}`);
-        }, 1000);
+        // setTimeout(() => {
+        router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}`);
+        // }, 1000);
       }
     } catch (error) {
       Swal.fire({
