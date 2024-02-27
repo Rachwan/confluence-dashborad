@@ -375,7 +375,7 @@ const Page = () => {
                   padding: "10px",
                   marginTop: "10px",
                   height: "150px",
-                  border: "2px solid var(--second-blue)",
+                  border: "1px solid var(--second-blue)",
                   minWidth: "100%",
                   maxWidth: "100%",
                   borderRadius: "4px",

@@ -9,6 +9,7 @@ import { UserContext } from "src/contexts/UserContext";
 import styles from "../../styles/influencer-details.module.css";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import LoadingSection from "src/components/LoadingSection";
 
 const Page = () => {
   const { user, fetchUserData } = useContext(UserContext);
@@ -16,12 +17,13 @@ const Page = () => {
     age: user?.age ? user?.age : "",
     gender: user?.gender ? user?.gender : "",
     number: user?.number ? user?.number : "",
-    platforms: user?.platforms ? user?.platforms : [],
+    platforms: user?.platforms || [],
     profile: user?.profile ? user?.profile : null,
     background: user?.background ? user?.background : null,
     cityId: user?.cityId ? user?.cityId._id : "",
     categoryId: user?.categoryId ? user?.categoryId._id : "",
   });
+  const [loading, setLoading] = useState(true);
 
   /* Fethcing neccessary data */
   const [categoriesData, setCategoriesData] = useState([]);
@@ -54,6 +56,7 @@ const Page = () => {
 
   useEffect(() => {
     fetchPlatformsData();
+    setLoading(false);
   }, []);
 
   /* */
@@ -90,17 +93,28 @@ const Page = () => {
   };
 
   const handlePlatformsChange = (e, thePlatform) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
 
-    const existingPlatform = formData.platforms.find(
-      (platform) => platform.platformId === thePlatform._id
-    );
+    const existingPlatformIndex = formData?.platforms?.findIndex((platform) => {
+      const existingPlatformId = platform?.platformId;
 
-    const updatedPlatforms = formData.platforms.map((platform) =>
-      platform.platformId === thePlatform._id ? { ...platform, followers: value } : platform
-    );
-
-    if (!existingPlatform) {
+      if (existingPlatformId && typeof existingPlatformId === "object") {
+        // If platformId is an object, compare its _id property
+        return existingPlatformId._id?.toString() === thePlatform?._id?.toString();
+      } else {
+        // If platformId is not an object, compare it directly
+        return existingPlatformId?.toString() === thePlatform?._id?.toString();
+      }
+    });
+    const updatedPlatforms = [...formData.platforms];
+    if (existingPlatformIndex !== -1) {
+      // Update existing platform
+      updatedPlatforms[existingPlatformIndex] = {
+        ...updatedPlatforms[existingPlatformIndex],
+        followers: value,
+      };
+    } else {
+      // Add new platform
       updatedPlatforms.push({
         platformId: thePlatform._id,
         followers: value,
@@ -114,19 +128,29 @@ const Page = () => {
   };
 
   const handlePlatformsLinkChange = (e, thePlatform) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
 
-    const existingPlatform = formData.platforms.find(
-      (platform) => platform.platformId === thePlatform._id
-    );
+    const existingPlatformIndex = formData?.platforms?.findIndex((platform) => {
+      const existingPlatformId = platform?.platformId;
 
-    const updatedPlatforms = formData.platforms.map((platform) =>
-      platform.platformId === thePlatform._id
-        ? { ...platform, link: value } // Add link to the platform
-        : platform
-    );
+      if (existingPlatformId && typeof existingPlatformId === "object") {
+        // If platformId is an object, compare its _id property
+        return existingPlatformId._id?.toString() === thePlatform?._id?.toString();
+      } else {
+        // If platformId is not an object, compare it directly
+        return existingPlatformId?.toString() === thePlatform?._id?.toString();
+      }
+    });
+    const updatedPlatforms = [...formData.platforms];
 
-    if (!existingPlatform) {
+    if (existingPlatformIndex !== -1) {
+      // Update existing platform
+      updatedPlatforms[existingPlatformIndex] = {
+        ...updatedPlatforms[existingPlatformIndex],
+        link: value,
+      };
+    } else {
+      // Add new platform
       updatedPlatforms.push({
         platformId: thePlatform._id,
         link: value,
@@ -184,7 +208,7 @@ const Page = () => {
       });
       return;
     }
-    if (!phoneRegex.test(formData.number)) {
+    if (phoneRegex.test(formData.number)) {
       Swal.fire({
         title: "Have you provided a valid phone?",
         text: "Please insert a valid phone (at least 8 digits).",
@@ -227,12 +251,13 @@ const Page = () => {
 
     if (formData.platforms.length === 0) {
       Swal.fire({
-        title: "Have you inserted any platform followers?",
+        title: "Have you inserted any platform?",
         text: "Please insert at least one platfrom.",
         icon: "question",
       });
       return;
     }
+
     try {
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_BACK_END}/user/${user?._id}`,
@@ -458,46 +483,48 @@ const Page = () => {
                   <h2 className={styles.input__title} style={{ fontSize: "22px" }}>
                     Platforms
                   </h2>
-                  {platformsData
-                    ? platformsData.map((platform, index) => (
-                        <>
-                          <h4 style={{ fontSize: "17px", margin: "15px 0 -8px" }}>
-                            {platform?.name}
-                          </h4>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                              gap: "15px",
-                            }}
-                            className={styles.platfroms__inputs}
-                          >
-                            <TextField
-                              label={`${platform.name} Link`}
-                              type="text"
-                              name={`${platform._id}_link`} // Use a unique name for each link field
-                              onChange={(e) => handlePlatformsLinkChange(e, platform)}
-                              fullWidth
-                              placeholder={`Link`}
-                              style={{ marginTop: "15px", marginBottom: "0px", width: "50%" }}
-                              className={styles.platfrom__input}
-                            />
-                            <TextField
-                              key={platform._id}
-                              label={`${platform.name} Followers`}
-                              type="number"
-                              name={platform._id}
-                              onChange={(e) => handlePlatformsChange(e, platform)}
-                              fullWidth
-                              placeholder={`Number of followers`}
-                              style={{ marginTop: "15px", marginBottom: "0px", width: "50%" }}
-                              className={styles.platfrom__input}
-                            />
-                          </div>
-                        </>
-                      ))
-                    : "Loading Platforms"}
+                  {loading ? (
+                    <LoadingSection padding={"15px"} />
+                  ) : platformsData && platformsData?.length !== 0 && !loading ? (
+                    platformsData.map((platform, index) => (
+                      <React.Fragment key={index}>
+                        <h4 style={{ fontSize: "17px", margin: "15px 0 -8px" }}>
+                          {platform?.name}
+                        </h4>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            gap: "15px",
+                          }}
+                          className={styles.platfroms__inputs}
+                        >
+                          <TextField
+                            label={`${platform.name} Link`}
+                            type="text"
+                            name={`${platform._id}_link`} // Use a unique name for each link field
+                            onChange={(e) => handlePlatformsLinkChange(e, platform)}
+                            fullWidth
+                            placeholder={`Link`}
+                            style={{ marginTop: "15px", marginBottom: "0px", width: "50%" }}
+                            className={styles.platfrom__input}
+                          />
+                          <TextField
+                            key={platform._id}
+                            label={`${platform.name} Followers`}
+                            type="number"
+                            name={platform._id}
+                            onChange={(e) => handlePlatformsChange(e, platform)}
+                            fullWidth
+                            placeholder={`Number of followers`}
+                            style={{ marginTop: "15px", marginBottom: "0px", width: "50%" }}
+                            className={styles.platfrom__input}
+                          />
+                        </div>
+                      </React.Fragment>
+                    ))
+                  ) : null}
                 </div>
               </div>
               {/* Submit Button */}

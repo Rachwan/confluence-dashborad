@@ -79,7 +79,7 @@ export const AllCollaborationsTable = (props) => {
                 <TableCell style={{ fontSize: "14px" }}>Collaboration Id</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>User Name</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>User Id</TableCell>
-                <TableCell style={{ fontSize: "14px" }}>Link</TableCell>
+                {/* <TableCell style={{ fontSize: "14px" }}>Link</TableCell> */}
                 <TableCell style={{ fontSize: "14px" }}>Title</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Background</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>description</TableCell>
@@ -110,15 +110,15 @@ export const AllCollaborationsTable = (props) => {
                     <TableCell style={{ fontSize: "16px" }}>
                       {allCollaboration.userId ? allCollaboration.userId._id : "NNNN/AAAA"}
                     </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
+                    {/* <TableCell style={{ fontSize: "16px" }}>
                       <Link
-                        href={`${process.env.NEXT_PUBLIC_MAIN_WEB}/collaboration/${allCollaboration.title}`}
+                        href={`${process.env.NEXT_PUBLIC_MAIN_WEB}/${allCollaboration?.userId?.name}/collaborations/${allCollaboration.title}`}
                         target="_blank"
                         style={{ textDecoration: "underline" }}
                       >
                         Page Link
                       </Link>
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell>
                       <Stack alignItems="center" direction="row" spacing={2}>
                         <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
