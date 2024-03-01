@@ -17,7 +17,7 @@ const Page = () => (
               influential connections in the dashboard realm.
             </p>
             <div className={styles.buttonWrapper}>
-              <Link href={`${process.env.NEXT_PUBLIC_API_URL}`}>
+              <Link href={"/"}>
                 <div className={styles.button}>Back To Overview</div>
               </Link>
             </div>
