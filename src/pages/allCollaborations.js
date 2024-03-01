@@ -1,105 +1,105 @@
-import { useCallback, useMemo, useState, useEffect } from "react";
-import axios from "axios";
-import Head from "next/head";
-import ArrowDownOnSquareIcon from "@heroicons/react/24/solid/ArrowDownOnSquareIcon";
-import ArrowUpOnSquareIcon from "@heroicons/react/24/solid/ArrowUpOnSquareIcon";
-import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
-import { Box, Button, Container, Stack, SvgIcon, Typography } from "@mui/material";
-import { useSelection } from "src/hooks/use-selection";
+import { useCallback, useMemo, useState, useEffect } from 'react'
+import axios from 'axios'
+import Head from 'next/head'
+import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon'
+import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon'
+import PlusIcon from '@heroicons/react/24/solid/PlusIcon'
+import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material'
+import { useSelection } from 'src/hooks/use-selection'
 
-import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
-import { AllCollaborationsTable } from "src/sections/allCollaborations/allCollaborations-table";
-import { AllCollaborationsSearch } from "src/sections/allCollaborations/allCollaborations-search";
-import { applyPagination } from "src/utils/apply-pagination";
-import Link from "next/link";
+import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout'
+import { AllCollaborationsTable } from 'src/sections/allCollaborations/allCollaborations-table'
+import { AllCollaborationsSearch } from 'src/sections/allCollaborations/allCollaborations-search'
+import { applyPagination } from 'src/utils/apply-pagination'
+import Link from 'next/link'
 
 const Page = () => {
-  const [allCollaborationsData, setAllCollaborationsData] = useState([]);
-  const [filteredBusinesses, setFilteredBusinesses] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [allCollaborationsData, setAllCollaborationsData] = useState([])
+  const [filteredBusinesses, setFilteredBusinesses] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const fetchAllCollaborationsData = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/collaboration/all`);
-      setAllCollaborationsData(response.data);
-      setLoading(false);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/collaboration/all`)
+      setAllCollaborationsData(response.data)
+      setLoading(false)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchAllCollaborationsData();
-  }, []);
+    fetchAllCollaborationsData()
+  }, [])
 
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
 
   const useAllCollaborations = (page, rowsPerPage, filteredData) => {
     return useMemo(() => {
-      return applyPagination(filteredData, page, rowsPerPage);
-    }, [filteredData, page, rowsPerPage]);
-  };
+      return applyPagination(filteredData, page, rowsPerPage)
+    }, [filteredData, page, rowsPerPage])
+  }
 
   const useAllCollaborationsIds = (allCollaborations) => {
     return useMemo(() => {
-      return allCollaborations.map((collaboration) => collaboration.id);
-    }, [allCollaborations]);
-  };
+      return allCollaborations.map((collaboration) => collaboration.id)
+    }, [allCollaborations])
+  }
 
   const allCollaborationsSelection = useSelection(
-    useAllCollaborationsIds(useAllCollaborations(page, rowsPerPage, filteredBusinesses))
-  );
+    useAllCollaborationsIds(useAllCollaborations(page, rowsPerPage, filteredBusinesses)),
+  )
 
   const handlePageChange = useCallback((event, value) => {
-    setPage(value);
-  }, []);
+    setPage(value)
+  }, [])
 
   const handleRowsPerPageChange = useCallback((event) => {
-    setRowsPerPage(event.target.value);
-  }, []);
+    setRowsPerPage(event.target.value)
+  }, [])
 
   /* Search Filter Stuff*/
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleSearch = useCallback((newSearchTerm) => {
-    setSearchTerm(newSearchTerm);
-  }, []);
+    setSearchTerm(newSearchTerm)
+  }, [])
 
   useEffect(() => {
     const filteredData = allCollaborationsData.filter((collaboration) => {
-      const idMatch = collaboration?._id?.toLowerCase().includes(searchTerm?.toLowerCase());
-      const titleMatch = collaboration?.title?.toLowerCase().includes(searchTerm?.toLowerCase());
+      const idMatch = collaboration?._id?.toLowerCase().includes(searchTerm?.toLowerCase())
+      const titleMatch = collaboration?.title?.toLowerCase().includes(searchTerm?.toLowerCase())
       const userMatch = collaboration?.userId?.name
         ?.toLowerCase()
-        .includes(searchTerm?.toLowerCase());
+        .includes(searchTerm?.toLowerCase())
       const descriptionMatch = collaboration?.description
         ?.toLowerCase()
-        .includes(searchTerm?.toLowerCase());
+        .includes(searchTerm?.toLowerCase())
 
       // Additional fields in the "additional" array
       const additionalMatch = collaboration?.additional?.some((item) => {
-        const nameMatch = item?.name?.toLowerCase().includes(searchTerm?.toLowerCase());
-        const detailMatch = item?.detail?.toLowerCase().includes(searchTerm?.toLowerCase());
-        return nameMatch || detailMatch;
-      });
+        const nameMatch = item?.name?.toLowerCase().includes(searchTerm?.toLowerCase())
+        const detailMatch = item?.detail?.toLowerCase().includes(searchTerm?.toLowerCase())
+        return nameMatch || detailMatch
+      })
 
       // Platforms array
       const platformsMatch = collaboration?.platforms?.some((platform) =>
-        platform?.toLowerCase().includes(searchTerm?.toLowerCase())
-      );
+        platform?.toLowerCase().includes(searchTerm?.toLowerCase()),
+      )
 
       // Add more fields as needed
 
       return (
         idMatch || titleMatch || userMatch || descriptionMatch || additionalMatch || platformsMatch
-      );
-    });
+      )
+    })
 
-    setFilteredBusinesses(filteredData);
-    console.log("Filtered Businesses:", filteredData);
-  }, [allCollaborationsData, searchTerm]);
+    setFilteredBusinesses(filteredData)
+    console.log('Filtered Businesses:', filteredData)
+  }, [allCollaborationsData, searchTerm])
 
   /* ------------------ */
 
@@ -128,7 +128,7 @@ const Page = () => {
                         <ArrowUpOnSquareIcon />
                       </SvgIcon>
                     }
-                    style={{ fontSize: "16px" }}
+                    style={{ fontSize: '16px' }}
                   >
                     Import
                   </Button>
@@ -139,7 +139,7 @@ const Page = () => {
                         <ArrowDownOnSquareIcon />
                       </SvgIcon>
                     }
-                    style={{ fontSize: "16px" }}
+                    style={{ fontSize: '16px' }}
                   >
                     Export
                   </Button>
@@ -185,9 +185,9 @@ const Page = () => {
         </Container>
       </Box>
     </>
-  );
-};
+  )
+}
 
-Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>
 
-export default Page;
+export default Page

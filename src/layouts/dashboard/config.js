@@ -1,17 +1,17 @@
-import ChartBarIcon from "@heroicons/react/24/solid/ChartBarIcon";
-import CogIcon from "@heroicons/react/24/solid/CogIcon";
-import LockClosedIcon from "@heroicons/react/24/solid/LockClosedIcon";
-import ShoppingBagIcon from "@heroicons/react/24/solid/ShoppingBagIcon";
-import UserIcon from "@heroicons/react/24/solid/UserIcon";
-import UserPlusIcon from "@heroicons/react/24/solid/UserPlusIcon";
-import UsersIcon from "@heroicons/react/24/solid/UsersIcon";
-import XCircleIcon from "@heroicons/react/24/solid/XCircleIcon";
-import { SvgIcon } from "@mui/material";
+import ChartBarIcon from '@heroicons/react/24/solid/ChartBarIcon'
+import CogIcon from '@heroicons/react/24/solid/CogIcon'
+import LockClosedIcon from '@heroicons/react/24/solid/LockClosedIcon'
+import ShoppingBagIcon from '@heroicons/react/24/solid/ShoppingBagIcon'
+import UserIcon from '@heroicons/react/24/solid/UserIcon'
+import UserPlusIcon from '@heroicons/react/24/solid/UserPlusIcon'
+import UsersIcon from '@heroicons/react/24/solid/UsersIcon'
+import XCircleIcon from '@heroicons/react/24/solid/XCircleIcon'
+import { SvgIcon } from '@mui/material'
 
 export const items = [
   {
-    title: "Overview",
-    path: "/",
+    title: 'Overview',
+    path: '/',
     icon: (
       <SvgIcon fontSize="small">
         <ChartBarIcon />
@@ -19,8 +19,8 @@ export const items = [
     ),
   },
   {
-    title: "Influencers",
-    path: "/influencers",
+    title: 'Influencers',
+    path: '/influencers',
     icon: (
       <SvgIcon fontSize="small">
         <svg
@@ -35,8 +35,8 @@ export const items = [
     ),
   },
   {
-    title: "Businesses",
-    path: "/businesses",
+    title: 'Businesses',
+    path: '/businesses',
     icon: (
       <SvgIcon fontSize="small">
         <svg
@@ -51,8 +51,8 @@ export const items = [
     ),
   },
   {
-    title: "Admins",
-    path: "/admins",
+    title: 'Admins',
+    path: '/admins',
     icon: (
       <SvgIcon fontSize="small">
         <svg
@@ -67,8 +67,8 @@ export const items = [
     ),
   },
   {
-    title: "Platforms",
-    path: "/platforms",
+    title: 'Platforms',
+    path: '/platforms',
     icon: (
       <SvgIcon fontSize="small">
         <svg
@@ -83,8 +83,8 @@ export const items = [
     ),
   },
   {
-    title: "Categories",
-    path: "/categories",
+    title: 'Categories',
+    path: '/categories',
     icon: (
       <SvgIcon fontSize="small">
         <svg
@@ -99,8 +99,8 @@ export const items = [
     ),
   },
   {
-    title: "Cities",
-    path: "/cities",
+    title: 'Cities',
+    path: '/cities',
     icon: (
       <SvgIcon fontSize="small">
         <svg
@@ -115,8 +115,8 @@ export const items = [
     ),
   },
   {
-    title: "Soon",
-    path: "/soon",
+    title: 'Soon',
+    path: '/soon',
     icon: (
       <SvgIcon fontSize="small">
         <svg
@@ -131,8 +131,8 @@ export const items = [
     ),
   },
   {
-    title: "Subscribers",
-    path: "/subscribers",
+    title: 'Subscribers',
+    path: '/subscribers',
     icon: (
       <SvgIcon fontSize="small" fill="currentColor" className="w-6 h-6 dashIcon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -142,8 +142,8 @@ export const items = [
     ),
   },
   {
-    title: "All Collaborations",
-    path: "/allCollaborations",
+    title: 'All Collaborations',
+    path: '/allCollaborations',
     icon: (
       <SvgIcon fontSize="small">
         <svg
@@ -158,12 +158,12 @@ export const items = [
     ),
   },
   {
-    title: "************",
-    path: "/",
+    title: '************',
+    path: '/',
   },
   {
-    title: "Overview",
-    path: "/",
+    title: 'Overview',
+    path: '/',
     icon: (
       <SvgIcon fontSize="small">
         <ChartBarIcon />
@@ -171,8 +171,8 @@ export const items = [
     ),
   },
   {
-    title: "My Info Details",
-    path: "/influencer-details",
+    title: 'My Info Details',
+    path: '/influencer-details',
     icon: (
       <SvgIcon fontSize="small">
         <svg
@@ -187,8 +187,8 @@ export const items = [
     ),
   },
   {
-    title: "My Collaborations",
-    path: "/myCollaborations",
+    title: 'My Collaborations',
+    path: '/myCollaborations',
     icon: (
       <SvgIcon fontSize="small">
         <svg
@@ -203,8 +203,8 @@ export const items = [
     ),
   },
   {
-    title: "Add Collaboration",
-    path: "/addCollaboration",
+    title: 'Add Collaboration',
+    path: '/addCollaboration',
     icon: (
       // <SvgIcon fontSize="small">
       //   <UserIcon />
@@ -220,8 +220,8 @@ export const items = [
     ),
   },
   {
-    title: "Notifications",
-    path: "/notifications",
+    title: 'Notifications',
+    path: '/notifications',
     icon: (
       // <SvgIcon fontSize="small">
       //   <CogIcon />
@@ -242,8 +242,8 @@ export const items = [
     ),
   },
   {
-    title: "Settings",
-    path: "/settings",
+    title: 'Settings',
+    path: '/settings',
     icon: (
       <SvgIcon fontSize="small">
         <CogIcon />
@@ -295,4 +295,4 @@ export const items = [
   //     </SvgIcon>
   //   ),
   // },
-];
+]

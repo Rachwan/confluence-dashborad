@@ -1,12 +1,12 @@
-import PropTypes from "prop-types";
-import BellIcon from "@heroicons/react/24/solid/BellIcon";
-import UsersIcon from "@heroicons/react/24/solid/UsersIcon";
-import Bars3Icon from "@heroicons/react/24/solid/Bars3Icon";
-import MagnifyingGlassIcon from "@heroicons/react/24/solid/MagnifyingGlassIcon";
-import { useContext } from "react";
-import { UserContext } from "src/contexts/UserContext";
-import { getInitials } from "src/utils/get-initials";
-import Link from "next/link";
+import PropTypes from 'prop-types'
+import BellIcon from '@heroicons/react/24/solid/BellIcon'
+import UsersIcon from '@heroicons/react/24/solid/UsersIcon'
+import Bars3Icon from '@heroicons/react/24/solid/Bars3Icon'
+import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon'
+import { useContext } from 'react'
+import { UserContext } from 'src/contexts/UserContext'
+import { getInitials } from 'src/utils/get-initials'
+import Link from 'next/link'
 import {
   Avatar,
   Badge,
@@ -16,28 +16,28 @@ import {
   SvgIcon,
   Tooltip,
   useMediaQuery,
-} from "@mui/material";
-import { alpha } from "@mui/material/styles";
-import { usePopover } from "src/hooks/use-popover";
-import { AccountPopover } from "./account-popover";
+} from '@mui/material'
+import { alpha } from '@mui/material/styles'
+import { usePopover } from 'src/hooks/use-popover'
+import { AccountPopover } from './account-popover'
 
-const SIDE_NAV_WIDTH = 280;
-const TOP_NAV_HEIGHT = 64;
+const SIDE_NAV_WIDTH = 280
+const TOP_NAV_HEIGHT = 64
 
 export const TopNav = (props) => {
-  const { user, setUser } = useContext(UserContext);
-  const { onNavOpen } = props;
-  const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
-  const accountPopover = usePopover();
+  const { user, setUser } = useContext(UserContext)
+  const { onNavOpen } = props
+  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'))
+  const accountPopover = usePopover()
 
   return (
     <>
       <Box
         component="header"
         sx={{
-          backdropFilter: "blur(6px)",
+          backdropFilter: 'blur(6px)',
           backgroundColor: (theme) => alpha(theme.palette.background.default, 0.8),
-          position: "sticky",
+          position: 'sticky',
           left: {
             lg: `${SIDE_NAV_WIDTH}px`,
           },
@@ -91,11 +91,11 @@ export const TopNav = (props) => {
               ref={accountPopover.anchorRef}
               src={`${process.env.NEXT_PUBLIC_BACK_END}/${user?.profile}`}
               style={{
-                fontSize: "16px",
-                width: "45px",
-                height: "45px",
-                cursor: "pointer",
-                boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                fontSize: '16px',
+                width: '45px',
+                height: '45px',
+                cursor: 'pointer',
+                boxShadow: '7px 7px 30px rgba(0, 0, 0, 0.3)',
               }}
             >
               {getInitials(user?.name)}
@@ -109,9 +109,9 @@ export const TopNav = (props) => {
         onClose={accountPopover.handleClose}
       />
     </>
-  );
-};
+  )
+}
 
 TopNav.propTypes = {
   onNavOpen: PropTypes.func,
-};
+}

@@ -33,7 +33,9 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   border-radius: 8px;
-  box-shadow: 0px 5px 22px rgba(0, 0, 0, 0.04), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.03);
+  box-shadow:
+    0px 5px 22px rgba(0, 0, 0, 0.04),
+    0px 0px 0px 0.5px rgba(0, 0, 0, 0.03);
   padding: 30px;
   overflow: hidden;
   border-radius: 20px;
@@ -114,7 +116,7 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   width: 500px !important;
 }
 
-input[type="file"]:focus {
+input[type='file']:focus {
   outline: 2px solid var(--second-blue);
   border-radius: 6px;
 }

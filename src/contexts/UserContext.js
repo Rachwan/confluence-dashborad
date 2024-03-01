@@ -1,38 +1,38 @@
-import { createContext, useState, useEffect } from "react";
-import axios from "axios";
+import { createContext, useState, useEffect } from 'react'
+import axios from 'axios'
 
-export const UserContext = createContext();
+export const UserContext = createContext()
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState();
-  const [checkUser, setCheckUser] = useState(true);
-  const [userUpdated, setUserUpdated] = useState(false);
+  const [user, setUser] = useState()
+  const [checkUser, setCheckUser] = useState(true)
+  const [userUpdated, setUserUpdated] = useState(false)
 
   useEffect(() => {
     if (!user || userUpdated) {
-      fetchUserData();
+      fetchUserData()
     }
-  }, [user, userUpdated]);
+  }, [user, userUpdated])
 
   const fetchUserData = async () => {
     try {
-      setCheckUser(true);
+      setCheckUser(true)
 
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/logged-in-user`);
-      setUser(response.data.user);
-      console.log("Fetched user data:", response.data.user);
-      setUserUpdated(false);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/logged-in-user`)
+      setUser(response.data.user)
+      console.log('Fetched user data:', response.data.user)
+      setUserUpdated(false)
     } catch (err) {
-      setUser(null);
+      setUser(null)
     } finally {
-      setCheckUser(false);
+      setCheckUser(false)
     }
-  };
+  }
 
   const logout = async () => {
-    await axios.post(`${process.env.REACT_APP_PATH}/logout`);
-    setUser(null);
-  };
+    await axios.post(`${process.env.REACT_APP_PATH}/logout`)
+    setUser(null)
+  }
 
   // if (!user) {
   //   return <div>Loading image will be here...</div>;
@@ -51,5 +51,5 @@ export const UserProvider = ({ children }) => {
     >
       {children}
     </UserContext.Provider>
-  );
-};
+  )
+}

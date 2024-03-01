@@ -1,98 +1,98 @@
-import { useCallback, useMemo, useState, useEffect } from "react";
-import axios from "axios";
-import Head from "next/head";
-import ArrowDownOnSquareIcon from "@heroicons/react/24/solid/ArrowDownOnSquareIcon";
-import ArrowUpOnSquareIcon from "@heroicons/react/24/solid/ArrowUpOnSquareIcon";
-import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
-import { Box, Button, Container, Stack, SvgIcon, Typography } from "@mui/material";
-import { useSelection } from "src/hooks/use-selection";
+import { useCallback, useMemo, useState, useEffect } from 'react'
+import axios from 'axios'
+import Head from 'next/head'
+import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon'
+import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon'
+import PlusIcon from '@heroicons/react/24/solid/PlusIcon'
+import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material'
+import { useSelection } from 'src/hooks/use-selection'
 
-import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
-import { BusinessesTable } from "src/sections/businesses/businesses-table";
-import { BusinessesSearch } from "src/sections/businesses/businesses-search";
-import { applyPagination } from "src/utils/apply-pagination";
-import BusinessAddForm from "src/sections/businesses/businesses-add-form";
+import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout'
+import { BusinessesTable } from 'src/sections/businesses/businesses-table'
+import { BusinessesSearch } from 'src/sections/businesses/businesses-search'
+import { applyPagination } from 'src/utils/apply-pagination'
+import BusinessAddForm from 'src/sections/businesses/businesses-add-form'
 
 const Page = () => {
-  const [businessesData, setBusinessesData] = useState([]);
-  const [filteredBusinesses, setFilteredBusinesses] = useState([]);
+  const [businessesData, setBusinessesData] = useState([])
+  const [filteredBusinesses, setFilteredBusinesses] = useState([])
 
   const fetchBusinessesData = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/user/get/business`);
-      setBusinessesData(response.data);
-      console.log("response.data:", response.data);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/user/get/business`)
+      setBusinessesData(response.data)
+      console.log('response.data:', response.data)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchBusinessesData();
-  }, []);
+    fetchBusinessesData()
+  }, [])
 
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
 
   const useBusinesses = (page, rowsPerPage, filteredData) => {
     return useMemo(() => {
-      return applyPagination(filteredData, page, rowsPerPage);
-    }, [filteredData, page, rowsPerPage]);
-  };
+      return applyPagination(filteredData, page, rowsPerPage)
+    }, [filteredData, page, rowsPerPage])
+  }
 
   const useBusinessesIds = (businesses) => {
     return useMemo(() => {
-      return businesses.map((business) => business.id);
-    }, [businesses]);
-  };
+      return businesses.map((business) => business.id)
+    }, [businesses])
+  }
 
   const businessesSelection = useSelection(
-    useBusinessesIds(useBusinesses(page, rowsPerPage, filteredBusinesses))
-  );
+    useBusinessesIds(useBusinesses(page, rowsPerPage, filteredBusinesses)),
+  )
 
   const handlePageChange = useCallback((event, value) => {
-    setPage(value);
-  }, []);
+    setPage(value)
+  }, [])
 
   const handleRowsPerPageChange = useCallback((event) => {
-    setRowsPerPage(event.target.value);
-  }, []);
+    setRowsPerPage(event.target.value)
+  }, [])
 
   /* Search Filter Stuff*/
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleSearch = useCallback((newSearchTerm) => {
-    setSearchTerm(newSearchTerm);
-  }, []);
+    setSearchTerm(newSearchTerm)
+  }, [])
 
   useEffect(() => {
     const filteredData = businessesData.filter((business) => {
-      console.log("Business:", business); // Log the business object
-      console.log("---------------------");
-      const idMatch = business._id.toLowerCase().includes(searchTerm.toLowerCase());
-      const nameMatch = business.name.toLowerCase().includes(searchTerm.toLowerCase());
-      const emailMatch = business.email.toLowerCase().includes(searchTerm.toLowerCase());
-      const numberMatch = business.number && business.number.toString().includes(searchTerm);
+      console.log('Business:', business) // Log the business object
+      console.log('---------------------')
+      const idMatch = business._id.toLowerCase().includes(searchTerm.toLowerCase())
+      const nameMatch = business.name.toLowerCase().includes(searchTerm.toLowerCase())
+      const emailMatch = business.email.toLowerCase().includes(searchTerm.toLowerCase())
+      const numberMatch = business.number && business.number.toString().includes(searchTerm)
 
-      return idMatch || nameMatch || emailMatch || numberMatch;
-    });
+      return idMatch || nameMatch || emailMatch || numberMatch
+    })
 
-    setFilteredBusinesses(filteredData);
-    console.log("Filtered Businesses:", filteredData);
-  }, [businessesData, searchTerm]);
+    setFilteredBusinesses(filteredData)
+    console.log('Filtered Businesses:', filteredData)
+  }, [businessesData, searchTerm])
 
   /* ------------------ */
 
-  const [isAddFormOpen, setIsAddFormOpen] = useState(false);
+  const [isAddFormOpen, setIsAddFormOpen] = useState(false)
 
   const handleAddClick = () => {
-    setIsAddFormOpen(true);
-  };
+    setIsAddFormOpen(true)
+  }
 
   const handleAddFormClose = () => {
-    setIsAddFormOpen(false);
-  };
+    setIsAddFormOpen(false)
+  }
 
   return (
     <>
@@ -119,7 +119,7 @@ const Page = () => {
                         <ArrowUpOnSquareIcon />
                       </SvgIcon>
                     }
-                    style={{ fontSize: "16px" }}
+                    style={{ fontSize: '16px' }}
                   >
                     Import
                   </Button>
@@ -130,7 +130,7 @@ const Page = () => {
                         <ArrowDownOnSquareIcon />
                       </SvgIcon>
                     }
-                    style={{ fontSize: "16px" }}
+                    style={{ fontSize: '16px' }}
                   >
                     Export
                   </Button>
@@ -144,9 +144,9 @@ const Page = () => {
                     </SvgIcon>
                   }
                   style={{
-                    fontSize: "16px",
-                    backgroundColor: "var(--second-blue)",
-                    borderRadius: "30px",
+                    fontSize: '16px',
+                    backgroundColor: 'var(--second-blue)',
+                    borderRadius: '30px',
                   }}
                   variant="contained"
                 >
@@ -178,9 +178,9 @@ const Page = () => {
         </section>
       </Box>
     </>
-  );
-};
+  )
+}
 
-Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>
 
-export default Page;
+export default Page

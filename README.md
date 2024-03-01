@@ -28,15 +28,15 @@
 We also have a pro version of this product which bundles even more pages and components if you want
 to save more time and design efforts :)
 
-| Free Version (this one) | [Material Kit Pro - React](https://mui.com/store/items/devias-kit-pro/)  |
-|-------------------------|:-------------------------------------------------------------------------|
-| **9** Demo Pages        | **40+** demo pages                                                       
-| ✔ Mocked Authentication | ✔ Authentication with **Amplify**, **Auth0**, **JWT** and **Firebase**   
-| -                       | ✔ Dark & light mode                                                      
-| -                       | ✔ CRA version                                                            
-| -                       | ✔ TypeScript version - for Standard Plus and Extended license            
-| -                       | ✔ Design files (sketch & figma) - for Standard Plus and Extended license 
-| -                       | ✔ Complete users flows                                                   
+| Free Version (this one)  | [Material Kit Pro - React](https://mui.com/store/items/devias-kit-pro/)   |
+| ------------------------ | :------------------------------------------------------------------------ |
+| **9** Demo Pages         | **40+** demo pages                                                        |
+| ✔ Mocked Authentication | ✔ Authentication with **Amplify**, **Auth0**, **JWT** and **Firebase**   |
+| -                        | ✔ Dark & light mode                                                      |
+| -                        | ✔ CRA version                                                            |
+| -                        | ✔ TypeScript version - for Standard Plus and Extended license            |
+| -                        | ✔ Design files (sketch & figma) - for Standard Plus and Extended license |
+| -                        | ✔ Complete users flows                                                   |
 
 ## Quick start
 

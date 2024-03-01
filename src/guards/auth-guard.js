@@ -1,78 +1,78 @@
-import { useRouter } from "next/router";
-import PropTypes from "prop-types";
-import { usePathname } from "next/navigation";
-import { useContext } from "react";
-import { UserContext } from "src/contexts/UserContext";
-import Loading from "src/sections/Loading/Loading";
+import { useRouter } from 'next/router'
+import PropTypes from 'prop-types'
+import { usePathname } from 'next/navigation'
+import { useContext } from 'react'
+import { UserContext } from 'src/contexts/UserContext'
+import Loading from 'src/sections/Loading/Loading'
 
 export const AuthGuard = (props) => {
-  const pathname = usePathname();
-  const { user, checkUser } = useContext(UserContext);
+  const pathname = usePathname()
+  const { user, checkUser } = useContext(UserContext)
 
-  const { children } = props;
+  const { children } = props
 
-  const router = useRouter();
+  const router = useRouter()
 
-  const infPathes = ["/", "/influencer-details", "/myCollaborations", "/addCollaboration"];
+  const infPathes = ['/', '/influencer-details', '/myCollaborations', '/addCollaboration']
   const infAdminPathes = [
-    "/",
-    "/settings",
-    "/notifications",
-    "/influencer-details",
-    "/myCollaborations",
-    "/addCollaboration",
-  ];
+    '/',
+    '/settings',
+    '/notifications',
+    '/influencer-details',
+    '/myCollaborations',
+    '/addCollaboration',
+  ]
 
   const adminPathes = [
-    "/",
-    "/influencers",
-    "/businesses",
-    "/admins",
-    "/platforms",
-    "/categories",
-    "/cities",
-    "/soon",
-    "/subscribers",
-    "/allCollaborations",
-    "/myCollaborations",
-    "/addCollaboration",
-    "/influencer-details",
-    "/notifications",
-    "/settings",
-  ];
+    '/',
+    '/influencers',
+    '/businesses',
+    '/admins',
+    '/platforms',
+    '/categories',
+    '/cities',
+    '/soon',
+    '/subscribers',
+    '/allCollaborations',
+    '/myCollaborations',
+    '/addCollaboration',
+    '/influencer-details',
+    '/notifications',
+    '/settings',
+  ]
 
   if (checkUser) {
-    return <Loading />;
+    return <Loading />
   }
-  if (user && ["influencer", "admin"].includes(user.role)) {
-    if (infAdminPathes.includes(pathname) && ["influencer", "admin"].includes(user.role)) {
-      return children;
+  if (user && ['influencer', 'admin'].includes(user.role)) {
+    if (infAdminPathes.includes(pathname) && ['influencer', 'admin'].includes(user.role)) {
+      return children
     }
-    if (infPathes.includes(pathname) && user.role === "influencer") {
-      return children;
-    }
-
-    if (!infPathes.includes(pathname) && user.role === "influencer") {
-      router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}/unauthorized`);
+    if (infPathes.includes(pathname) && user.role === 'influencer') {
+      return children
     }
 
-    if (adminPathes.includes(pathname) && user.role === "admin") {
-      return children;
+    if (!infPathes.includes(pathname) && user.role === 'influencer') {
+      router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}/unauthorized`)
     }
-  } else if (user && ["business"].includes(user.role)) {
-    if (infPathes.includes(pathname) && user.role === "business") {
-      router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}/coming-soon`);
+
+    if (adminPathes.includes(pathname) && user.role === 'admin') {
+      return children
+    }
+  } else if (user && ['business'].includes(user.role)) {
+    if (infPathes.includes(pathname) && user.role === 'business') {
+      router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}/coming-soon`)
     } else {
-      router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}/unauthorized`);
+      router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}/unauthorized`)
     }
   } else {
-    router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}/login`);
+    router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}/login`)
   }
-};
+}
 
 AuthGuard.propTypes = {
   children: PropTypes.node,
-};
+}
 
 // import { useAuthContext } from 'src/contexts/auth-context';
 // const { isAuthenticated } = useAuthContext();

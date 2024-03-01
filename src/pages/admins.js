@@ -1,70 +1,70 @@
-import { useCallback, useMemo, useState, useEffect } from "react";
-import axios from "axios";
-import Head from "next/head";
-import ArrowDownOnSquareIcon from "@heroicons/react/24/solid/ArrowDownOnSquareIcon";
-import ArrowUpOnSquareIcon from "@heroicons/react/24/solid/ArrowUpOnSquareIcon";
-import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
-import { Box, Button, Container, Stack, SvgIcon, Typography } from "@mui/material";
-import { useSelection } from "src/hooks/use-selection";
+import { useCallback, useMemo, useState, useEffect } from 'react'
+import axios from 'axios'
+import Head from 'next/head'
+import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon'
+import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon'
+import PlusIcon from '@heroicons/react/24/solid/PlusIcon'
+import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material'
+import { useSelection } from 'src/hooks/use-selection'
 
-import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
-import { AdminsTable } from "src/sections/admins/admins-table";
-import { AdminsSearch } from "src/sections/admins/admins-search";
-import { applyPagination } from "src/utils/apply-pagination";
-import AdminAddForm from "src/sections/admins/admins-add-form";
+import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout'
+import { AdminsTable } from 'src/sections/admins/admins-table'
+import { AdminsSearch } from 'src/sections/admins/admins-search'
+import { applyPagination } from 'src/utils/apply-pagination'
+import AdminAddForm from 'src/sections/admins/admins-add-form'
 
 const Page = () => {
-  const [adminsData, setAdminsData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [adminsData, setAdminsData] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const fetchAdminsData = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/user/get/admin`);
-      setAdminsData(response.data);
-      setLoading(false);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/user/get/admin`)
+      setAdminsData(response.data)
+      setLoading(false)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchAdminsData();
-  }, []);
+    fetchAdminsData()
+  }, [])
 
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
 
   const useAdmins = (page, rowsPerPage) => {
     return useMemo(() => {
-      return applyPagination(adminsData, page, rowsPerPage);
-    }, [adminsData, page, rowsPerPage]);
-  };
+      return applyPagination(adminsData, page, rowsPerPage)
+    }, [adminsData, page, rowsPerPage])
+  }
 
   const useAdminsIds = (admins) => {
     return useMemo(() => {
-      return admins.map((admin) => admin.id);
-    }, [admins]);
-  };
+      return admins.map((admin) => admin.id)
+    }, [admins])
+  }
 
-  const adminsSelection = useSelection(useAdminsIds(useAdmins(page, rowsPerPage)));
+  const adminsSelection = useSelection(useAdminsIds(useAdmins(page, rowsPerPage)))
 
   const handlePageChange = useCallback((event, value) => {
-    setPage(value);
-  }, []);
+    setPage(value)
+  }, [])
 
   const handleRowsPerPageChange = useCallback((event) => {
-    setRowsPerPage(event.target.value);
-  }, []);
+    setRowsPerPage(event.target.value)
+  }, [])
 
-  const [isAddFormOpen, setIsAddFormOpen] = useState(false);
+  const [isAddFormOpen, setIsAddFormOpen] = useState(false)
 
   const handleAddClick = () => {
-    setIsAddFormOpen(true);
-  };
+    setIsAddFormOpen(true)
+  }
 
   const handleAddFormClose = () => {
-    setIsAddFormOpen(false);
-  };
+    setIsAddFormOpen(false)
+  }
 
   return (
     <>
@@ -91,7 +91,7 @@ const Page = () => {
                         <ArrowUpOnSquareIcon />
                       </SvgIcon>
                     }
-                    style={{ fontSize: "16px" }}
+                    style={{ fontSize: '16px' }}
                   >
                     Import
                   </Button>
@@ -102,7 +102,7 @@ const Page = () => {
                         <ArrowDownOnSquareIcon />
                       </SvgIcon>
                     }
-                    style={{ fontSize: "16px" }}
+                    style={{ fontSize: '16px' }}
                   >
                     Export
                   </Button>
@@ -116,9 +116,9 @@ const Page = () => {
                     </SvgIcon>
                   }
                   style={{
-                    fontSize: "16px",
-                    backgroundColor: "var(--second-blue)",
-                    borderRadius: "30px",
+                    fontSize: '16px',
+                    backgroundColor: 'var(--second-blue)',
+                    borderRadius: '30px',
                   }}
                   variant="contained"
                 >
@@ -151,9 +151,9 @@ const Page = () => {
         </section>
       </Box>
     </>
-  );
-};
+  )
+}
 
-Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>
 
-export default Page;
+export default Page

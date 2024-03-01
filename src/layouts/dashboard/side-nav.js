@@ -1,11 +1,11 @@
 // import { useEffect } from "react";
-import NextLink from "next/link";
-import { usePathname } from "next/navigation";
-import PropTypes from "prop-types";
-import ArrowTopRightOnSquareIcon from "@heroicons/react/24/solid/ArrowTopRightOnSquareIcon";
-import ChevronUpDownIcon from "@heroicons/react/24/solid/ChevronUpDownIcon";
-import ChartBarIcon from "@heroicons/react/24/solid/ChartBarIcon";
-import CogIcon from "@heroicons/react/24/solid/CogIcon";
+import NextLink from 'next/link'
+import { usePathname } from 'next/navigation'
+import PropTypes from 'prop-types'
+import ArrowTopRightOnSquareIcon from '@heroicons/react/24/solid/ArrowTopRightOnSquareIcon'
+import ChevronUpDownIcon from '@heroicons/react/24/solid/ChevronUpDownIcon'
+import ChartBarIcon from '@heroicons/react/24/solid/ChartBarIcon'
+import CogIcon from '@heroicons/react/24/solid/CogIcon'
 import {
   Box,
   Button,
@@ -15,28 +15,28 @@ import {
   SvgIcon,
   Typography,
   useMediaQuery,
-} from "@mui/material";
-import { Logo } from "src/components/logo";
-import { Scrollbar } from "src/components/scrollbar";
-import { items } from "./config";
-import { SideNavItem } from "./side-nav-item";
-import { color, width } from "@mui/system";
-import { useContext } from "react";
-import { UserContext } from "src/contexts/UserContext";
+} from '@mui/material'
+import { Logo } from 'src/components/logo'
+import { Scrollbar } from 'src/components/scrollbar'
+import { items } from './config'
+import { SideNavItem } from './side-nav-item'
+import { color, width } from '@mui/system'
+import { useContext } from 'react'
+import { UserContext } from 'src/contexts/UserContext'
 // import { useRouter } from "next/router";
 
 export const SideNav = (props) => {
-  const { user } = useContext(UserContext);
-  const { open, onClose } = props;
-  const pathname = usePathname();
-  const lgUp = useMediaQuery((theme) => theme.breakpoints.up("lg"));
+  const { user } = useContext(UserContext)
+  const { open, onClose } = props
+  const pathname = usePathname()
+  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'))
   // const router = useRouter();
 
-  let items;
+  let items
   let array = [
     {
-      title: "My Info Details",
-      path: "/influencer-details",
+      title: 'My Info Details',
+      path: '/influencer-details',
       icon: (
         <SvgIcon fontSize="small" className="css-ks6xm0">
           <svg
@@ -51,8 +51,8 @@ export const SideNav = (props) => {
       ),
     },
     {
-      title: "My Collaborations",
-      path: "/myCollaborations",
+      title: 'My Collaborations',
+      path: '/myCollaborations',
       icon: (
         <SvgIcon fontSize="small">
           <svg
@@ -67,8 +67,8 @@ export const SideNav = (props) => {
       ),
     },
     {
-      title: "Add Collaboration",
-      path: "/addCollaboration",
+      title: 'Add Collaboration',
+      path: '/addCollaboration',
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -81,8 +81,8 @@ export const SideNav = (props) => {
       ),
     },
     {
-      title: "Notifications",
-      path: "/notifications",
+      title: 'Notifications',
+      path: '/notifications',
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -100,20 +100,20 @@ export const SideNav = (props) => {
       ),
     },
     {
-      title: "Account Settings",
-      path: "/settings",
+      title: 'Account Settings',
+      path: '/settings',
       icon: (
         <SvgIcon fontSize="small">
           <CogIcon />
         </SvgIcon>
       ),
     },
-  ];
-  if (user && user.role === "admin") {
+  ]
+  if (user && user.role === 'admin') {
     items = [
       {
-        title: "Overview",
-        path: "/",
+        title: 'Overview',
+        path: '/',
         icon: (
           <SvgIcon fontSize="small">
             <ChartBarIcon />
@@ -121,8 +121,8 @@ export const SideNav = (props) => {
         ),
       },
       {
-        title: "Influencers",
-        path: "/influencers",
+        title: 'Influencers',
+        path: '/influencers',
         icon: (
           <SvgIcon fontSize="small">
             <svg
@@ -137,8 +137,8 @@ export const SideNav = (props) => {
         ),
       },
       {
-        title: "Businesses",
-        path: "/businesses",
+        title: 'Businesses',
+        path: '/businesses',
         icon: (
           <SvgIcon fontSize="small">
             <svg
@@ -153,8 +153,8 @@ export const SideNav = (props) => {
         ),
       },
       {
-        title: "Admins",
-        path: "/admins",
+        title: 'Admins',
+        path: '/admins',
         icon: (
           <SvgIcon fontSize="small">
             <svg
@@ -169,8 +169,8 @@ export const SideNav = (props) => {
         ),
       },
       {
-        title: "Platforms",
-        path: "/platforms",
+        title: 'Platforms',
+        path: '/platforms',
         icon: (
           <SvgIcon fontSize="small">
             <svg
@@ -185,8 +185,8 @@ export const SideNav = (props) => {
         ),
       },
       {
-        title: "Categories",
-        path: "/categories",
+        title: 'Categories',
+        path: '/categories',
         icon: (
           <SvgIcon fontSize="small">
             <svg
@@ -201,8 +201,8 @@ export const SideNav = (props) => {
         ),
       },
       {
-        title: "Cities",
-        path: "/cities",
+        title: 'Cities',
+        path: '/cities',
         icon: (
           <SvgIcon fontSize="small">
             <svg
@@ -217,8 +217,8 @@ export const SideNav = (props) => {
         ),
       },
       {
-        title: "Soon",
-        path: "/soon",
+        title: 'Soon',
+        path: '/soon',
         icon: (
           <SvgIcon fontSize="small">
             <svg
@@ -233,8 +233,8 @@ export const SideNav = (props) => {
         ),
       },
       {
-        title: "Subscribers",
-        path: "/subscribers",
+        title: 'Subscribers',
+        path: '/subscribers',
         icon: (
           <SvgIcon fontSize="small" fill="currentColor" className="w-6 h-6 dashIcon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -244,8 +244,8 @@ export const SideNav = (props) => {
         ),
       },
       {
-        title: "All Collaborations",
-        path: "/allCollaborations",
+        title: 'All Collaborations',
+        path: '/allCollaborations',
         icon: (
           <SvgIcon fontSize="small">
             <svg
@@ -260,12 +260,12 @@ export const SideNav = (props) => {
         ),
       },
       ...array,
-    ];
-  } else if (user && user.role === "influencer") {
+    ]
+  } else if (user && user.role === 'influencer') {
     items = [
       {
-        title: "Overview",
-        path: "/",
+        title: 'Overview',
+        path: '/',
         icon: (
           <SvgIcon fontSize="small">
             <ChartBarIcon />
@@ -273,10 +273,10 @@ export const SideNav = (props) => {
         ),
       },
       ...array,
-    ];
+    ]
   } else {
     // Default menu items
-    items = [];
+    items = []
   }
   // useEffect(() => {
   //   if (user && user?.role === "business") {
@@ -287,58 +287,58 @@ export const SideNav = (props) => {
   const content = (
     <Scrollbar
       sx={{
-        height: "100%",
-        "& .simplebar-content": {
-          height: "100%",
+        height: '100%',
+        '& .simplebar-content': {
+          height: '100%',
         },
-        "& .simplebar-scrollbar:before": {
-          background: "neutral.400",
+        '& .simplebar-scrollbar:before': {
+          background: 'neutral.400',
         },
       }}
     >
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%',
         }}
       >
         <Box sx={{ p: 3 }}>
           <Box
             sx={{
-              alignItems: "center",
-              backgroundColor: "rgba(255, 255, 255, 0.04)",
+              alignItems: 'center',
+              backgroundColor: 'rgba(255, 255, 255, 0.04)',
               borderRadius: 1,
-              cursor: "pointer",
-              display: "flex",
-              justifyContent: "center",
+              cursor: 'pointer',
+              display: 'flex',
+              justifyContent: 'center',
               mt: 2,
-              p: "12px",
+              p: '12px',
             }}
           >
             <Box
               component={NextLink}
               href="/"
               sx={{
-                display: "inline-flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "5px",
+                display: 'inline-flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '5px',
                 height: 32,
-                width: "100%",
+                width: '100%',
               }}
             >
               <img
                 src="/logoTwo.svg"
                 alt=""
-                style={{ width: "24px", height: "24px", transform: "translateY(2px)" }}
+                style={{ width: '24px', height: '24px', transform: 'translateY(2px)' }}
               />
               <Typography
                 sx={{
-                  color: "white",
-                  fontSize: "30px",
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
+                  color: 'white',
+                  fontSize: '30px',
+                  fontWeight: 'bold',
+                  textTransform: 'uppercase',
                 }}
               >
                 Confluence
@@ -346,7 +346,7 @@ export const SideNav = (props) => {
             </Box>
           </Box>
         </Box>
-        <Divider sx={{ borderColor: "neutral.200" }} />
+        <Divider sx={{ borderColor: 'neutral.200' }} />
         <Box
           component="nav"
           sx={{
@@ -359,13 +359,13 @@ export const SideNav = (props) => {
             component="ul"
             spacing={0.5}
             sx={{
-              listStyle: "none",
+              listStyle: 'none',
               p: 0,
               m: 0,
             }}
           >
             {items.map((item) => {
-              const active = item.path ? pathname === item.path : false;
+              const active = item.path ? pathname === item.path : false
 
               // if (user && user?.role === "business") {
               //   router.push(`${process.env.NEXT_PUBLIC_MAIN_WEB}`);
@@ -382,7 +382,7 @@ export const SideNav = (props) => {
                   path={item.path}
                   title={item.title}
                 />
-              );
+              )
             })}
           </Stack>
         </Box>
@@ -401,7 +401,7 @@ export const SideNav = (props) => {
             }
             fullWidth
             href={`${process.env.NEXT_PUBLIC_MAIN_WEB}`}
-            sx={{ mt: 2, fontSize: "16px" }}
+            sx={{ mt: 2, fontSize: '16px' }}
             target="_blank"
             variant="contained"
           >
@@ -410,7 +410,7 @@ export const SideNav = (props) => {
         </Box>
       </Box>
     </Scrollbar>
-  );
+  )
 
   if (lgUp) {
     return (
@@ -419,8 +419,8 @@ export const SideNav = (props) => {
         open
         PaperProps={{
           sx: {
-            backgroundColor: "neutral.800",
-            color: "common.white",
+            backgroundColor: 'neutral.800',
+            color: 'common.white',
             width: 280,
           },
         }}
@@ -428,7 +428,7 @@ export const SideNav = (props) => {
       >
         {content}
       </Drawer>
-    );
+    )
   }
 
   return (
@@ -438,8 +438,8 @@ export const SideNav = (props) => {
       open={open}
       PaperProps={{
         sx: {
-          backgroundColor: "neutral.800",
-          color: "common.white",
+          backgroundColor: 'neutral.800',
+          color: 'common.white',
           width: 280,
         },
       }}
@@ -448,10 +448,10 @@ export const SideNav = (props) => {
     >
       {content}
     </Drawer>
-  );
-};
+  )
+}
 
 SideNav.propTypes = {
   onClose: PropTypes.func,
   open: PropTypes.bool,
-};
+}

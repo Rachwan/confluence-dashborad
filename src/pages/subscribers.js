@@ -1,57 +1,57 @@
-import { useCallback, useMemo, useState, useEffect } from "react";
-import axios from "axios";
-import Head from "next/head";
-import ArrowDownOnSquareIcon from "@heroicons/react/24/solid/ArrowDownOnSquareIcon";
-import ArrowUpOnSquareIcon from "@heroicons/react/24/solid/ArrowUpOnSquareIcon";
-import PlusIcon from "@heroicons/react/24/solid/PlusIcon";
-import { Box, Button, Container, Stack, SvgIcon, Typography } from "@mui/material";
-import { useSelection } from "src/hooks/use-selection";
+import { useCallback, useMemo, useState, useEffect } from 'react'
+import axios from 'axios'
+import Head from 'next/head'
+import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIcon'
+import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon'
+import PlusIcon from '@heroicons/react/24/solid/PlusIcon'
+import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material'
+import { useSelection } from 'src/hooks/use-selection'
 
-import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
-import { SubscribersTable } from "src/sections/subscribers/subscribers-table";
-import { SubscribersSearch } from "src/sections/subscribers/subscribers-search";
-import { applyPagination } from "src/utils/apply-pagination";
+import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout'
+import { SubscribersTable } from 'src/sections/subscribers/subscribers-table'
+import { SubscribersSearch } from 'src/sections/subscribers/subscribers-search'
+import { applyPagination } from 'src/utils/apply-pagination'
 
 const Page = () => {
-  const [subscribersData, setSubscribersData] = useState([]);
+  const [subscribersData, setSubscribersData] = useState([])
 
   const fetchSubscribersData = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/subscriber/all`);
-      setSubscribersData(response.data);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/subscriber/all`)
+      setSubscribersData(response.data)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchSubscribersData();
-  }, []);
+    fetchSubscribersData()
+  }, [])
 
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
 
   const useSubscribers = (page, rowsPerPage) => {
     return useMemo(() => {
-      return applyPagination(subscribersData, page, rowsPerPage);
-    }, [subscribersData, page, rowsPerPage]);
-  };
+      return applyPagination(subscribersData, page, rowsPerPage)
+    }, [subscribersData, page, rowsPerPage])
+  }
 
   const useSubscribersIds = (subscribers) => {
     return useMemo(() => {
-      return subscribers.map((contact) => contact.id);
-    }, [subscribers]);
-  };
+      return subscribers.map((contact) => contact.id)
+    }, [subscribers])
+  }
 
-  const subscribersSelection = useSelection(useSubscribersIds(useSubscribers(page, rowsPerPage)));
+  const subscribersSelection = useSelection(useSubscribersIds(useSubscribers(page, rowsPerPage)))
 
   const handlePageChange = useCallback((event, value) => {
-    setPage(value);
-  }, []);
+    setPage(value)
+  }, [])
 
   const handleRowsPerPageChange = useCallback((event) => {
-    setRowsPerPage(event.target.value);
-  }, []);
+    setRowsPerPage(event.target.value)
+  }, [])
 
   return (
     <>
@@ -78,7 +78,7 @@ const Page = () => {
                         <ArrowUpOnSquareIcon />
                       </SvgIcon>
                     }
-                    style={{ fontSize: "16px" }}
+                    style={{ fontSize: '16px' }}
                   >
                     Import
                   </Button>
@@ -89,7 +89,7 @@ const Page = () => {
                         <ArrowDownOnSquareIcon />
                       </SvgIcon>
                     }
-                    style={{ fontSize: "16px" }}
+                    style={{ fontSize: '16px' }}
                   >
                     Export
                   </Button>
@@ -115,9 +115,9 @@ const Page = () => {
         </Container>
       </Box>
     </>
-  );
-};
+  )
+}
 
-Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>
 
-export default Page;
+export default Page

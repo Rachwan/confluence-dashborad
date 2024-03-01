@@ -1,7 +1,7 @@
-import Head from "next/head";
-import { Box, Container, Stack, Typography } from "@mui/material";
-import { SettingsPassword } from "src/sections/settings/settings-password";
-import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
+import Head from 'next/head'
+import { Box, Container, Stack, Typography } from '@mui/material'
+import { SettingsPassword } from 'src/sections/settings/settings-password'
+import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout'
 
 const Page = () => (
   <>
@@ -23,8 +23,8 @@ const Page = () => (
       </Container>
     </Box>
   </>
-);
+)
 
-Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
+Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>
 
-export default Page;
+export default Page

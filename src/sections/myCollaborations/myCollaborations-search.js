@@ -1,15 +1,15 @@
-import MagnifyingGlassIcon from "@heroicons/react/24/solid/MagnifyingGlassIcon";
-import { Card, InputAdornment, OutlinedInput, SvgIcon } from "@mui/material";
-import { useState } from "react";
+import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon'
+import { Card, InputAdornment, OutlinedInput, SvgIcon } from '@mui/material'
+import { useState } from 'react'
 
 export const MyCollaborationsSearch = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleSearchChange = (event) => {
-    const newSearchTerm = event.target.value;
-    setSearchTerm(newSearchTerm);
-    onSearch(newSearchTerm); // Trigger the callback function with the new search term
-  };
+    const newSearchTerm = event.target.value
+    setSearchTerm(newSearchTerm)
+    onSearch(newSearchTerm) // Trigger the callback function with the new search term
+  }
 
   return (
     <Card sx={{ p: 2 }}>
@@ -29,5 +29,5 @@ export const MyCollaborationsSearch = ({ onSearch }) => {
         sx={{ maxWidth: 500 }}
       />
     </Card>
-  );
-};
+  )
+}

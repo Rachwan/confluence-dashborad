@@ -1,5 +1,5 @@
-import MagnifyingGlassIcon from "@heroicons/react/24/solid/MagnifyingGlassIcon";
-import { Card, InputAdornment, OutlinedInput, SvgIcon } from "@mui/material";
+import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon'
+import { Card, InputAdornment, OutlinedInput, SvgIcon } from '@mui/material'
 
 export const SubscribersSearch = () => (
   <Card sx={{ p: 2 }}>
@@ -17,4 +17,4 @@ export const SubscribersSearch = () => (
       sx={{ maxWidth: 500 }}
     />
   </Card>
-);
+)

@@ -1,6 +1,6 @@
-import Head from "next/head";
-import Link from "next/link";
-import styles from "../../styles/404.module.css";
+import Head from 'next/head'
+import Link from 'next/link'
+import styles from '../../styles/404.module.css'
 
 const Page = () => (
   <>
@@ -17,7 +17,7 @@ const Page = () => (
               influential connections in the dashboard realm.
             </p>
             <div className={styles.buttonWrapper}>
-              <Link href={"/"}>
+              <Link href={'/'}>
                 <div className={styles.button}>Back To Overview</div>
               </Link>
             </div>
@@ -29,6 +29,6 @@ const Page = () => (
       </div>
     </main>
   </>
-);
+)
 
-export default Page;
+export default Page

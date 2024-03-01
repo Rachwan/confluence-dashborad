@@ -1,91 +1,91 @@
-import React, { useState, useEffect, useContext } from "react";
-import { UserContext } from "src/contexts/UserContext";
-import axios from "axios";
-import TextField from "@mui/material/TextField";
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
-import Swal from "sweetalert2";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import { Layout as DashboardLayout } from "src/layouts/dashboard/layout";
-import Head from "next/head";
-import { TextareaAutosize } from "@mui/base/TextareaAutosize";
+import React, { useState, useEffect, useContext } from 'react'
+import { UserContext } from 'src/contexts/UserContext'
+import axios from 'axios'
+import TextField from '@mui/material/TextField'
+import { Box, Button, Container, Stack, Typography } from '@mui/material'
+import Swal from 'sweetalert2'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout'
+import Head from 'next/head'
+import { TextareaAutosize } from '@mui/base/TextareaAutosize'
 
 const Page = () => {
-  const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext)
   const [formData, setFormData] = useState({
-    title: "",
+    title: '',
     background: null,
     firstImage: null,
     secondImage: null,
     thirdImage: null,
     fourthImage: null,
-    description: "",
+    description: '',
     platforms: [],
     // images: [null],
     additional: [],
     userId: user?._id,
-  });
+  })
 
   const [imagePreviews, setImagePreviews] = useState({
     firstImage: null,
     secondImage: null,
     thirdImage: null,
     fourthImage: null,
-  });
+  })
 
   const handleImageChange = (imageKey, e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     setFormData((prevData) => ({
       ...prevData,
       [imageKey]: file,
-    }));
+    }))
     setImagePreviews((prevPreviews) => ({
       ...prevPreviews,
       [imageKey]: URL.createObjectURL(file),
-    }));
-  };
+    }))
+  }
 
   /* Platforms */
-  const [platformsData, setPlatformsData] = useState([]);
-  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+  const [platformsData, setPlatformsData] = useState([])
+  const [selectedPlatforms, setSelectedPlatforms] = useState([])
 
   const fetchPlatformsData = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/platform/all`);
-      setPlatformsData(response.data);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/platform/all`)
+      setPlatformsData(response.data)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchPlatformsData();
-  }, []);
+    fetchPlatformsData()
+  }, [])
 
   const handlePlatformChange = (platformName) => {
     setSelectedPlatforms((prevSelected) => {
       const updatedSelected = prevSelected.includes(platformName)
         ? prevSelected.filter((id) => id !== platformName)
-        : [...prevSelected, platformName];
+        : [...prevSelected, platformName]
 
       setFormData((prevData) => ({
         ...prevData,
         platforms: updatedSelected,
-      }));
+      }))
 
-      return updatedSelected;
-    });
-  };
+      return updatedSelected
+    })
+  }
   /* --------------------- */
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
 
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   // 4 Images baby
   // const [selectedImages, setSelectedImages] = useState(Array(4).fill(null));
@@ -105,78 +105,78 @@ const Page = () => {
   // ----------------
 
   /* Additionals */
-  const [additionalItems, setAdditionalItems] = useState([{ name: "", detail: "" }]);
+  const [additionalItems, setAdditionalItems] = useState([{ name: '', detail: '' }])
 
   const handleInputChange = (index, field, value) => {
-    const newItems = [...additionalItems];
-    newItems[index][field] = value;
-    setAdditionalItems(newItems);
+    const newItems = [...additionalItems]
+    newItems[index][field] = value
+    setAdditionalItems(newItems)
 
     setFormData((prevData) => ({
       ...prevData,
       additional: additionalItems,
-    }));
-  };
+    }))
+  }
 
   const handleAddItem = () => {
-    setAdditionalItems([...additionalItems, { name: "", detail: "" }]);
-  };
+    setAdditionalItems([...additionalItems, { name: '', detail: '' }])
+  }
 
   const handleRemoveItem = (index) => {
-    const newItems = [...additionalItems];
-    newItems.splice(index, 1);
-    setAdditionalItems(newItems);
-  };
+    const newItems = [...additionalItems]
+    newItems.splice(index, 1)
+    setAdditionalItems(newItems)
+  }
 
   /* ---------- */
   const handleBackgroundChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
       background: e.target.files[0],
-    }));
-  };
+    }))
+  }
   /* --------- */
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formData);
+    e.preventDefault()
+    console.log(formData)
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACK_END}/collaboration/create`,
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
-        }
-      );
+        },
+      )
       setFormData({
-        title: "",
+        title: '',
         background: null,
         firstImage: null,
         secondImage: null,
         thirdImage: null,
         fourthImage: null,
-        description: "",
+        description: '',
         platforms: [],
         additional: [],
-      });
+      })
       if (response) {
         Swal.fire({
-          title: "Done",
+          title: 'Done',
           text: `Collaboration added it successfully!`,
-          icon: "success",
-        });
+          icon: 'success',
+        })
       }
     } catch (error) {
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong! Try again.",
-      });
-      console.error("Error editing the collaboration:", error);
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong! Try again.',
+      })
+      console.error('Error editing the collaboration:', error)
     }
-  };
+  }
 
   return (
     <>
@@ -186,43 +186,43 @@ const Page = () => {
       <Box
         sx={{
           p: 4,
-          backgroundColor: "#fff",
-          width: "100% !important",
+          backgroundColor: '#fff',
+          width: '100% !important',
         }}
       >
         <Container maxWidth="xl">
           <Stack spacing={3}>
             <Stack direction="row" justifyContent="space-between" spacing={4}>
-              <Stack spacing={1} sx={{ display: "flex" }}>
+              <Stack spacing={1} sx={{ display: 'flex' }}>
                 <Typography variant="h4">Add A Collaboration</Typography>
               </Stack>
             </Stack>
           </Stack>
           <Box
             sx={{
-              backgroundColor: "#fff",
-              width: "100%",
+              backgroundColor: '#fff',
+              width: '100%',
             }}
           >
-            <h2 style={{ color: "var(--second-blue)", fontSize: "17px", margin: "20px 0 30px" }}>
+            <h2 style={{ color: 'var(--second-blue)', fontSize: '17px', margin: '20px 0 30px' }}>
               Please Insert all the details below.
             </h2>
-            <form style={{ width: "100%" }} enctype="multipart/form-data" onSubmit={handleSubmit}>
+            <form style={{ width: '100%' }} enctype="multipart/form-data" onSubmit={handleSubmit}>
               <div className="collab__post">
                 <h2
                   style={{
-                    marginTop: "20px",
-                    marginBottom: "10px",
-                    borderBottom: "1px solid var(--second-blue)",
-                    paddingBottom: "10px",
-                    width: "fit-content",
-                    fontSize: "22px",
-                    fontWeight: "600",
+                    marginTop: '20px',
+                    marginBottom: '10px',
+                    borderBottom: '1px solid var(--second-blue)',
+                    paddingBottom: '10px',
+                    width: 'fit-content',
+                    fontSize: '22px',
+                    fontWeight: '600',
                   }}
                 >
                   For Collaboration Post:
                 </h2>
-                <h2 style={{ fontSize: "20px", margin: "15px 0 0", fontWeight: "500" }}>
+                <h2 style={{ fontSize: '20px', margin: '15px 0 0', fontWeight: '500' }}>
                   Title post
                 </h2>
                 <TextField
@@ -235,10 +235,10 @@ const Page = () => {
                   margin="normal"
                   placeholder="Enter the main title"
                 />
-                <div style={{ display: "flex", flexDirection: "column", marginBottom: "30px" }}>
+                <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '30px' }}>
                   <label
                     htmlFor="back"
-                    style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}
+                    style={{ fontSize: '20px', margin: '15px 0', fontWeight: '500' }}
                   >
                     Upload a background
                   </label>
@@ -252,7 +252,7 @@ const Page = () => {
                 </div>
                 {/* Platforms */}
                 <div>
-                  <h1 style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}>
+                  <h1 style={{ fontSize: '20px', margin: '15px 0', fontWeight: '500' }}>
                     Select the platforms to show
                   </h1>
                   {platformsData.map((platform) => (
@@ -272,18 +272,18 @@ const Page = () => {
               <div className="collab__detail">
                 <h2
                   style={{
-                    marginTop: "40px",
-                    marginBottom: "10px",
-                    borderBottom: "1px solid var(--second-blue)",
-                    paddingBottom: "10px",
-                    width: "fit-content",
-                    fontSize: "22px",
-                    fontWeight: "600",
+                    marginTop: '40px',
+                    marginBottom: '10px',
+                    borderBottom: '1px solid var(--second-blue)',
+                    paddingBottom: '10px',
+                    width: 'fit-content',
+                    fontSize: '22px',
+                    fontWeight: '600',
                   }}
                 >
                   For Collaboration Details:
                 </h2>
-                <h2 style={{ fontSize: "20px", margin: "15px 0 0", fontWeight: "500" }}>
+                <h2 style={{ fontSize: '20px', margin: '15px 0 0', fontWeight: '500' }}>
                   Collaboration Title
                 </h2>
                 <TextField
@@ -293,7 +293,7 @@ const Page = () => {
                   margin="normal"
                   inputProps={{ readOnly: true }}
                 />
-                <h2 style={{ fontSize: "22px", margin: "15px 0 0", fontWeight: "600" }}>
+                <h2 style={{ fontSize: '22px', margin: '15px 0 0', fontWeight: '600' }}>
                   Upload the 4 images
                 </h2>
                 {/* 4 Images */}
@@ -338,18 +338,18 @@ const Page = () => {
                 {Object.keys(imagePreviews).map((imageKey) => (
                   <div
                     key={imageKey}
-                    style={{ display: "flex", flexDirection: "column", marginBottom: "12px" }}
+                    style={{ display: 'flex', flexDirection: 'column', marginBottom: '12px' }}
                   >
                     <label
                       htmlFor={imageKey}
-                      style={{ fontSize: "18px", margin: "15px 0", fontWeight: "500" }}
+                      style={{ fontSize: '18px', margin: '15px 0', fontWeight: '500' }}
                     >
                       {/* Upload the {imageKey.charAt(0).toUpperCase() + imageKey.slice(1)} */}
-                      Upload the{" "}
+                      Upload the{' '}
                       {imageKey.charAt(0).toLowerCase() +
                         imageKey
                           .slice(1)
-                          .replace(/([A-Z])/g, " $1")
+                          .replace(/([A-Z])/g, ' $1')
                           .toLowerCase()}
                       :
                     </label>
@@ -359,7 +359,7 @@ const Page = () => {
                       id={imageKey}
                       name={imageKey}
                       onChange={(e) => handleImageChange(imageKey, e)}
-                      style={{ marginBottom: "10px" }}
+                      style={{ marginBottom: '10px' }}
                     />
                     {imagePreviews[imageKey] && (
                       <img
@@ -368,16 +368,16 @@ const Page = () => {
                           imageKey.charAt(0).toUpperCase() + imageKey.slice(1)
                         } Image Preview`}
                         style={{
-                          maxWidth: "30%",
-                          objectFit: "cover",
-                          marginBottom: "10px",
-                          marginTop: "10px",
+                          maxWidth: '30%',
+                          objectFit: 'cover',
+                          marginBottom: '10px',
+                          marginTop: '10px',
                         }}
                       />
                     )}
                   </div>
                 ))}
-                <h2 style={{ fontSize: "22px", margin: "15px 0 0", fontWeight: "600" }}>
+                <h2 style={{ fontSize: '22px', margin: '15px 0 0', fontWeight: '600' }}>
                   Collaboration Description
                 </h2>
                 <TextareaAutosize
@@ -387,41 +387,41 @@ const Page = () => {
                   onChange={handleChange}
                   placeholder="Enter the description"
                   style={{
-                    width: "100%",
-                    padding: "10px",
-                    marginTop: "10px",
-                    height: "150px",
-                    border: "1px solid var(--second-blue)",
-                    minWidth: "100%",
-                    maxWidth: "100%",
-                    borderRadius: "4px",
+                    width: '100%',
+                    padding: '10px',
+                    marginTop: '10px',
+                    height: '150px',
+                    border: '1px solid var(--second-blue)',
+                    minWidth: '100%',
+                    maxWidth: '100%',
+                    borderRadius: '4px',
                   }}
                 />
                 <div>
-                  <h2 style={{ fontSize: "22px", margin: "15px 0", fontWeight: "600" }}>
+                  <h2 style={{ fontSize: '22px', margin: '15px 0', fontWeight: '600' }}>
                     Additional Items:
                   </h2>
                   {additionalItems.map((item, index) => (
-                    <div key={index} style={{ marginBottom: "15px" }}>
+                    <div key={index} style={{ marginBottom: '15px' }}>
                       <TextField
                         label="Name"
                         value={item.name}
-                        onChange={(e) => handleInputChange(index, "name", e.target.value)}
+                        onChange={(e) => handleInputChange(index, 'name', e.target.value)}
                         fullWidth
                         placeholder="Enter the the additional name"
-                        style={{ marginBottom: "5px" }}
+                        style={{ marginBottom: '5px' }}
                       />
                       <TextField
                         label="Detail"
                         value={item.detail}
-                        onChange={(e) => handleInputChange(index, "detail", e.target.value)}
+                        onChange={(e) => handleInputChange(index, 'detail', e.target.value)}
                         fullWidth
                         placeholder="Enter the the additional delail"
-                        style={{ marginBottom: "5px" }}
+                        style={{ marginBottom: '5px' }}
                       />
-                      <div style={{ display: "inline", width: "100%", justifyContent: "flex-end" }}>
+                      <div style={{ display: 'inline', width: '100%', justifyContent: 'flex-end' }}>
                         <Button
-                          style={{ textAlign: "right", color: "var(--second-blue)" }}
+                          style={{ textAlign: 'right', color: 'var(--second-blue)' }}
                           onClick={() => handleRemoveItem(index)}
                         >
                           Remove
@@ -429,12 +429,12 @@ const Page = () => {
                       </div>
                     </div>
                   ))}
-                  <div style={{ display: "flex", width: "100%", justifyContent: "flex-start" }}>
+                  <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-start' }}>
                     <Button
                       style={{
-                        backgroundColor: "var(--second-blue)",
-                        borderRadius: "6px",
-                        padding: "5px 10px",
+                        backgroundColor: 'var(--second-blue)',
+                        borderRadius: '6px',
+                        padding: '5px 10px',
                       }}
                       variant="contained"
                       onClick={handleAddItem}
@@ -443,16 +443,16 @@ const Page = () => {
                     </Button>
                   </div>
                 </div>
-                <div style={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
+                <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
                   <Button
                     variant="contained"
                     type="submit"
                     style={{
-                      backgroundColor: "var(--second-blue)",
-                      color: "white",
-                      marginTop: "30px",
-                      fontSize: "16px",
-                      borderRadius: "30px",
+                      backgroundColor: 'var(--second-blue)',
+                      color: 'white',
+                      marginTop: '30px',
+                      fontSize: '16px',
+                      borderRadius: '30px',
                     }}
                   >
                     Add Collaboration
@@ -464,8 +464,8 @@ const Page = () => {
         </Container>
       </Box>
     </>
-  );
-};
+  )
+}
 
-Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>;
-export default Page;
+Page.getLayout = (page) => <DashboardLayout>{page}</DashboardLayout>
+export default Page

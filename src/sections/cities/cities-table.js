@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import axios from "axios";
-import Swal from "sweetalert2";
+import PropTypes from 'prop-types'
+import axios from 'axios'
+import Swal from 'sweetalert2'
 import {
   Avatar,
   Box,
@@ -13,15 +13,15 @@ import {
   TablePagination,
   TableRow,
   Typography,
-} from "@mui/material";
-import { Scrollbar } from "src/components/scrollbar";
-import { getInitials } from "src/utils/get-initials";
-import { useState } from "react";
-import EditCityForm from "./cities-edit-form";
+} from '@mui/material'
+import { Scrollbar } from 'src/components/scrollbar'
+import { getInitials } from 'src/utils/get-initials'
+import { useState } from 'react'
+import EditCityForm from './cities-edit-form'
 
 export const CitiesTable = (props) => {
-  const [isCityFormOpen, setIsCityFormOpen] = useState(false);
-  const [selectedCity, setSelectedCity] = useState(null);
+  const [isCityFormOpen, setIsCityFormOpen] = useState(false)
+  const [selectedCity, setSelectedCity] = useState(null)
 
   const {
     count = 0,
@@ -32,40 +32,40 @@ export const CitiesTable = (props) => {
     rowsPerPage = 0,
     selected = [],
     fetchUpdatedData,
-  } = props;
+  } = props
 
   const handleEditClick = (city) => {
-    setIsCityFormOpen(true);
-    setSelectedCity(city);
-  };
+    setIsCityFormOpen(true)
+    setSelectedCity(city)
+  }
 
   const handleDeleteClick = async (city) => {
     Swal.fire({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      icon: "warning",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#FF0000",
-      cancelButtonColor: "#00306e",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: '#FF0000',
+      cancelButtonColor: '#00306e',
+      confirmButtonText: 'Yes, delete it!',
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`${process.env.NEXT_PUBLIC_BACK_END}/city/${city._id}`);
-          fetchUpdatedData();
+          await axios.delete(`${process.env.NEXT_PUBLIC_BACK_END}/city/${city._id}`)
+          fetchUpdatedData()
 
           Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success",
-          });
-          onClose();
+            title: 'Deleted!',
+            text: 'Your file has been deleted.',
+            icon: 'success',
+          })
+          onClose()
         } catch (error) {
-          console.error("Error deleting city:", error);
+          console.error('Error deleting city:', error)
         }
       }
-    });
-  };
+    })
+  }
 
   return (
     <Card>
@@ -74,59 +74,59 @@ export const CitiesTable = (props) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell style={{ fontSize: "14px" }}>Id</TableCell>
-                <TableCell style={{ fontSize: "14px" }}>Name</TableCell>
-                <TableCell style={{ fontSize: "14px" }}>Created At</TableCell>
-                <TableCell style={{ fontSize: "14px" }}>Actions</TableCell>
+                <TableCell style={{ fontSize: '14px' }}>Id</TableCell>
+                <TableCell style={{ fontSize: '14px' }}>Name</TableCell>
+                <TableCell style={{ fontSize: '14px' }}>Created At</TableCell>
+                <TableCell style={{ fontSize: '14px' }}>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {items.map((city) => {
-                const isSelected = selected.includes(city._id);
-                const createdAt = city.createdAt;
-                const formattedDate = new Date(createdAt).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                });
+                const isSelected = selected.includes(city._id)
+                const createdAt = city.createdAt
+                const formattedDate = new Date(createdAt).toLocaleDateString('en-GB', {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric',
+                })
 
                 return (
                   <TableRow hover key={city._id} selected={isSelected}>
-                    <TableCell style={{ fontSize: "16px" }}>{city._id}</TableCell>
+                    <TableCell style={{ fontSize: '16px' }}>{city._id}</TableCell>
                     <TableCell>
                       <Stack alignItems="center" direction="row" spacing={2}>
                         <Avatar
                           src={`${process.env.NEXT_PUBLIC_BACK_END}/${city.icon}`}
-                          style={{ fontSize: "16px", width: "40px", height: "40px" }}
+                          style={{ fontSize: '16px', width: '40px', height: '40px' }}
                         >
                           {getInitials(city.name)}
                         </Avatar>
-                        <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
+                        <Typography variant="subtitle2" style={{ fontSize: '16px' }}>
                           {city.name}
                         </Typography>
                       </Stack>
                     </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
+                    <TableCell style={{ fontSize: '16px' }}>{formattedDate}</TableCell>
                     <TableCell>
-                      <div style={{ display: "flex", gap: "8px" }}>
-                        <div onClick={() => handleEditClick(city)} style={{ cursor: "pointer" }}>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <div onClick={() => handleEditClick(city)} style={{ cursor: 'pointer' }}>
                           <img
                             src="/assets/icons/pen-to-square-solid (1).svg"
-                            style={{ width: "22px" }}
+                            style={{ width: '22px' }}
                             alt=""
                           />
                         </div>
-                        <div onClick={() => handleDeleteClick(city)} style={{ cursor: "pointer" }}>
+                        <div onClick={() => handleDeleteClick(city)} style={{ cursor: 'pointer' }}>
                           <img
                             src="/assets/icons/trash-can-solid.svg"
-                            style={{ width: "20px" }}
+                            style={{ width: '20px' }}
                             alt=""
                           />
                         </div>
                       </div>
                     </TableCell>
                   </TableRow>
-                );
+                )
               })}
             </TableBody>
             <section>
@@ -151,8 +151,8 @@ export const CitiesTable = (props) => {
         rowsPerPageOptions={[5, 10, 25]}
       />
     </Card>
-  );
-};
+  )
+}
 
 CitiesTable.propTypes = {
   count: PropTypes.number,
@@ -166,4 +166,4 @@ CitiesTable.propTypes = {
   page: PropTypes.number,
   rowsPerPage: PropTypes.number,
   selected: PropTypes.array,
-};
+}

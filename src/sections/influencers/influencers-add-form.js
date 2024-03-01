@@ -1,75 +1,75 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Dialog from "@mui/material/Dialog";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Swal from "sweetalert2";
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import Dialog from '@mui/material/Dialog'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import Swal from 'sweetalert2'
 
 const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    age: "",
-    number: "",
+    name: '',
+    email: '',
+    password: '',
+    age: '',
+    number: '',
     platforms: [],
     profile: null,
     background: null,
-    cityId: "",
-    categoryId: "",
-  });
+    cityId: '',
+    categoryId: '',
+  })
 
   /* Fethcing neccessary data */
-  const [categoriesData, setCategoriesData] = useState([]);
+  const [categoriesData, setCategoriesData] = useState([])
 
   const fetchCategoriesData = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/category/all`);
-      setCategoriesData(response.data);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/category/all`)
+      setCategoriesData(response.data)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchCategoriesData();
-  }, []);
+    fetchCategoriesData()
+  }, [])
 
   /* */
 
-  const [platformsData, setPlatformsData] = useState([]);
+  const [platformsData, setPlatformsData] = useState([])
 
   const fetchPlatformsData = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/platform/all`);
-      setPlatformsData(response.data);
-      console.log(response.data);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/platform/all`)
+      setPlatformsData(response.data)
+      console.log(response.data)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchPlatformsData();
-  }, []);
+    fetchPlatformsData()
+  }, [])
 
   /* */
 
-  const [citiesData, setCitiesData] = useState([]);
+  const [citiesData, setCitiesData] = useState([])
 
   const fetchCitiesData = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/city/all`);
-      setCitiesData(response.data);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/city/all`)
+      setCitiesData(response.data)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchCitiesData();
-  }, []);
+    fetchCitiesData()
+  }, [])
 
   /* Fetching ends here */
 
@@ -77,78 +77,78 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
-    }));
-  };
+    }))
+  }
 
   const handlePlatformsChange = (e, thePlatform) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
 
     const existingPlatform = formData.platforms.find(
-      (platform) => platform.platformId === thePlatform._id
-    );
+      (platform) => platform.platformId === thePlatform._id,
+    )
 
     const updatedPlatforms = formData.platforms.map((platform) =>
-      platform.platformId === thePlatform._id ? { ...platform, followers: value } : platform
-    );
+      platform.platformId === thePlatform._id ? { ...platform, followers: value } : platform,
+    )
 
     if (!existingPlatform) {
       updatedPlatforms.push({
         platformId: thePlatform._id,
         followers: value,
-      });
+      })
     }
 
     setFormData((prevData) => ({
       ...prevData,
       platforms: updatedPlatforms,
-    }));
-  };
+    }))
+  }
 
   const handleProfileChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
       profile: e.target.files[0],
-    }));
-  };
+    }))
+  }
 
   const handleBackgroundChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
       background: e.target.files[0],
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACK_END}/user/add/user`,
-        {...formData, role: "influencer"},
+        { ...formData, role: 'influencer' },
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
-        }
-      );
-      fetchUpdatedData();
+        },
+      )
+      fetchUpdatedData()
 
       Swal.fire({
-        title: "Done",
+        title: 'Done',
         text: `${response.data.name} Add it successfully!`,
-        icon: "success",
-      });
+        icon: 'success',
+      })
 
-      onClose();
+      onClose()
     } catch (error) {
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong! Try again.",
-      });
-      console.error("Error adding influencer:", error);
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong! Try again.',
+      })
+      console.error('Error adding influencer:', error)
     }
-  };
+  }
 
   return (
     <Dialog open={true} onClose={onClose}>
@@ -156,12 +156,12 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
         sx={{
           p: 4,
           width: 400,
-          backgroundColor: "#fff",
-          borderRadius: "4px",
-          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+          backgroundColor: '#fff',
+          borderRadius: '4px',
+          boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
         }}
       >
-        <h2 style={{ color: "var(--second-blue)", fontSize: "25px" }}>Influencer Details</h2>
+        <h2 style={{ color: 'var(--second-blue)', fontSize: '25px' }}>Influencer Details</h2>
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <TextField
             label="Name"
@@ -172,7 +172,7 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
             fullWidth
             margin="normal"
             placeholder="Influencer name"
-            style={{ fontSize: "20px" }}
+            style={{ fontSize: '20px' }}
           />
           <TextField
             label="Email"
@@ -182,7 +182,7 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
             fullWidth
             margin="normal"
             placeholder="Influencer email"
-            style={{ fontSize: "20px" }}
+            style={{ fontSize: '20px' }}
           />
           <TextField
             label="Password"
@@ -192,7 +192,7 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
             fullWidth
             margin="normal"
             placeholder="Influencer password"
-            style={{ fontSize: "20px" }}
+            style={{ fontSize: '20px' }}
           />
           <TextField
             label="Age"
@@ -202,7 +202,7 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
             fullWidth
             margin="normal"
             placeholder="Influencer age"
-            style={{ fontSize: "20px" }}
+            style={{ fontSize: '20px' }}
           />
           <TextField
             label="Phone"
@@ -212,7 +212,7 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
             fullWidth
             margin="normal"
             placeholder="Influencer number"
-            style={{ fontSize: "20px" }}
+            style={{ fontSize: '20px' }}
           />
 
           {/* Category */}
@@ -231,7 +231,7 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
                         {category.name}
                       </option>
                     ))
-                  : "Loding Categories"}
+                  : 'Loding Categories'}
               </select>
             </div>
           </div>
@@ -252,7 +252,7 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
                         {city.name}
                       </option>
                     ))
-                  : "Loding Cities"}
+                  : 'Loding Cities'}
               </select>
             </div>
           </div>
@@ -272,18 +272,18 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
                       fullWidth
                       margin="normal"
                       placeholder={`Number of followers`}
-                      style={{ fontSize: "20px" }}
+                      style={{ fontSize: '20px' }}
                     />
                   </>
                 ))
-              : "Loading Platforms"}
+              : 'Loading Platforms'}
           </div>
 
           {/* Images */}
-          <div style={{ display: "flex", flexDirection: "column", marginBottom: "20px" }}>
+          <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
             <label
               htmlFor="pro"
-              style={{ marginTop: "15px", marginBottom: "10px", fontSize: "20px" }}
+              style={{ marginTop: '15px', marginBottom: '10px', fontSize: '20px' }}
             >
               Upload the profile
             </label>
@@ -295,10 +295,10 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
               onChange={handleProfileChange}
             />
           </div>
-          <div style={{ display: "flex", flexDirection: "column", marginBottom: "12px" }}>
+          <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '12px' }}>
             <label
               htmlFor="back"
-              style={{ marginTop: "15px", marginBottom: "10px", fontSize: "20px" }}
+              style={{ marginTop: '15px', marginBottom: '10px', fontSize: '20px' }}
             >
               Upload the background
             </label>
@@ -315,12 +315,12 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
             variant="contained"
             type="submit"
             style={{
-              backgroundColor: "var(--second-blue)",
-              color: "white",
-              marginTop: "30px",
-              fontSize: "16px",
-              width: "100%",
-              borderRadius: "30px",
+              backgroundColor: 'var(--second-blue)',
+              color: 'white',
+              marginTop: '30px',
+              fontSize: '16px',
+              width: '100%',
+              borderRadius: '30px',
             }}
           >
             Add Influencer
@@ -328,7 +328,7 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
         </form>
       </Box>
     </Dialog>
-  );
-};
+  )
+}
 
-export default InfluencerAddForm;
+export default InfluencerAddForm
