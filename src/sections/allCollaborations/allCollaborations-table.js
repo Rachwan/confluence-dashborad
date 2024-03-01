@@ -31,6 +31,7 @@ export const AllCollaborationsTable = (props) => {
     rowsPerPage = 0,
     selected = [],
     fetchUpdatedData,
+    loading,
   } = props;
 
   const handleEditClick = (allCollaboration) => {
@@ -84,7 +85,7 @@ export const AllCollaborationsTable = (props) => {
                 <TableCell style={{ fontSize: "14px" }}>Background</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>description</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Platforms</TableCell>
-                <TableCell style={{ fontSize: "14px" }}>singleTitle</TableCell>
+                {/* <TableCell style={{ fontSize: "14px" }}>singleTitle</TableCell> */}
                 <TableCell style={{ fontSize: "14px" }}>Images</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Additional</TableCell>
                 <TableCell style={{ fontSize: "14px" }}>Created At</TableCell>
@@ -92,25 +93,34 @@ export const AllCollaborationsTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((allCollaboration) => {
-                const isSelected = selected.includes(allCollaboration._id);
-                const createdAt = allCollaboration.createdAt;
-                const formattedDate = new Date(createdAt).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                });
+              {loading ? (
+                <LoadingSection padding={"50px"} />
+              ) : items && items.length === 0 && !loading ? (
+                <TableRow>
+                  <TableCell style={{ fontSize: "18px", fontWeight: "500", padding: "50px" }}>
+                    There is no collabs yet!
+                  </TableCell>
+                </TableRow>
+              ) : (
+                items.map((allCollaboration) => {
+                  const isSelected = selected.includes(allCollaboration._id);
+                  const createdAt = allCollaboration.createdAt;
+                  const formattedDate = new Date(createdAt).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  });
 
-                return (
-                  <TableRow hover key={allCollaboration._id} selected={isSelected}>
-                    <TableCell style={{ fontSize: "16px" }}>{allCollaboration._id}</TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      {allCollaboration.userId ? allCollaboration.userId.name : "NNNN/AAAA"}
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      {allCollaboration.userId ? allCollaboration.userId._id : "NNNN/AAAA"}
-                    </TableCell>
-                    {/* <TableCell style={{ fontSize: "16px" }}>
+                  return (
+                    <TableRow hover key={allCollaboration._id} selected={isSelected}>
+                      <TableCell style={{ fontSize: "16px" }}>{allCollaboration._id}</TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        {allCollaboration.userId ? allCollaboration.userId.name : "NNNN/AAAA"}
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        {allCollaboration.userId ? allCollaboration.userId._id : "NNNN/AAAA"}
+                      </TableCell>
+                      {/* <TableCell style={{ fontSize: "16px" }}>
                       <Link
                         href={`${process.env.NEXT_PUBLIC_MAIN_WEB}/${allCollaboration?.userId?.name}/collaborations/${allCollaboration.title}`}
                         target="_blank"
@@ -119,44 +129,44 @@ export const AllCollaborationsTable = (props) => {
                         Page Link
                       </Link>
                     </TableCell> */}
-                    <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
-                        <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
-                          {allCollaboration.title}
-                        </Typography>
-                      </Stack>
-                    </TableCell>
-                    <TableCell>
-                      <img
-                        src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.background}`}
-                        alt=""
-                        style={{ maxWidth: "125px", maxHeight: "200px" }}
-                      />
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      {allCollaboration.description}
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      <ul>
-                        {allCollaboration.platforms.map((platform) => (
-                          <li key={platform._id}>
-                            <p>{platform}</p>
-                          </li>
-                        ))}
-                      </ul>
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
+                      <TableCell>
+                        <Stack alignItems="center" direction="row" spacing={2}>
+                          <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
+                            {allCollaboration.title}
+                          </Typography>
+                        </Stack>
+                      </TableCell>
+                      <TableCell>
+                        <img
+                          src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.background}`}
+                          alt=""
+                          style={{ maxWidth: "125px", maxHeight: "200px" }}
+                        />
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        {allCollaboration.description}
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        <ul>
+                          {allCollaboration.platforms.map((platform) => (
+                            <li key={platform._id}>
+                              <p>{platform}</p>
+                            </li>
+                          ))}
+                        </ul>
+                      </TableCell>
+                      {/* <TableCell style={{ fontSize: "16px" }}>
                       {allCollaboration.singleTitle}
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      <ul
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "20px",
-                        }}
-                      >
-                        {/* {allCollaboration.images.map((img, index) => (
+                    </TableCell> */}
+                      <TableCell style={{ fontSize: "16px" }}>
+                        <ul
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "20px",
+                          }}
+                        >
+                          {/* {allCollaboration.images.map((img, index) => (
                           <li key={index}>
                             <img
                               src={`${process.env.NEXT_PUBLIC_BACK_END}/${img}`}
@@ -169,98 +179,99 @@ export const AllCollaborationsTable = (props) => {
                             />
                           </li>
                         ))} */}
-                        <li>
-                          <img
-                            src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.firstImage}`}
-                            alt=""
-                            style={{
-                              maxWidth: "200px",
-                              maxHeight: "200px",
-                              boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
-                            }}
-                          />
-                        </li>
-                        <li>
-                          <img
-                            src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.secondImage}`}
-                            alt=""
-                            style={{
-                              maxWidth: "200px",
-                              maxHeight: "200px",
-                              boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
-                            }}
-                          />
-                        </li>
-                        <li>
-                          <img
-                            src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.thirdImage}`}
-                            alt=""
-                            style={{
-                              maxWidth: "200px",
-                              maxHeight: "200px",
-                              boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
-                            }}
-                          />
-                        </li>
-                        <li>
-                          <img
-                            src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.fourthImage}`}
-                            alt=""
-                            style={{
-                              maxWidth: "200px",
-                              maxHeight: "200px",
-                              boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
-                            }}
-                          />
-                        </li>
-                      </ul>
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      <ul>
-                        {allCollaboration.additional.map((singleAdditional, index) => (
-                          <li key={index}>
-                            <p
+                          <li>
+                            <img
+                              src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.firstImage}`}
+                              alt=""
                               style={{
-                                display: "flex",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
-                                gap: "1px",
+                                maxWidth: "200px",
+                                maxHeight: "200px",
+                                boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
                               }}
-                            >
-                              {singleAdditional.name}: {singleAdditional.detail}
-                            </p>
+                            />
                           </li>
-                        ))}
-                      </ul>
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
-                    <TableCell>
-                      <div style={{ display: "flex", gap: "8px" }}>
-                        <div
-                          onClick={() => handleEditClick(allCollaboration)}
-                          style={{ cursor: "pointer" }}
-                        >
-                          <img
-                            src="/assets/icons/pen-to-square-solid (1).svg"
-                            style={{ width: "22px" }}
-                            alt=""
-                          />
+                          <li>
+                            <img
+                              src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.secondImage}`}
+                              alt=""
+                              style={{
+                                maxWidth: "200px",
+                                maxHeight: "200px",
+                                boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                              }}
+                            />
+                          </li>
+                          <li>
+                            <img
+                              src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.thirdImage}`}
+                              alt=""
+                              style={{
+                                maxWidth: "200px",
+                                maxHeight: "200px",
+                                boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                              }}
+                            />
+                          </li>
+                          <li>
+                            <img
+                              src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.fourthImage}`}
+                              alt=""
+                              style={{
+                                maxWidth: "200px",
+                                maxHeight: "200px",
+                                boxShadow: "7px 7px 30px rgba(0, 0, 0, 0.3)",
+                              }}
+                            />
+                          </li>
+                        </ul>
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        <ul>
+                          {allCollaboration.additional.map((singleAdditional, index) => (
+                            <li key={index}>
+                              <p
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "flex-start",
+                                  alignItems: "center",
+                                  gap: "1px",
+                                }}
+                              >
+                                {singleAdditional.name}: {singleAdditional.detail}
+                              </p>
+                            </li>
+                          ))}
+                        </ul>
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
+                      <TableCell>
+                        <div style={{ display: "flex", gap: "8px" }}>
+                          <div
+                            onClick={() => handleEditClick(allCollaboration)}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <img
+                              src="/assets/icons/pen-to-square-solid (1).svg"
+                              style={{ width: "22px" }}
+                              alt=""
+                            />
+                          </div>
+                          <div
+                            onClick={() => handleDeleteClick(allCollaboration)}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <img
+                              src="/assets/icons/trash-can-solid.svg"
+                              style={{ width: "20px" }}
+                              alt=""
+                            />
+                          </div>
                         </div>
-                        <div
-                          onClick={() => handleDeleteClick(allCollaboration)}
-                          style={{ cursor: "pointer" }}
-                        >
-                          <img
-                            src="/assets/icons/trash-can-solid.svg"
-                            style={{ width: "20px" }}
-                            alt=""
-                          />
-                        </div>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
+              )}
             </TableBody>
             <section>
               {isAllCollaborationFormOpen && (

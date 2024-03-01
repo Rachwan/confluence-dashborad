@@ -12,16 +12,18 @@ import { InfluencersTable } from "src/sections/influencers/influencers-table";
 import { InfluencersSearch } from "src/sections/influencers/influencers-search";
 import { applyPagination } from "src/utils/apply-pagination";
 import InfluencerAddForm from "src/sections/influencers/influencers-add-form";
+import LoadingSection from "src/components/LoadingSection";
 
 const Page = () => {
   const [influencersData, setinfluencersData] = useState([]);
   const [filteredBusinesses, setFilteredBusinesses] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchinfluencersData = async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/user/get/influencer`);
       setinfluencersData(response.data);
-      console.log("response.data:", response.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -200,6 +202,7 @@ const Page = () => {
               rowsPerPage={rowsPerPage}
               selected={influencersSelection.selected}
               fetchUpdatedData={fetchinfluencersData}
+              loading={loading}
             />
           </Stack>
         </Container>

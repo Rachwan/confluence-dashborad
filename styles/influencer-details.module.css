@@ -19,12 +19,23 @@
 
 /* Inputs */
 .inputs {
+  box-shadow: var(--box-shadow-hover);
 }
 .input {
 }
 
 /* Platforms */
-.platforms {
+.inputs,
+.platfroms {
+  background-color: #fff;
+  color: #111927;
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 8px;
+  box-shadow: 0px 5px 22px rgba(0, 0, 0, 0.04), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.03);
+  padding: 30px;
+  overflow: hidden;
+  border-radius: 20px;
 }
 .platform__input {
   margin-top: 16px;

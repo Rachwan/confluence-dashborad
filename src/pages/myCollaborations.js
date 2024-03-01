@@ -20,6 +20,7 @@ const Page = () => {
   const { user } = useContext(UserContext);
   const [myCollaborationsData, setmyCollaborationsData] = useState([]);
   const [filteredBusinesses, setFilteredBusinesses] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchMyCollaborationsData = async () => {
     try {
@@ -27,7 +28,7 @@ const Page = () => {
         `${process.env.NEXT_PUBLIC_BACK_END}/collaboration/usercollaborations/${user._id}`
       );
       setmyCollaborationsData(response.data);
-      console.log("collabsssssss", response.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -151,7 +152,7 @@ const Page = () => {
                   </Button>
                 </Stack>
               </Stack>
-              <Link href="/addCollaboration" target="_blank">
+              {/* <Link href="/addCollaboration" target="_blank">
                 <Button
                   startIcon={
                     <SvgIcon fontSize="small">
@@ -167,7 +168,7 @@ const Page = () => {
                 >
                   Add a Collaboration
                 </Button>
-              </Link>
+              </Link> */}
             </Stack>
             <MyCollaborationsSearch onSearch={handleSearch} />
             <MyCollaborationsTable
@@ -185,6 +186,7 @@ const Page = () => {
               rowsPerPage={rowsPerPage}
               selected={myCollaborationsSelection.selected}
               fetchUpdatedData={fetchMyCollaborationsData}
+              loading={loading}
             />
           </Stack>
         </Container>

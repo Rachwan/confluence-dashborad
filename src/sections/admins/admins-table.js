@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { Scrollbar } from "src/components/scrollbar";
 import { getInitials } from "src/utils/get-initials";
+import LoadingSection from "src/components/LoadingSection";
 
 export const AdminsTable = (props) => {
   const {
@@ -27,6 +28,7 @@ export const AdminsTable = (props) => {
     rowsPerPage = 0,
     selected = [],
     fetchUpdatedData,
+    loading,
   } = props;
 
   const handleDeleteClick = async (admin) => {
@@ -73,50 +75,63 @@ export const AdminsTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((admin) => {
-                const isSelected = selected.includes(admin._id);
-                const createdAt = admin.createdAt;
-                const formattedDate = new Date(createdAt).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                });
+              {loading ? (
+                <LoadingSection padding={"50px"} />
+              ) : items && items.length === 0 && !loading ? (
+                <TableRow>
+                  <TableCell style={{ fontSize: "18px", fontWeight: "500", padding: "50px" }}>
+                    There is no admins yet for no reason!
+                  </TableCell>
+                </TableRow>
+              ) : (
+                items.map((admin) => {
+                  const isSelected = selected.includes(admin._id);
+                  const createdAt = admin.createdAt;
+                  const formattedDate = new Date(createdAt).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  });
 
-                return (
-                  <TableRow hover key={admin._id} selected={isSelected}>
-                    <TableCell style={{ fontSize: "16px" }}>{admin._id}</TableCell>
-                    <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
-                        <Avatar
-                          src={`${process.env.NEXT_PUBLIC_BACK_END}/${admin.profile}`}
-                          style={{ fontSize: "16px", width: "60px", height: "60px" }}
-                        >
-                          {getInitials(admin.name)}
-                        </Avatar>
-                        <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
-                          {admin.name}
-                        </Typography>
-                      </Stack>
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>{admin.email}</TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      {admin.number ? admin.number : "No Number Yet"}
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
-                    <TableCell>
-                      <div style={{ position: "relative", left: "20px", width: "fit-content" }}>
-                        <div onClick={() => handleDeleteClick(admin)} style={{ cursor: "pointer" }}>
-                          <img
-                            src="/assets/icons/trash-can-solid.svg"
-                            style={{ width: "20px" }}
-                            alt=""
-                          />
+                  return (
+                    <TableRow hover key={admin._id} selected={isSelected}>
+                      <TableCell style={{ fontSize: "16px" }}>{admin._id}</TableCell>
+                      <TableCell>
+                        <Stack alignItems="center" direction="row" spacing={2}>
+                          <Avatar
+                            src={`${process.env.NEXT_PUBLIC_BACK_END}/${admin.profile}`}
+                            style={{ fontSize: "16px", width: "60px", height: "60px" }}
+                          >
+                            {getInitials(admin.name)}
+                          </Avatar>
+                          <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
+                            {admin.name}
+                          </Typography>
+                        </Stack>
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>{admin.email}</TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        {admin.number ? admin.number : "No Number Yet"}
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
+                      <TableCell>
+                        <div style={{ position: "relative", left: "20px", width: "fit-content" }}>
+                          <div
+                            onClick={() => handleDeleteClick(admin)}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <img
+                              src="/assets/icons/trash-can-solid.svg"
+                              style={{ width: "20px" }}
+                              alt=""
+                            />
+                          </div>
                         </div>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
+              )}
             </TableBody>
           </Table>
         </Box>

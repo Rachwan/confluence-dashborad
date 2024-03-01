@@ -18,6 +18,7 @@ import { Scrollbar } from "src/components/scrollbar";
 import { getInitials } from "src/utils/get-initials";
 import { useState } from "react";
 import EditCategoryForm from "./categories-edit-form";
+import LoadingSection from "src/components/LoadingSection";
 
 export const CategoriesTable = (props) => {
   const [isCategoryFormOpen, setIsCategoryFormOpen] = useState(false);
@@ -32,6 +33,7 @@ export const CategoriesTable = (props) => {
     rowsPerPage = 0,
     selected = [],
     fetchUpdatedData,
+    loading,
   } = props;
 
   const handleEditClick = (category) => {
@@ -83,66 +85,76 @@ export const CategoriesTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((category) => {
-                const isSelected = selected.includes(category._id);
-                const createdAt = category.createdAt;
-                const formattedDate = new Date(createdAt).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                });
+              {loading ? (
+                <LoadingSection padding={"50px"} />
+              ) : items && items.length === 0 && !loading ? (
+                <TableRow>
+                  <TableCell style={{ fontSize: "18px", fontWeight: "500", padding: "50px" }}>
+                    There is no categories yet for no reason!
+                  </TableCell>
+                </TableRow>
+              ) : (
+                items.map((category) => {
+                  const isSelected = selected.includes(category._id);
+                  const createdAt = category.createdAt;
+                  const formattedDate = new Date(createdAt).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  });
 
-                return (
-                  <TableRow hover key={category._id} selected={isSelected}>
-                    <TableCell style={{ fontSize: "16px" }}>{category._id}</TableCell>
-                    <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
+                  return (
+                    <TableRow hover key={category._id} selected={isSelected}>
+                      <TableCell style={{ fontSize: "16px" }}>{category._id}</TableCell>
+                      <TableCell>
+                        <Stack alignItems="center" direction="row" spacing={2}>
+                          <img
+                            src={`${process.env.NEXT_PUBLIC_BACK_END}/${category.icon}`}
+                            style={{ fontSize: "16px", width: "40px", height: "40px" }}
+                          />
+                          <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
+                            {category.name}
+                          </Typography>
+                        </Stack>
+                      </TableCell>
+                      <TableCell>
                         <img
-                          src={`${process.env.NEXT_PUBLIC_BACK_END}/${category.icon}`}
-                          style={{ fontSize: "16px", width: "40px", height: "40px" }}
+                          src={`${process.env.NEXT_PUBLIC_BACK_END}/${category.background}`}
+                          alt=""
+                          style={{ maxWidth: "125px", maxHeight: "200px" }}
                         />
-                        <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
-                          {category.name}
-                        </Typography>
-                      </Stack>
-                    </TableCell>
-                    <TableCell>
-                      <img
-                        src={`${process.env.NEXT_PUBLIC_BACK_END}/${category.background}`}
-                        alt=""
-                        style={{ maxWidth: "125px", maxHeight: "200px" }}
-                      />
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>{category.activeColor}</TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
-                    <TableCell>
-                      <div style={{ display: "flex", gap: "8px" }}>
-                        <div
-                          onClick={() => handleEditClick(category)}
-                          style={{ cursor: "pointer" }}
-                        >
-                          <img
-                            src="/assets/icons/pen-to-square-solid (1).svg"
-                            style={{ width: "22px" }}
-                            alt=""
-                          />
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>{category.activeColor}</TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
+                      <TableCell>
+                        <div style={{ display: "flex", gap: "8px" }}>
+                          <div
+                            onClick={() => handleEditClick(category)}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <img
+                              src="/assets/icons/pen-to-square-solid (1).svg"
+                              style={{ width: "22px" }}
+                              alt=""
+                            />
+                          </div>
+                          <div
+                            onClick={() => handleDeleteClick(category)}
+                            style={{ cursor: "pointer" }}
+                          >
+                            {/* <DeleteIcon /> */}
+                            <img
+                              src="/assets/icons/trash-can-solid.svg"
+                              style={{ width: "20px" }}
+                              alt=""
+                            />
+                          </div>
                         </div>
-                        <div
-                          onClick={() => handleDeleteClick(category)}
-                          style={{ cursor: "pointer" }}
-                        >
-                          {/* <DeleteIcon /> */}
-                          <img
-                            src="/assets/icons/trash-can-solid.svg"
-                            style={{ width: "20px" }}
-                            alt=""
-                          />
-                        </div>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
+              )}
             </TableBody>
             <section>
               {isCategoryFormOpen && (

@@ -208,7 +208,7 @@ const Page = () => {
       });
       return;
     }
-    if (phoneRegex.test(formData.number)) {
+    if (!phoneRegex.test(formData.number)) {
       Swal.fire({
         title: "Have you provided a valid phone?",
         text: "Please insert a valid phone (at least 8 digits).",

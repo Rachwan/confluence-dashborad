@@ -15,12 +15,13 @@ import AdminAddForm from "src/sections/admins/admins-add-form";
 
 const Page = () => {
   const [adminsData, setAdminsData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchAdminsData = async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/user/get/admin`);
       setAdminsData(response.data);
-      console.log("response.data:", response.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -139,6 +140,7 @@ const Page = () => {
               rowsPerPage={rowsPerPage}
               selected={adminsSelection.selected}
               fetchUpdatedData={fetchAdminsData}
+              loading={loading}
             />
           </Stack>
         </Container>

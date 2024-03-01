@@ -100,7 +100,7 @@ export const SideNav = (props) => {
       ),
     },
     {
-      title: "Settings",
+      title: "Account Settings",
       path: "/settings",
       icon: (
         <SvgIcon fontSize="small">

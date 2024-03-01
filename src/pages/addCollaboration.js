@@ -150,6 +150,17 @@ const Page = () => {
           },
         }
       );
+      setFormData({
+        title: "",
+        background: null,
+        firstImage: null,
+        secondImage: null,
+        thirdImage: null,
+        fourthImage: null,
+        description: "",
+        platforms: [],
+        additional: [],
+      });
       if (response) {
         Swal.fire({
           title: "Done",
@@ -197,93 +208,96 @@ const Page = () => {
               Please Insert all the details below.
             </h2>
             <form style={{ width: "100%" }} enctype="multipart/form-data" onSubmit={handleSubmit}>
-              <h2
-                style={{
-                  marginTop: "20px",
-                  marginBottom: "10px",
-                  borderBottom: "1px solid var(--second-blue)",
-                  paddingBottom: "10px",
-                  width: "fit-content",
-                  fontSize: "22px",
-                  fontWeight: "600",
-                }}
-              >
-                For Collaboration Post:
-              </h2>
-              <h2 style={{ fontSize: "20px", margin: "15px 0 0", fontWeight: "500" }}>
-                Title post
-              </h2>
-              <TextField
-                label="Title"
-                type="text"
-                name="title"
-                // value={formData.name}
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
-                placeholder="Enter the main title"
-              />
-              <div style={{ display: "flex", flexDirection: "column", marginBottom: "30px" }}>
-                <label
-                  htmlFor="back"
-                  style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}
+              <div className="collab__post">
+                <h2
+                  style={{
+                    marginTop: "20px",
+                    marginBottom: "10px",
+                    borderBottom: "1px solid var(--second-blue)",
+                    paddingBottom: "10px",
+                    width: "fit-content",
+                    fontSize: "22px",
+                    fontWeight: "600",
+                  }}
                 >
-                  Upload a background
-                </label>
-                <input
-                  accept="image/*"
-                  type="file"
-                  id="back"
-                  name="background"
-                  onChange={handleBackgroundChange}
+                  For Collaboration Post:
+                </h2>
+                <h2 style={{ fontSize: "20px", margin: "15px 0 0", fontWeight: "500" }}>
+                  Title post
+                </h2>
+                <TextField
+                  label="Title"
+                  type="text"
+                  name="title"
+                  // value={formData.name}
+                  onChange={handleChange}
+                  fullWidth
+                  margin="normal"
+                  placeholder="Enter the main title"
                 />
-              </div>
-              {/* Platforms */}
-              <div>
-                <h1 style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}>
-                  Select the platforms to show
-                </h1>
-                {platformsData.map((platform) => (
-                  <FormControlLabel
-                    key={platform._id}
-                    control={
-                      <Checkbox
-                        checked={selectedPlatforms.includes(platform.name)}
-                        onChange={() => handlePlatformChange(platform.name)}
-                      />
-                    }
-                    label={platform.name}
+                <div style={{ display: "flex", flexDirection: "column", marginBottom: "30px" }}>
+                  <label
+                    htmlFor="back"
+                    style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}
+                  >
+                    Upload a background
+                  </label>
+                  <input
+                    accept="image/*"
+                    type="file"
+                    id="back"
+                    name="background"
+                    onChange={handleBackgroundChange}
                   />
-                ))}
+                </div>
+                {/* Platforms */}
+                <div>
+                  <h1 style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}>
+                    Select the platforms to show
+                  </h1>
+                  {platformsData.map((platform) => (
+                    <FormControlLabel
+                      key={platform._id}
+                      control={
+                        <Checkbox
+                          checked={selectedPlatforms.includes(platform.name)}
+                          onChange={() => handlePlatformChange(platform.name)}
+                        />
+                      }
+                      label={platform.name}
+                    />
+                  ))}
+                </div>
               </div>
-              <h2
-                style={{
-                  marginTop: "40px",
-                  marginBottom: "10px",
-                  borderBottom: "1px solid var(--second-blue)",
-                  paddingBottom: "10px",
-                  width: "fit-content",
-                  fontSize: "22px",
-                  fontWeight: "600",
-                }}
-              >
-                For Collaboration Details:
-              </h2>
-              <h2 style={{ fontSize: "20px", margin: "15px 0 0", fontWeight: "500" }}>
-                Collaboration Title
-              </h2>
-              <TextField
-                label="Main title"
-                value={formData.title}
-                fullWidth
-                margin="normal"
-                inputProps={{ readOnly: true }}
-              />
-              <h2 style={{ fontSize: "22px", margin: "15px 0 0", fontWeight: "600" }}>
-                Upload the 4 images
-              </h2>
-              {/* 4 Images */}
-              {/* <div>
+              <div className="collab__detail">
+                <h2
+                  style={{
+                    marginTop: "40px",
+                    marginBottom: "10px",
+                    borderBottom: "1px solid var(--second-blue)",
+                    paddingBottom: "10px",
+                    width: "fit-content",
+                    fontSize: "22px",
+                    fontWeight: "600",
+                  }}
+                >
+                  For Collaboration Details:
+                </h2>
+                <h2 style={{ fontSize: "20px", margin: "15px 0 0", fontWeight: "500" }}>
+                  Collaboration Title
+                </h2>
+                <TextField
+                  label="Main title"
+                  value={formData.title}
+                  fullWidth
+                  margin="normal"
+                  inputProps={{ readOnly: true }}
+                />
+                <h2 style={{ fontSize: "22px", margin: "15px 0 0", fontWeight: "600" }}>
+                  Upload the 4 images
+                </h2>
+                {/* 4 Images */}
+                {/* <div>
                 <h2 style={{ fontSize: "20px", margin: "15px 0", fontWeight: "500" }}>
                   Update the image you want:
                 </h2>
@@ -321,126 +335,129 @@ const Page = () => {
                   </div>
                 ))}
               </div> */}
-              {Object.keys(imagePreviews).map((imageKey) => (
-                <div
-                  key={imageKey}
-                  style={{ display: "flex", flexDirection: "column", marginBottom: "12px" }}
-                >
-                  <label
-                    htmlFor={imageKey}
-                    style={{ fontSize: "18px", margin: "15px 0", fontWeight: "500" }}
+                {Object.keys(imagePreviews).map((imageKey) => (
+                  <div
+                    key={imageKey}
+                    style={{ display: "flex", flexDirection: "column", marginBottom: "12px" }}
                   >
-                    {/* Upload the {imageKey.charAt(0).toUpperCase() + imageKey.slice(1)} */}
-                    Upload the{" "}
-                    {imageKey.charAt(0).toLowerCase() +
-                      imageKey
-                        .slice(1)
-                        .replace(/([A-Z])/g, " $1")
-                        .toLowerCase()}
-                    :
-                  </label>
-                  <input
-                    accept="image/*"
-                    type="file"
-                    id={imageKey}
-                    name={imageKey}
-                    onChange={(e) => handleImageChange(imageKey, e)}
-                    style={{ marginBottom: "10px" }}
-                  />
-                  {imagePreviews[imageKey] && (
-                    <img
-                      src={imagePreviews[imageKey]}
-                      alt={`${imageKey.charAt(0).toUpperCase() + imageKey.slice(1)} Image Preview`}
-                      style={{
-                        maxWidth: "30%",
-                        objectFit: "cover",
-                        marginBottom: "10px",
-                        marginTop: "10px",
-                      }}
+                    <label
+                      htmlFor={imageKey}
+                      style={{ fontSize: "18px", margin: "15px 0", fontWeight: "500" }}
+                    >
+                      {/* Upload the {imageKey.charAt(0).toUpperCase() + imageKey.slice(1)} */}
+                      Upload the{" "}
+                      {imageKey.charAt(0).toLowerCase() +
+                        imageKey
+                          .slice(1)
+                          .replace(/([A-Z])/g, " $1")
+                          .toLowerCase()}
+                      :
+                    </label>
+                    <input
+                      accept="image/*"
+                      type="file"
+                      id={imageKey}
+                      name={imageKey}
+                      onChange={(e) => handleImageChange(imageKey, e)}
+                      style={{ marginBottom: "10px" }}
                     />
-                  )}
-                </div>
-              ))}
-              <h2 style={{ fontSize: "22px", margin: "15px 0 0", fontWeight: "600" }}>
-                Collaboration Description
-              </h2>
-              <TextareaAutosize
-                label="Description"
-                type="text"
-                name="description"
-                onChange={handleChange}
-                placeholder="Enter the description"
-                style={{
-                  width: "100%",
-                  padding: "10px",
-                  marginTop: "10px",
-                  height: "150px",
-                  border: "1px solid var(--second-blue)",
-                  minWidth: "100%",
-                  maxWidth: "100%",
-                  borderRadius: "4px",
-                }}
-              />
-              <div>
-                <h2 style={{ fontSize: "22px", margin: "15px 0", fontWeight: "600" }}>
-                  Additional Items:
-                </h2>
-                {additionalItems.map((item, index) => (
-                  <div key={index} style={{ marginBottom: "15px" }}>
-                    <TextField
-                      label="Name"
-                      value={item.name}
-                      onChange={(e) => handleInputChange(index, "name", e.target.value)}
-                      fullWidth
-                      placeholder="Enter the the additional name"
-                      style={{ marginBottom: "5px" }}
-                    />
-                    <TextField
-                      label="Detail"
-                      value={item.detail}
-                      onChange={(e) => handleInputChange(index, "detail", e.target.value)}
-                      fullWidth
-                      placeholder="Enter the the additional delail"
-                      style={{ marginBottom: "5px" }}
-                    />
-                    <div style={{ display: "inline", width: "100%", justifyContent: "flex-end" }}>
-                      <Button
-                        style={{ textAlign: "right", color: "var(--second-blue)" }}
-                        onClick={() => handleRemoveItem(index)}
-                      >
-                        Remove
-                      </Button>
-                    </div>
+                    {imagePreviews[imageKey] && (
+                      <img
+                        src={imagePreviews[imageKey]}
+                        alt={`${
+                          imageKey.charAt(0).toUpperCase() + imageKey.slice(1)
+                        } Image Preview`}
+                        style={{
+                          maxWidth: "30%",
+                          objectFit: "cover",
+                          marginBottom: "10px",
+                          marginTop: "10px",
+                        }}
+                      />
+                    )}
                   </div>
                 ))}
-                <div style={{ display: "flex", width: "100%", justifyContent: "flex-start" }}>
+                <h2 style={{ fontSize: "22px", margin: "15px 0 0", fontWeight: "600" }}>
+                  Collaboration Description
+                </h2>
+                <TextareaAutosize
+                  label="Description"
+                  type="text"
+                  name="description"
+                  onChange={handleChange}
+                  placeholder="Enter the description"
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    marginTop: "10px",
+                    height: "150px",
+                    border: "1px solid var(--second-blue)",
+                    minWidth: "100%",
+                    maxWidth: "100%",
+                    borderRadius: "4px",
+                  }}
+                />
+                <div>
+                  <h2 style={{ fontSize: "22px", margin: "15px 0", fontWeight: "600" }}>
+                    Additional Items:
+                  </h2>
+                  {additionalItems.map((item, index) => (
+                    <div key={index} style={{ marginBottom: "15px" }}>
+                      <TextField
+                        label="Name"
+                        value={item.name}
+                        onChange={(e) => handleInputChange(index, "name", e.target.value)}
+                        fullWidth
+                        placeholder="Enter the the additional name"
+                        style={{ marginBottom: "5px" }}
+                      />
+                      <TextField
+                        label="Detail"
+                        value={item.detail}
+                        onChange={(e) => handleInputChange(index, "detail", e.target.value)}
+                        fullWidth
+                        placeholder="Enter the the additional delail"
+                        style={{ marginBottom: "5px" }}
+                      />
+                      <div style={{ display: "inline", width: "100%", justifyContent: "flex-end" }}>
+                        <Button
+                          style={{ textAlign: "right", color: "var(--second-blue)" }}
+                          onClick={() => handleRemoveItem(index)}
+                        >
+                          Remove
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                  <div style={{ display: "flex", width: "100%", justifyContent: "flex-start" }}>
+                    <Button
+                      style={{
+                        backgroundColor: "var(--second-blue)",
+                        borderRadius: "6px",
+                        padding: "5px 10px",
+                      }}
+                      variant="contained"
+                      onClick={handleAddItem}
+                    >
+                      Add Item
+                    </Button>
+                  </div>
+                </div>
+                <div style={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
                   <Button
+                    variant="contained"
+                    type="submit"
                     style={{
                       backgroundColor: "var(--second-blue)",
-                      borderRadius: "6px",
-                      padding: "5px 10px",
+                      color: "white",
+                      marginTop: "30px",
+                      fontSize: "16px",
+                      borderRadius: "30px",
                     }}
-                    variant="contained"
-                    onClick={handleAddItem}
                   >
-                    Add Item
+                    Add Collaboration
                   </Button>
                 </div>
-              </div>
-              <div style={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  style={{
-                    backgroundColor: "var(--second-blue)",
-                    color: "white",
-                    marginTop: "30px",
-                    fontSize: "16px",
-                    borderRadius: "30px",
-                  }}
-                >
-                  Add Collaboration
-                </Button>
               </div>
             </form>
           </Box>

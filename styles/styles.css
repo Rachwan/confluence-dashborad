@@ -25,7 +25,22 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 .css-1uruvu9-MuiInputBase-root-MuiOutlinedInput-root {
   border-radius: 30px !important;
 }
-
+/* Styles for the add collab page*/
+.collab__post,
+.collab__detail {
+  background-color: #fff;
+  color: #111927;
+  -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 8px;
+  box-shadow: 0px 5px 22px rgba(0, 0, 0, 0.04), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.03);
+  padding: 30px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.collab__post {
+  margin-bottom: 20px;
+}
 /* Styles for the select options */
 .select__wrapper {
   display: flex;

@@ -15,11 +15,13 @@ import PlatformAddForm from "src/sections/platforms/platforms-add-form";
 
 const Page = () => {
   const [platformsData, setPlatformsData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchPlatformsData = async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/platform/all`);
       setPlatformsData(response.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -138,6 +140,7 @@ const Page = () => {
               rowsPerPage={rowsPerPage}
               selected={platformsSelection.selected}
               fetchUpdatedData={fetchPlatformsData}
+              loading={loading}
             />
           </Stack>
         </Container>

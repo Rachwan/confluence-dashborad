@@ -17,6 +17,7 @@ import {
 import { Scrollbar } from "src/components/scrollbar";
 import { useState } from "react";
 import EditMyCollaborationForm from "./myCollaborations-edit-form";
+import LoadingSection from "src/components/LoadingSection";
 
 export const MyCollaborationsTable = (props) => {
   const [isMyCollaborationFormOpen, setIsMyCollaborationFormOpen] = useState(false);
@@ -31,6 +32,7 @@ export const MyCollaborationsTable = (props) => {
     rowsPerPage = 0,
     selected = [],
     fetchUpdatedData,
+    loading,
   } = props;
 
   console.log("here", items, items.length);
@@ -91,9 +93,11 @@ export const MyCollaborationsTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.length === 0 ? (
+              {loading ? (
+                <LoadingSection padding={"50px"} />
+              ) : items && items.length === 0 && !loading ? (
                 <TableRow>
-                  <TableCell style={{ fontSize: "18px", fontWeight: "500" }}>
+                  <TableCell style={{ fontSize: "18px", fontWeight: "500", padding: "50px" }}>
                     There is no collabs yet!
                   </TableCell>
                 </TableRow>
@@ -224,7 +228,8 @@ export const MyCollaborationsTable = (props) => {
                                   gap: "1px",
                                 }}
                               >
-                                {singleAdditional.name}: {singleAdditional.detail}
+                                <span style={{ fontWeight: "600" }}>{singleAdditional.name}</span>:{" "}
+                                {singleAdditional.detail}
                               </p>
                             </li>
                           ))}

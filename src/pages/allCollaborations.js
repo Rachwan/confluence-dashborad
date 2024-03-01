@@ -16,12 +16,13 @@ import Link from "next/link";
 const Page = () => {
   const [allCollaborationsData, setAllCollaborationsData] = useState([]);
   const [filteredBusinesses, setFilteredBusinesses] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchAllCollaborationsData = async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/collaboration/all`);
       setAllCollaborationsData(response.data);
-      console.log("response.data:", response.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -70,6 +71,9 @@ const Page = () => {
     const filteredData = allCollaborationsData.filter((collaboration) => {
       const idMatch = collaboration?._id?.toLowerCase().includes(searchTerm?.toLowerCase());
       const titleMatch = collaboration?.title?.toLowerCase().includes(searchTerm?.toLowerCase());
+      const userMatch = collaboration?.userId?.name
+        ?.toLowerCase()
+        .includes(searchTerm?.toLowerCase());
       const descriptionMatch = collaboration?.description
         ?.toLowerCase()
         .includes(searchTerm?.toLowerCase());
@@ -88,7 +92,9 @@ const Page = () => {
 
       // Add more fields as needed
 
-      return idMatch || titleMatch || descriptionMatch || additionalMatch || platformsMatch;
+      return (
+        idMatch || titleMatch || userMatch || descriptionMatch || additionalMatch || platformsMatch
+      );
     });
 
     setFilteredBusinesses(filteredData);
@@ -139,7 +145,7 @@ const Page = () => {
                   </Button>
                 </Stack>
               </Stack>
-              <Link href="/addCollaboration" target="_blank">
+              {/* <Link href="/addCollaboration" target="_blank">
                 <Button
                   startIcon={
                     <SvgIcon fontSize="small">
@@ -155,7 +161,7 @@ const Page = () => {
                 >
                   Add a Collaboration
                 </Button>
-              </Link>
+              </Link> */}
             </Stack>
             <AllCollaborationsSearch onSearch={handleSearch} />
             <AllCollaborationsTable
@@ -173,6 +179,7 @@ const Page = () => {
               rowsPerPage={rowsPerPage}
               selected={allCollaborationsSelection.selected}
               fetchUpdatedData={fetchAllCollaborationsData}
+              loading={loading}
             />
           </Stack>
         </Container>

@@ -17,6 +17,7 @@ import {
 import { Scrollbar } from "src/components/scrollbar";
 import { getInitials } from "src/utils/get-initials";
 import { useState } from "react";
+import LoadingSection from "src/components/LoadingSection";
 // import EditInfluencerForm from "./influencers-edit-form";
 
 export const InfluencersTable = (props) => {
@@ -32,6 +33,7 @@ export const InfluencersTable = (props) => {
     rowsPerPage = 0,
     selected = [],
     fetchUpdatedData,
+    loading,
   } = props;
 
   // const handleEditClick = (infleuncer) => {
@@ -93,101 +95,112 @@ export const InfluencersTable = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((influencer) => {
-                const isSelected = selected.includes(influencer._id);
-                const createdAt = influencer.createdAt;
-                const formattedDate = new Date(createdAt).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
-                });
+              {loading ? (
+                <LoadingSection padding={"50px"} />
+              ) : items && items.length === 0 && !loading ? (
+                <TableRow>
+                  <TableCell style={{ fontSize: "18px", fontWeight: "500" }}>
+                    There is no influencers yet!
+                  </TableCell>
+                </TableRow>
+              ) : (
+                items &&
+                items.map((influencer) => {
+                  const isSelected = selected.includes(influencer._id);
+                  const createdAt = influencer.createdAt;
+                  const formattedDate = new Date(createdAt).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  });
 
-                return (
-                  <TableRow hover key={influencer._id} selected={isSelected}>
-                    <TableCell style={{ fontSize: "16px" }}>{influencer._id}</TableCell>
-                    <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
-                        <Avatar
-                          src={`${process.env.NEXT_PUBLIC_BACK_END}/${influencer.profile}`}
-                          style={{ fontSize: "16px", width: "60px", height: "60px" }}
-                        >
-                          {getInitials(influencer.name)}
-                        </Avatar>
-                        <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
-                          {influencer.name}
-                        </Typography>
-                      </Stack>
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>{influencer.email}</TableCell>
-                    <TableCell>
-                      <img
-                        src={`${process.env.NEXT_PUBLIC_BACK_END}/${influencer.background}`}
-                        alt=""
-                        style={{ maxWidth: "125px", maxHeight: "200px" }}
-                      />
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>{influencer.number}</TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>{influencer.age}</TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      {influencer.categoryId?.name || "No Category Yet"}
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      {influencer.cityId?.name || "No City Yet"}
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      <ul>
-                        {influencer.platforms?.map((platform) => (
-                          <li key={platform.platformId?._id}>
-                            <p
-                              style={{
-                                display: "flex",
-                                justifyContent: "flex-start",
-                                alignItems: "center",
-                                gap: "5px",
-                              }}
-                            >
-                              <img
-                                style={{ width: "20px", height: "20px", display: "flex" }}
-                                src={`${process.env.NEXT_PUBLIC_BACK_END}/${platform.platformId?.icon}`}
-                                alt=""
-                              />
-                              : {platform.followers}
-                            </p>
-                          </li>
-                        ))}
-                      </ul>
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>
-                      {influencer?.totalFollowers || getTotalFollowers(influencer?.platforms)}
-                    </TableCell>
-                    <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
-                    <TableCell>
-                      <div style={{ position: "relative", left: "20px", width: "fit-content" }}>
-                        {/* <div
-                          onClick={() => handleEditClick(influencer)}
-                          style={{ cursor: "pointer" }}
-                        >
-                          <img
-                            src="/assets/icons/pen-to-square-solid (1).svg"
-                            style={{ width: "22px" }}
-                            alt=""
-                          />
-                        </div> */}
-                        <div
-                          onClick={() => handleDeleteClick(influencer)}
-                          style={{ cursor: "pointer" }}
-                        >
-                          <img
-                            src="/assets/icons/trash-can-solid.svg"
-                            style={{ width: "20px" }}
-                            alt=""
-                          />
+                  return (
+                    <TableRow hover key={influencer._id} selected={isSelected}>
+                      <TableCell style={{ fontSize: "16px" }}>{influencer._id}</TableCell>
+                      <TableCell>
+                        <Stack alignItems="center" direction="row" spacing={2}>
+                          <Avatar
+                            src={`${process.env.NEXT_PUBLIC_BACK_END}/${influencer.profile}`}
+                            style={{ fontSize: "16px", width: "60px", height: "60px" }}
+                          >
+                            {getInitials(influencer.name)}
+                          </Avatar>
+                          <Typography variant="subtitle2" style={{ fontSize: "16px" }}>
+                            {influencer.name}
+                          </Typography>
+                        </Stack>
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>{influencer.email}</TableCell>
+                      <TableCell>
+                        <img
+                          src={`${process.env.NEXT_PUBLIC_BACK_END}/${influencer.background}`}
+                          alt=""
+                          style={{ maxWidth: "125px", maxHeight: "200px" }}
+                        />
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>{influencer.number}</TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>{influencer.age}</TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        {influencer.categoryId?.name || "No Category Yet"}
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        {influencer.cityId?.name || "No City Yet"}
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        <ul>
+                          {influencer.platforms?.map((platform) => (
+                            <li key={platform.platformId?._id}>
+                              <p
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "flex-start",
+                                  alignItems: "center",
+                                  gap: "5px",
+                                }}
+                              >
+                                <img
+                                  style={{ width: "20px", height: "20px", display: "flex" }}
+                                  src={`${process.env.NEXT_PUBLIC_BACK_END}/${platform.platformId?.icon}`}
+                                  alt=""
+                                />
+                                : {platform.followers}
+                              </p>
+                            </li>
+                          ))}
+                        </ul>
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>
+                        {influencer?.totalFollowers || getTotalFollowers(influencer?.platforms)}
+                      </TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>{formattedDate}</TableCell>
+                      <TableCell>
+                        <div style={{ position: "relative", left: "20px", width: "fit-content" }}>
+                          {/* <div
+                                          onClick={() => handleEditClick(influencer)}
+                                          style={{ cursor: "pointer" }}
+                                        >
+                                          <img
+                                            src="/assets/icons/pen-to-square-solid (1).svg"
+                                            style={{ width: "22px" }}
+                                            alt=""
+                                          />
+                                        </div> */}
+                          <div
+                            onClick={() => handleDeleteClick(influencer)}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <img
+                              src="/assets/icons/trash-can-solid.svg"
+                              style={{ width: "20px" }}
+                              alt=""
+                            />
+                          </div>
                         </div>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
+              )}
             </TableBody>
             {/* <section>
               {isInfluencerFormOpen && (
