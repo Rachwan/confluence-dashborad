@@ -16,11 +16,13 @@ import CategoryAddForm from "src/sections/categories/categories-add-form";
 const Page = () => {
   const [categoriesData, setCategoriesData] = useState([]);
   const [filteredBusinesses, setFilteredBusinesses] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchCategoriesData = async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/category/all`);
       setCategoriesData(response.data);
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -170,6 +172,7 @@ const Page = () => {
               rowsPerPage={rowsPerPage}
               selected={categoriesSelection.selected}
               fetchUpdatedData={fetchCategoriesData}
+              loading={loading}
             />
           </Stack>
         </Container>
