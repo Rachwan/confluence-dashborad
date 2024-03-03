@@ -15,7 +15,7 @@ const Page = () => (
               alt=''
             />
             <p className={styles.message}>
-              Seems like you've taken a detour in the dashboard journey. Redirecting you to explore
+              Seems like you&apos;ve taken a detour in the dashboard journey. Redirecting you to explore
               influential connections in the dashboard realm.
             </p>
             <div className={styles.buttonWrapper}>

@@ -22,21 +22,21 @@ const Page = () => {
   const [filteredBusinesses, setFilteredBusinesses] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const fetchMyCollaborationsData = async () => {
+  const fetchMyCollaborationsData = useCallback(async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACK_END}/collaboration/usercollaborations/${user._id}`,
-      )
-      setmyCollaborationsData(response.data)
-      setLoading(false)
+        `${process.env.NEXT_PUBLIC_BACK_END}/collaboration/usercollaborations/${user._id}`
+      );
+      setmyCollaborationsData(response.data);
+      setLoading(false);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  }, [user]);
 
   useEffect(() => {
     fetchMyCollaborationsData()
-  }, [user])
+  }, [user, fetchMyCollaborationsData])
 
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)

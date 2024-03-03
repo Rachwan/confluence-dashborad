@@ -31,11 +31,16 @@ const Page = () => {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
 
+  // const useCities = (page, rowsPerPage) => {
+  //   return useMemo(() => {
+  //     return applyPagination(citiesData, page, rowsPerPage)
+  //   }, [citiesData, page, rowsPerPage])
+  // }
   const useCities = (page, rowsPerPage) => {
     return useMemo(() => {
-      return applyPagination(citiesData, page, rowsPerPage)
-    }, [citiesData, page, rowsPerPage])
-  }
+      return applyPagination(citiesData, page, rowsPerPage);
+    }, [page, rowsPerPage]);
+  };
 
   const useCitiesIds = (cities) => {
     return useMemo(() => {
