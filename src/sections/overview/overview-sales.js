@@ -116,11 +116,11 @@ export const OverviewSales = (props) => {
             Sync
           </Button>
         }
-        title='Sales'
+        title='Users overtime'
       />
       <CardContent>
         <Chart height={350} options={chartOptions} series={chartSeries}
-type='bar' width='100%' />
+          type='bar' width='100%' />
       </CardContent>
       <Divider />
       <CardActions sx={{ justifyContent: 'flex-end' }}>

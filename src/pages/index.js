@@ -32,7 +32,7 @@ const Page = () => (
         <Grid container spacing={3}>
           <Grid xs={12} sm={6} lg={3}>
             <OverviewBudget difference={12} positive sx={{ height: '100%' }}
-value='$24k' />
+              value='$24k' />
           </Grid>
           <Grid xs={12} sm={6} lg={3}>
             <OverviewTotalCustomers
@@ -70,7 +70,7 @@ value='$24k' />
               sx={{ height: '100%' }}
             />
           </Grid>
-          <Grid xs={12} md={6} lg={4}>
+          {/* <Grid xs={12} md={6} lg={4}>
             <OverviewLatestProducts
               products={[
                 {
@@ -173,7 +173,7 @@ value='$24k' />
               ]}
               sx={{ height: '100%' }}
             />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Box>

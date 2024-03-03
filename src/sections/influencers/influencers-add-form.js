@@ -12,6 +12,7 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
     email: '',
     password: '',
     age: '',
+    gender: '',
     number: '',
     platforms: [],
     profile: null,
@@ -222,16 +223,16 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
             </label>
             <div className='arrow'>
               <select className='select' name='categoryId' id='dropdown'
-onChange={handleChange}>
+                onChange={handleChange}>
                 <option value='' className='option__title'>
                   Select a Category
                 </option>
                 {categoriesData
                   ? categoriesData.map((category) => (
-                      <option key={category._id} value={category._id} className='option'>
-                        {category.name}
-                      </option>
-                    ))
+                    <option key={category._id} value={category._id} className='option'>
+                      {category.name}
+                    </option>
+                  ))
                   : 'Loding Categories'}
               </select>
             </div>
@@ -244,16 +245,16 @@ onChange={handleChange}>
             </label>
             <div className='arrow'>
               <select className='select' name='cityId' id='cdropdown'
-onChange={handleChange}>
+                onChange={handleChange}>
                 <option value='' className='option__title'>
                   Select a City
                 </option>
                 {citiesData
                   ? citiesData.map((city) => (
-                      <option key={city._id} value={city._id} className='option'>
-                        {city.name}
-                      </option>
-                    ))
+                    <option key={city._id} value={city._id} className='option'>
+                      {city.name}
+                    </option>
+                  ))
                   : 'Loding Cities'}
               </select>
             </div>
@@ -264,20 +265,20 @@ onChange={handleChange}>
             <label htmlFor='pdropdown'>Platforms</label>
             {platformsData
               ? platformsData.map((platform, index) => (
-                  <>
-                    <TextField
-                      key={platform._id}
-                      label={`${platform.name}`}
-                      type='number'
-                      name={platform._id}
-                      onChange={(e) => handlePlatformsChange(e, platform)}
-                      fullWidth
-                      margin='normal'
-                      placeholder={`Number of followers`}
-                      style={{ fontSize: '20px' }}
-                    />
-                  </>
-                ))
+                <>
+                  <TextField
+                    key={platform._id}
+                    label={`${platform.name}`}
+                    type='number'
+                    name={platform._id}
+                    onChange={(e) => handlePlatformsChange(e, platform)}
+                    fullWidth
+                    margin='normal'
+                    placeholder={`Number of followers`}
+                    style={{ fontSize: '20px' }}
+                  />
+                </>
+              ))
               : 'Loading Platforms'}
           </div>
 
