@@ -29,7 +29,7 @@ export const OverviewLatestOrders = (props) => {
 
   return (
     <Card sx={sx}>
-      <CardHeader title="Latest Orders" />
+      <CardHeader title='Latest Orders' />
       <Scrollbar sx={{ flexGrow: 1 }}>
         <Box sx={{ minWidth: 800 }}>
           <Table>
@@ -37,7 +37,7 @@ export const OverviewLatestOrders = (props) => {
               <TableRow>
                 <TableCell>Order</TableCell>
                 <TableCell>Customer</TableCell>
-                <TableCell sortDirection="desc">Date</TableCell>
+                <TableCell sortDirection='desc'>Date</TableCell>
                 <TableCell>Status</TableCell>
               </TableRow>
             </TableHead>
@@ -63,14 +63,14 @@ export const OverviewLatestOrders = (props) => {
       <Divider />
       <CardActions sx={{ justifyContent: 'flex-end' }}>
         <Button
-          color="inherit"
+          color='inherit'
           endIcon={
-            <SvgIcon fontSize="small">
+            <SvgIcon fontSize='small'>
               <ArrowRightIcon />
             </SvgIcon>
           }
-          size="small"
-          variant="text"
+          size='small'
+          variant='text'
         >
           View all
         </Button>

@@ -59,22 +59,22 @@ const Page = () => {
         <title>Subscribers | Confluence</title>
       </Head>
       <Box
-        component="main"
+        component='main'
         sx={{
           flexGrow: 1,
           py: 8,
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth='xl'>
           <Stack spacing={3}>
-            <Stack direction="row" justifyContent="space-between" spacing={4}>
+            <Stack direction='row' justifyContent='space-between' spacing={4}>
               <Stack spacing={1}>
-                <Typography variant="h4">Subscribers Emails</Typography>
-                <Stack alignItems="center" direction="row" spacing={1}>
+                <Typography variant='h4'>Subscribers Emails</Typography>
+                <Stack alignItems='center' direction='row' spacing={1}>
                   <Button
-                    color="inherit"
+                    color='inherit'
                     startIcon={
-                      <SvgIcon fontSize="small">
+                      <SvgIcon fontSize='small'>
                         <ArrowUpOnSquareIcon />
                       </SvgIcon>
                     }
@@ -83,9 +83,9 @@ const Page = () => {
                     Import
                   </Button>
                   <Button
-                    color="inherit"
+                    color='inherit'
                     startIcon={
-                      <SvgIcon fontSize="small">
+                      <SvgIcon fontSize='small'>
                         <ArrowDownOnSquareIcon />
                       </SvgIcon>
                     }

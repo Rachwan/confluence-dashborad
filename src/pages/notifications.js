@@ -62,11 +62,11 @@ const Page = () => {
               <div className={styles.single__input}>
                 <input
                   className={styles.input}
-                  type="text"
-                  id="email"
-                  name="email"
+                  type='text'
+                  id='email'
+                  name='email'
                   onChange={handleEmailChange}
-                  placeholder="Enter your email here..."
+                  placeholder='Enter your email here...'
                   required
                 />
                 <div className={styles.button} onClick={handleSubmit}>

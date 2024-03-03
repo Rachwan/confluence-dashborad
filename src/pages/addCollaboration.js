@@ -190,11 +190,11 @@ const Page = () => {
           width: '100% !important',
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth='xl'>
           <Stack spacing={3}>
-            <Stack direction="row" justifyContent="space-between" spacing={4}>
+            <Stack direction='row' justifyContent='space-between' spacing={4}>
               <Stack spacing={1} sx={{ display: 'flex' }}>
-                <Typography variant="h4">Add A Collaboration</Typography>
+                <Typography variant='h4'>Add A Collaboration</Typography>
               </Stack>
             </Stack>
           </Stack>
@@ -204,11 +204,17 @@ const Page = () => {
               width: '100%',
             }}
           >
-            <h2 style={{ color: 'var(--second-blue)', fontSize: '17px', margin: '20px 0 30px' }}>
+            <h2
+              style={{
+                color: 'var(--second-blue)',
+                fontSize: '17px',
+                margin: '20px 0 30px',
+              }}
+            >
               Please Insert all the details below.
             </h2>
-            <form style={{ width: '100%' }} enctype="multipart/form-data" onSubmit={handleSubmit}>
-              <div className="collab__post">
+            <form style={{ width: '100%' }} enctype='multipart/form-data' onSubmit={handleSubmit}>
+              <div className='collab__post'>
                 <h2
                   style={{
                     marginTop: '20px',
@@ -222,37 +228,59 @@ const Page = () => {
                 >
                   For Collaboration Post:
                 </h2>
-                <h2 style={{ fontSize: '20px', margin: '15px 0 0', fontWeight: '500' }}>
+                <h2
+                  style={{
+                    fontSize: '20px',
+                    margin: '15px 0 0',
+                    fontWeight: '500',
+                  }}
+                >
                   Title post
                 </h2>
                 <TextField
-                  label="Title"
-                  type="text"
-                  name="title"
+                  label='Title'
+                  type='text'
+                  name='title'
                   // value={formData.name}
                   onChange={handleChange}
                   fullWidth
-                  margin="normal"
-                  placeholder="Enter the main title"
+                  margin='normal'
+                  placeholder='Enter the main title'
                 />
-                <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '30px' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    marginBottom: '30px',
+                  }}
+                >
                   <label
-                    htmlFor="back"
-                    style={{ fontSize: '20px', margin: '15px 0', fontWeight: '500' }}
+                    htmlFor='back'
+                    style={{
+                      fontSize: '20px',
+                      margin: '15px 0',
+                      fontWeight: '500',
+                    }}
                   >
                     Upload a background
                   </label>
                   <input
-                    accept="image/*"
-                    type="file"
-                    id="back"
-                    name="background"
+                    accept='image/*'
+                    type='file'
+                    id='back'
+                    name='background'
                     onChange={handleBackgroundChange}
                   />
                 </div>
                 {/* Platforms */}
                 <div>
-                  <h1 style={{ fontSize: '20px', margin: '15px 0', fontWeight: '500' }}>
+                  <h1
+                    style={{
+                      fontSize: '20px',
+                      margin: '15px 0',
+                      fontWeight: '500',
+                    }}
+                  >
                     Select the platforms to show
                   </h1>
                   {platformsData.map((platform) => (
@@ -269,7 +297,7 @@ const Page = () => {
                   ))}
                 </div>
               </div>
-              <div className="collab__detail">
+              <div className='collab__detail'>
                 <h2
                   style={{
                     marginTop: '40px',
@@ -283,17 +311,29 @@ const Page = () => {
                 >
                   For Collaboration Details:
                 </h2>
-                <h2 style={{ fontSize: '20px', margin: '15px 0 0', fontWeight: '500' }}>
+                <h2
+                  style={{
+                    fontSize: '20px',
+                    margin: '15px 0 0',
+                    fontWeight: '500',
+                  }}
+                >
                   Collaboration Title
                 </h2>
                 <TextField
-                  label="Main title"
+                  label='Main title'
                   value={formData.title}
                   fullWidth
-                  margin="normal"
+                  margin='normal'
                   inputProps={{ readOnly: true }}
                 />
-                <h2 style={{ fontSize: '22px', margin: '15px 0 0', fontWeight: '600' }}>
+                <h2
+                  style={{
+                    fontSize: '22px',
+                    margin: '15px 0 0',
+                    fontWeight: '600',
+                  }}
+                >
                   Upload the 4 images
                 </h2>
                 {/* 4 Images */}
@@ -338,11 +378,19 @@ const Page = () => {
                 {Object.keys(imagePreviews).map((imageKey) => (
                   <div
                     key={imageKey}
-                    style={{ display: 'flex', flexDirection: 'column', marginBottom: '12px' }}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      marginBottom: '12px',
+                    }}
                   >
                     <label
                       htmlFor={imageKey}
-                      style={{ fontSize: '18px', margin: '15px 0', fontWeight: '500' }}
+                      style={{
+                        fontSize: '18px',
+                        margin: '15px 0',
+                        fontWeight: '500',
+                      }}
                     >
                       {/* Upload the {imageKey.charAt(0).toUpperCase() + imageKey.slice(1)} */}
                       Upload the{' '}
@@ -354,8 +402,8 @@ const Page = () => {
                       :
                     </label>
                     <input
-                      accept="image/*"
-                      type="file"
+                      accept='image/*'
+                      type='file'
                       id={imageKey}
                       name={imageKey}
                       onChange={(e) => handleImageChange(imageKey, e)}
@@ -377,15 +425,21 @@ const Page = () => {
                     )}
                   </div>
                 ))}
-                <h2 style={{ fontSize: '22px', margin: '15px 0 0', fontWeight: '600' }}>
+                <h2
+                  style={{
+                    fontSize: '22px',
+                    margin: '15px 0 0',
+                    fontWeight: '600',
+                  }}
+                >
                   Collaboration Description
                 </h2>
                 <TextareaAutosize
-                  label="Description"
-                  type="text"
-                  name="description"
+                  label='Description'
+                  type='text'
+                  name='description'
                   onChange={handleChange}
-                  placeholder="Enter the description"
+                  placeholder='Enter the description'
                   style={{
                     width: '100%',
                     padding: '10px',
@@ -398,30 +452,45 @@ const Page = () => {
                   }}
                 />
                 <div>
-                  <h2 style={{ fontSize: '22px', margin: '15px 0', fontWeight: '600' }}>
+                  <h2
+                    style={{
+                      fontSize: '22px',
+                      margin: '15px 0',
+                      fontWeight: '600',
+                    }}
+                  >
                     Additional Items:
                   </h2>
                   {additionalItems.map((item, index) => (
                     <div key={index} style={{ marginBottom: '15px' }}>
                       <TextField
-                        label="Name"
+                        label='Name'
                         value={item.name}
                         onChange={(e) => handleInputChange(index, 'name', e.target.value)}
                         fullWidth
-                        placeholder="Enter the the additional name"
+                        placeholder='Enter the the additional name'
                         style={{ marginBottom: '5px' }}
                       />
                       <TextField
-                        label="Detail"
+                        label='Detail'
                         value={item.detail}
                         onChange={(e) => handleInputChange(index, 'detail', e.target.value)}
                         fullWidth
-                        placeholder="Enter the the additional delail"
+                        placeholder='Enter the the additional delail'
                         style={{ marginBottom: '5px' }}
                       />
-                      <div style={{ display: 'inline', width: '100%', justifyContent: 'flex-end' }}>
+                      <div
+                        style={{
+                          display: 'inline',
+                          width: '100%',
+                          justifyContent: 'flex-end',
+                        }}
+                      >
                         <Button
-                          style={{ textAlign: 'right', color: 'var(--second-blue)' }}
+                          style={{
+                            textAlign: 'right',
+                            color: 'var(--second-blue)',
+                          }}
                           onClick={() => handleRemoveItem(index)}
                         >
                           Remove
@@ -429,24 +498,36 @@ const Page = () => {
                       </div>
                     </div>
                   ))}
-                  <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-start' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      width: '100%',
+                      justifyContent: 'flex-start',
+                    }}
+                  >
                     <Button
                       style={{
                         backgroundColor: 'var(--second-blue)',
                         borderRadius: '6px',
                         padding: '5px 10px',
                       }}
-                      variant="contained"
+                      variant='contained'
                       onClick={handleAddItem}
                     >
                       Add Item
                     </Button>
                   </div>
                 </div>
-                <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    width: '100%',
+                    justifyContent: 'flex-end',
+                  }}
+                >
                   <Button
-                    variant="contained"
-                    type="submit"
+                    variant='contained'
+                    type='submit'
                     style={{
                       backgroundColor: 'var(--second-blue)',
                       color: 'white',

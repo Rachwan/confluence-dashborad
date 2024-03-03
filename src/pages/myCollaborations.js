@@ -110,32 +110,42 @@ const Page = () => {
         <title>My Collaborations | Confluence</title>
       </Head>
       <Box
-        component="main"
+        component='main'
         sx={{
           flexGrow: 1,
           py: 8,
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth='xl'>
           <Stack spacing={3}>
-            <Stack direction="row" justifyContent="space-between" spacing={4}>
+            <Stack direction='row' justifyContent='space-between' spacing={4}>
               <Stack spacing={1}>
-                <Typography variant="h4">My Collaborations</Typography>
-                <Stack alignItems="center" direction="row" spacing={1}>
+                <Typography variant='h4'>My Collaborations</Typography>
+                <Stack alignItems='center' direction='row' spacing={1}>
                   <Button
-                    color="inherit"
-                    style={{ fontSize: '16px', display: 'flex', alignItems: 'center', gap: '4px' }}
+                    color='inherit'
+                    style={{
+                      fontSize: '16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
                   >
-                    <SvgIcon fontSize="small" style={{ color: '#0000EE' }}>
+                    <SvgIcon fontSize='small' style={{ color: '#0000EE' }}>
                       <ArrowDownOnSquareIcon />
                     </SvgIcon>
                     <span style={{ transform: 'translateY(2px)', color: '#0000EE' }}>Import</span>
                   </Button>
                   <Button
-                    color="inherit"
-                    style={{ fontSize: '16px', display: 'flex', alignItems: 'center', gap: '4px' }}
+                    color='inherit'
+                    style={{
+                      fontSize: '16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
                   >
-                    <SvgIcon fontSize="small" style={{ color: '#0000EE' }}>
+                    <SvgIcon fontSize='small' style={{ color: '#0000EE' }}>
                       <ArrowUpOnSquareIcon />
                     </SvgIcon>
                     <CSVLink

@@ -9,7 +9,7 @@ function LoadingSection({ padding }) {
         padding: `${padding}`,
       }}
     >
-      <img src="/assets/logos/confluenceTwo.svg" alt="" />
+      <img src='/assets/logos/confluenceTwo.svg' alt='' />
     </div>
   )
 }

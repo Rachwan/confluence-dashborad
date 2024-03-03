@@ -42,7 +42,7 @@ export const SideNavItem = (props) => {
       >
         {icon && (
           <Box
-            component="span"
+            component='span'
             sx={{
               alignItems: 'center',
               color: 'neutral.400',
@@ -58,7 +58,7 @@ export const SideNavItem = (props) => {
           </Box>
         )}
         <Box
-          component="span"
+          component='span'
           sx={{
             color: 'neutral.400',
             flexGrow: 1,

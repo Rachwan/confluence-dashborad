@@ -4,12 +4,12 @@ import { Card, InputAdornment, OutlinedInput, SvgIcon } from '@mui/material'
 export const CustomersSearch = () => (
   <Card sx={{ p: 2 }}>
     <OutlinedInput
-      defaultValue=""
+      defaultValue=''
       fullWidth
-      placeholder="Search customer"
+      placeholder='Search customer'
       startAdornment={
-        <InputAdornment position="start">
-          <SvgIcon color="action" fontSize="small">
+        <InputAdornment position='start'>
+          <SvgIcon color='action' fontSize='small'>
             <MagnifyingGlassIcon />
           </SvgIcon>
         </InputAdornment>

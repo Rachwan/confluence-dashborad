@@ -86,14 +86,18 @@ export const BusinessesTable = (props) => {
                   <TableRow hover key={business._id} selected={isSelected}>
                     <TableCell style={{ fontSize: '16px' }}>{business._id}</TableCell>
                     <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
+                      <Stack alignItems='center' direction='row' spacing={2}>
                         <Avatar
                           src={`${process.env.NEXT_PUBLIC_BACK_END}/${business.profile}`}
-                          style={{ fontSize: '16px', width: '60px', height: '60px' }}
+                          style={{
+                            fontSize: '16px',
+                            width: '60px',
+                            height: '60px',
+                          }}
                         >
                           {getInitials(business.name)}
                         </Avatar>
-                        <Typography variant="subtitle2" style={{ fontSize: '16px' }}>
+                        <Typography variant='subtitle2' style={{ fontSize: '16px' }}>
                           {business.name}
                         </Typography>
                       </Stack>
@@ -102,15 +106,21 @@ export const BusinessesTable = (props) => {
                     <TableCell style={{ fontSize: '16px' }}>{business.number}</TableCell>
                     <TableCell style={{ fontSize: '16px' }}>{formattedDate}</TableCell>
                     <TableCell>
-                      <div style={{ position: 'relative', left: '20px', width: 'fit-content' }}>
+                      <div
+                        style={{
+                          position: 'relative',
+                          left: '20px',
+                          width: 'fit-content',
+                        }}
+                      >
                         <div
                           onClick={() => handleDeleteClick(business)}
                           style={{ cursor: 'pointer' }}
                         >
                           <img
-                            src="/assets/icons/trash-can-solid.svg"
+                            src='/assets/icons/trash-can-solid.svg'
                             style={{ width: '20px' }}
-                            alt=""
+                            alt=''
                           />
                         </div>
                       </div>
@@ -123,7 +133,7 @@ export const BusinessesTable = (props) => {
         </Box>
       </Scrollbar>
       <TablePagination
-        component="div"
+        component='div'
         count={count}
         onPageChange={onPageChange}
         onRowsPerPageChange={onRowsPerPageChange}

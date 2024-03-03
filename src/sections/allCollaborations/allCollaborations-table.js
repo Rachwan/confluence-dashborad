@@ -17,6 +17,7 @@ import {
 import { Scrollbar } from 'src/components/scrollbar'
 import { useState } from 'react'
 import EditAllCollaborationForm from './allCollaborations-edit-form'
+import LoadingSection from 'src/components/LoadingSection'
 
 export const AllCollaborationsTable = (props) => {
   const [isAllCollaborationFormOpen, setIsAllCollaborationFormOpen] = useState(false)
@@ -25,7 +26,7 @@ export const AllCollaborationsTable = (props) => {
   const {
     count = 0,
     items = [],
-    onPageChange = () => {},
+    onPageChange = () => { },
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 0,
@@ -95,10 +96,16 @@ export const AllCollaborationsTable = (props) => {
             <TableBody>
               {loading ? (
                 <LoadingSection padding={'50px'} />
-              ) : items && items.length === 0 && !loading ? (
+              ) : items && items.length === 0 ? (
                 <TableRow>
-                  <TableCell style={{ fontSize: '18px', fontWeight: '500', padding: '50px' }}>
-                    There is no collabs yet!
+                  <TableCell
+                    style={{
+                      fontSize: '18px',
+                      fontWeight: '500',
+                      padding: '50px',
+                    }}
+                  >
+                    {items.length === 0 ? "There is no collabs yet!" : ""}
                   </TableCell>
                 </TableRow>
               ) : (
@@ -130,8 +137,8 @@ export const AllCollaborationsTable = (props) => {
                       </Link>
                     </TableCell> */}
                       <TableCell>
-                        <Stack alignItems="center" direction="row" spacing={2}>
-                          <Typography variant="subtitle2" style={{ fontSize: '16px' }}>
+                        <Stack alignItems='center' direction='row' spacing={2}>
+                          <Typography variant='subtitle2' style={{ fontSize: '16px' }}>
                             {allCollaboration.title}
                           </Typography>
                         </Stack>
@@ -139,7 +146,7 @@ export const AllCollaborationsTable = (props) => {
                       <TableCell>
                         <img
                           src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.background}`}
-                          alt=""
+                          alt=''
                           style={{ maxWidth: '125px', maxHeight: '200px' }}
                         />
                       </TableCell>
@@ -182,7 +189,7 @@ export const AllCollaborationsTable = (props) => {
                           <li>
                             <img
                               src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.firstImage}`}
-                              alt=""
+                              alt=''
                               style={{
                                 maxWidth: '200px',
                                 maxHeight: '200px',
@@ -193,7 +200,7 @@ export const AllCollaborationsTable = (props) => {
                           <li>
                             <img
                               src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.secondImage}`}
-                              alt=""
+                              alt=''
                               style={{
                                 maxWidth: '200px',
                                 maxHeight: '200px',
@@ -204,7 +211,7 @@ export const AllCollaborationsTable = (props) => {
                           <li>
                             <img
                               src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.thirdImage}`}
-                              alt=""
+                              alt=''
                               style={{
                                 maxWidth: '200px',
                                 maxHeight: '200px',
@@ -215,7 +222,7 @@ export const AllCollaborationsTable = (props) => {
                           <li>
                             <img
                               src={`${process.env.NEXT_PUBLIC_BACK_END}/${allCollaboration.fourthImage}`}
-                              alt=""
+                              alt=''
                               style={{
                                 maxWidth: '200px',
                                 maxHeight: '200px',
@@ -251,9 +258,9 @@ export const AllCollaborationsTable = (props) => {
                             style={{ cursor: 'pointer' }}
                           >
                             <img
-                              src="/assets/icons/pen-to-square-solid (1).svg"
+                              src='/assets/icons/pen-to-square-solid (1).svg'
                               style={{ width: '22px' }}
-                              alt=""
+                              alt=''
                             />
                           </div>
                           <div
@@ -261,9 +268,9 @@ export const AllCollaborationsTable = (props) => {
                             style={{ cursor: 'pointer' }}
                           >
                             <img
-                              src="/assets/icons/trash-can-solid.svg"
+                              src='/assets/icons/trash-can-solid.svg'
                               style={{ width: '20px' }}
-                              alt=""
+                              alt=''
                             />
                           </div>
                         </div>
@@ -286,7 +293,7 @@ export const AllCollaborationsTable = (props) => {
         </Box>
       </Scrollbar>
       <TablePagination
-        component="div"
+        component='div'
         count={count}
         onPageChange={onPageChange}
         onRowsPerPageChange={onRowsPerPageChange}

@@ -112,7 +112,7 @@ export const SettingsPassword = () => {
         password: newPassword,
         oldPasswordInput: oldPassword,
       })
-      if (response.data) {
+      if (response && response.data) {
         setUser(response.data)
         Swal.fire({
           title: 'Done',
@@ -138,46 +138,47 @@ export const SettingsPassword = () => {
           text: 'Error updating user data.',
         })
       }
+      console.error(error)
     }
   }
 
-  useEffect(() => {
-    const updateUserInContext = async () => {
-      try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/logged-in-userId`)
-        setUser(response.data.user)
-      } catch (err) {
-        console.log(err)
-      }
-    }
+  // useEffect(() => {
+  //   const updateUserInContext = async () => {
+  //     try {
+  //       const response = await axios.get(`${process.env.NEXT_PUBLIC_BACK_END}/logged-in-userId`)
+  //       setUser(response.data.user)
+  //     } catch (err) {
+  //       console.log(err)
+  //     }
+  //   }
 
-    updateUserInContext()
+  //   updateUserInContext()
 
-    return () => {
-      updateUserInContext()
-    }
-  }, [setUser])
+  //   return () => {
+  //     updateUserInContext()
+  //   }
+  // }, [setUser])
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
+    <form onSubmit={handleSubmit} encType='multipart/form-data'>
       <Card>
-        <CardHeader subheader="Update your email or password" title="Email & Password" />
+        <CardHeader subheader='Update your email or password' title='Email & Password' />
         <Divider />
         <CardContent>
           <Stack spacing={3} sx={{ maxWidth: 400 }}>
             <TextField
               fullWidth
-              label="Email"
-              name="email"
-              type="email"
+              label='Email'
+              name='email'
+              type='email'
               onChange={handleInputChange}
               defaultValue={user?.email}
             />
             <TextField
               fullWidth
-              label="Old Password"
-              name="oldPasswordInput"
-              type="password"
+              label='Old Password'
+              name='oldPasswordInput'
+              type='password'
               value={oldPassword}
               onChange={(e) => {
                 setOldPassword(e.target.value)
@@ -186,9 +187,9 @@ export const SettingsPassword = () => {
             />
             <TextField
               fullWidth
-              label="New Password"
-              name="password"
-              type="password"
+              label='New Password'
+              name='password'
+              type='password'
               value={newPassword}
               onChange={(e) => {
                 setNewPassword(e.target.value)
@@ -197,9 +198,9 @@ export const SettingsPassword = () => {
             />
             <TextField
               fullWidth
-              label="Confirm Password"
-              type="password"
-              name="verifyPassword"
+              label='Confirm Password'
+              type='password'
+              name='verifyPassword'
               value={verifyPassword}
               onChange={(e) => setVerifyPassword(e.target.value)}
             />
@@ -208,7 +209,7 @@ export const SettingsPassword = () => {
         <Divider />
         <CardActions sx={{ justifyContent: 'flex-end' }}>
           <Button
-            variant="contained"
+            variant='contained'
             onClick={handleSubmit}
             style={{
               fontSize: '16px',

@@ -99,67 +99,77 @@ const adminAddForm = ({ onClose, fetchUpdatedData }) => {
         }}
       >
         <h2 style={{ color: 'var(--second-blue)', fontSize: '25px' }}>Admin Details</h2>
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <form onSubmit={handleSubmit} encType='multipart/form-data'>
           <TextField
-            label="Name"
-            type="text"
-            name="name"
+            label='Name'
+            type='text'
+            name='name'
             value={formData.name}
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="admin name"
+            margin='normal'
+            placeholder='admin name'
             style={{ fontSize: '20px' }}
           />
           <TextField
-            label="Email"
-            type="email"
-            name="email"
+            label='Email'
+            type='email'
+            name='email'
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="Admin email"
+            margin='normal'
+            placeholder='Admin email'
             style={{ fontSize: '20px' }}
           />
           <TextField
-            label="Password"
-            type="password"
-            name="password"
+            label='Password'
+            type='password'
+            name='password'
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="admin password"
+            margin='normal'
+            placeholder='admin password'
             style={{ fontSize: '20px' }}
           />
           <TextField
-            label="Phone"
-            type="text"
-            name="number"
+            label='Phone'
+            type='text'
+            name='number'
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="Admin number"
+            margin='normal'
+            placeholder='Admin number'
             style={{ fontSize: '20px' }}
           />
-          <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              marginBottom: '20px',
+            }}
+          >
             <label
-              htmlFor="pro"
-              style={{ marginTop: '15px', marginBottom: '10px', fontSize: '20px' }}
+              htmlFor='pro'
+              style={{
+                marginTop: '15px',
+                marginBottom: '10px',
+                fontSize: '20px',
+              }}
             >
               Upload the profile
             </label>
             <input
-              accept="image/*"
-              id="pro"
-              type="file"
-              name="profile"
+              accept='image/*'
+              id='pro'
+              type='file'
+              name='profile'
               onChange={handleProfileChange}
             />
           </div>
 
           <Button
-            variant="contained"
-            type="submit"
+            variant='contained'
+            type='submit'
             style={{
               backgroundColor: 'var(--second-blue)',
               color: 'white',

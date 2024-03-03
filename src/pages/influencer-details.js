@@ -291,17 +291,17 @@ const Page = () => {
         <title>Influencer Details | Confluence</title>
       </Head>
       <Box
-        component="main"
+        component='main'
         sx={{
           flexGrow: 1,
           py: 8,
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth='xl'>
           <Stack spacing={3}>
-            <Stack direction="row" justifyContent="space-between" spacing={4}>
+            <Stack direction='row' justifyContent='space-between' spacing={4}>
               <Stack spacing={1} sx={{ display: 'flex' }}>
-                <Typography variant="h4">My Details</Typography>
+                <Typography variant='h4'>My Details</Typography>
               </Stack>
             </Stack>
           </Stack>
@@ -310,10 +310,16 @@ const Page = () => {
               backgroundColor: '#fff',
             }}
           >
-            <h2 style={{ color: 'var(--second-blue)', fontSize: '17px', margin: '20px 0 30px' }}>
+            <h2
+              style={{
+                color: 'var(--second-blue)',
+                fontSize: '17px',
+                margin: '20px 0 30px',
+              }}
+            >
               Please Insert all the details below.
             </h2>
-            <form className={styles.form} onSubmit={handleSubmit} encType="multipart/form-data">
+            <form className={styles.form} onSubmit={handleSubmit} encType='multipart/form-data'>
               {/* All Inputs */}
               <div className={styles.all__inputs}>
                 {/* All Info Besides Platfroms */}
@@ -322,14 +328,14 @@ const Page = () => {
                     Personal Info
                   </h2>
                   <TextField
-                    label="Age"
-                    type="text"
-                    name="age"
+                    label='Age'
+                    type='text'
+                    name='age'
                     value={formData.age}
                     onChange={handleChange}
                     fullWidth
-                    margin="normal"
-                    placeholder="Insert your age"
+                    margin='normal'
+                    placeholder='Insert your age'
                     style={{ marginBottom: '15px', width: '100%' }}
                   />
                   <div
@@ -348,57 +354,57 @@ const Page = () => {
                           <Checkbox
                             checked={formData.gender === 'Male'}
                             onChange={(e) => handleCheckboxChange(e)}
-                            value="Male"
+                            value='Male'
                           />
                         }
-                        label="Male"
+                        label='Male'
                       />
                       <FormControlLabel
                         control={
                           <Checkbox
                             checked={formData.gender === 'Female'}
                             onChange={(e) => handleCheckboxChange(e)}
-                            value="Female"
+                            value='Female'
                           />
                         }
-                        label="Female"
+                        label='Female'
                       />
                     </div>
                   </div>
                   <TextField
-                    label="Phone"
-                    type="text"
-                    name="number"
+                    label='Phone'
+                    type='text'
+                    name='number'
                     value={formData.number}
                     onChange={handleChange}
                     fullWidth
-                    margin="normal"
-                    placeholder="Insert your number"
+                    margin='normal'
+                    placeholder='Insert your number'
                     style={{ marginTop: '0px', marginBottom: '15px' }}
                   />
 
                   {/* Category */}
-                  <div className="select__wrapper">
-                    <label className="label" htmlFor="dropdown">
+                  <div className='select__wrapper'>
+                    <label className='label' htmlFor='dropdown'>
                       Category
                     </label>
-                    <div className="arrow">
+                    <div className='arrow'>
                       <select
-                        name="categoryId"
-                        id="dropdown"
+                        name='categoryId'
+                        id='dropdown'
                         onChange={handleChange}
                         value={formData.categoryId || ''}
-                        className="select"
+                        className='select'
                       >
                         <option
                           value={user?.categoryId ? user?.categoryId : ''}
-                          className="option__title"
+                          className='option__title'
                         >
                           {user?.categoryId ? user?.categoryId.name : 'Select a Category'}
                         </option>
                         {categoriesData
                           ? categoriesData.map((category) => (
-                              <option key={category._id} value={category._id} className="option">
+                              <option key={category._id} value={category._id} className='option'>
                                 {category.name}
                               </option>
                             ))
@@ -408,24 +414,24 @@ const Page = () => {
                   </div>
 
                   {/* City */}
-                  <div className="select__wrapper">
-                    <label className="label" htmlFor="cdropdown">
+                  <div className='select__wrapper'>
+                    <label className='label' htmlFor='cdropdown'>
                       City
                     </label>
-                    <div className="arrow">
+                    <div className='arrow'>
                       <select
-                        name="cityId"
-                        id="cdropdown"
+                        name='cityId'
+                        id='cdropdown'
                         value={formData.cityId || ''}
                         onChange={handleChange}
-                        className="select"
+                        className='select'
                       >
-                        <option value={user?.cityId ? user?.cityId : ''} className="option__title">
+                        <option value={user?.cityId ? user?.cityId : ''} className='option__title'>
                           {user?.cityId ? user?.cityId.name : 'Select a City'}
                         </option>
                         {citiesData
                           ? citiesData.map((city) => (
-                              <option key={city._id} value={city._id} className="option">
+                              <option key={city._id} value={city._id} className='option'>
                                 {city.name}
                               </option>
                             ))
@@ -435,9 +441,15 @@ const Page = () => {
                   </div>
 
                   {/* Images */}
-                  <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      marginBottom: '20px',
+                    }}
+                  >
                     <label
-                      htmlFor="pro"
+                      htmlFor='pro'
                       style={{
                         marginTop: '15px',
                         marginBottom: '10px',
@@ -449,16 +461,22 @@ const Page = () => {
                       Upload the profile
                     </label>
                     <input
-                      accept="image/*"
-                      id="pro"
-                      type="file"
-                      name="profile"
+                      accept='image/*'
+                      id='pro'
+                      type='file'
+                      name='profile'
                       onChange={handleProfileChange}
                     />
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '12px' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      marginBottom: '12px',
+                    }}
+                  >
                     <label
-                      htmlFor="back"
+                      htmlFor='back'
                       style={{
                         marginTop: '15px',
                         marginBottom: '10px',
@@ -470,10 +488,10 @@ const Page = () => {
                       Upload the background
                     </label>
                     <input
-                      accept="image/*"
-                      type="file"
-                      id="back"
-                      name="background"
+                      accept='image/*'
+                      type='file'
+                      id='back'
+                      name='background'
                       onChange={handleBackgroundChange}
                     />
                   </div>
@@ -502,23 +520,31 @@ const Page = () => {
                         >
                           <TextField
                             label={`${platform.name} Link`}
-                            type="text"
+                            type='text'
                             name={`${platform._id}_link`} // Use a unique name for each link field
                             onChange={(e) => handlePlatformsLinkChange(e, platform)}
                             fullWidth
                             placeholder={`Link`}
-                            style={{ marginTop: '15px', marginBottom: '0px', width: '50%' }}
+                            style={{
+                              marginTop: '15px',
+                              marginBottom: '0px',
+                              width: '50%',
+                            }}
                             className={styles.platfrom__input}
                           />
                           <TextField
                             key={platform._id}
                             label={`${platform.name} Followers`}
-                            type="number"
+                            type='number'
                             name={platform._id}
                             onChange={(e) => handlePlatformsChange(e, platform)}
                             fullWidth
                             placeholder={`Number of followers`}
-                            style={{ marginTop: '15px', marginBottom: '0px', width: '50%' }}
+                            style={{
+                              marginTop: '15px',
+                              marginBottom: '0px',
+                              width: '50%',
+                            }}
                             className={styles.platfrom__input}
                           />
                         </div>
@@ -528,10 +554,16 @@ const Page = () => {
                 </div>
               </div>
               {/* Submit Button */}
-              <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
+              <div
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                }}
+              >
                 <Button
-                  variant="contained"
-                  type="submit"
+                  variant='contained'
+                  type='submit'
                   style={{
                     backgroundColor: 'var(--second-blue)',
                     color: 'white',

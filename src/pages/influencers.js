@@ -70,8 +70,6 @@ const Page = () => {
 
   useEffect(() => {
     const filteredData = influencersData.filter((influencer) => {
-      console.log('influencer:', influencer) // Log the influencer object
-      console.log('---------------------')
       const idMatch = influencer?._id.toLowerCase().includes(searchTerm.toLowerCase())
       const nameMatch = influencer?.name.toLowerCase().includes(searchTerm.toLowerCase())
       const emailMatch = influencer?.email.toLowerCase().includes(searchTerm.toLowerCase())
@@ -132,22 +130,22 @@ const Page = () => {
         <title>Influencers | Confluence</title>
       </Head>
       <Box
-        component="main"
+        component='main'
         sx={{
           flexGrow: 1,
           py: 8,
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth='xl'>
           <Stack spacing={3}>
-            <Stack direction="row" justifyContent="space-between" spacing={4}>
+            <Stack direction='row' justifyContent='space-between' spacing={4}>
               <Stack spacing={1}>
-                <Typography variant="h4">Influencers</Typography>
-                <Stack alignItems="center" direction="row" spacing={1}>
+                <Typography variant='h4'>Influencers</Typography>
+                <Stack alignItems='center' direction='row' spacing={1}>
                   <Button
-                    color="inherit"
+                    color='inherit'
                     startIcon={
-                      <SvgIcon fontSize="small">
+                      <SvgIcon fontSize='small'>
                         <ArrowUpOnSquareIcon />
                       </SvgIcon>
                     }
@@ -156,9 +154,9 @@ const Page = () => {
                     Import
                   </Button>
                   <Button
-                    color="inherit"
+                    color='inherit'
                     startIcon={
-                      <SvgIcon fontSize="small">
+                      <SvgIcon fontSize='small'>
                         <ArrowDownOnSquareIcon />
                       </SvgIcon>
                     }
@@ -171,7 +169,7 @@ const Page = () => {
               <div onClick={handleAddClick}>
                 <Button
                   startIcon={
-                    <SvgIcon fontSize="small">
+                    <SvgIcon fontSize='small'>
                       <PlusIcon />
                     </SvgIcon>
                   }
@@ -180,7 +178,7 @@ const Page = () => {
                     backgroundColor: 'var(--second-blue)',
                     borderRadius: '30px',
                   }}
-                  variant="contained"
+                  variant='contained'
                 >
                   Add Influencer
                 </Button>

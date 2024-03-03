@@ -94,14 +94,18 @@ export const CitiesTable = (props) => {
                   <TableRow hover key={city._id} selected={isSelected}>
                     <TableCell style={{ fontSize: '16px' }}>{city._id}</TableCell>
                     <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
+                      <Stack alignItems='center' direction='row' spacing={2}>
                         <Avatar
                           src={`${process.env.NEXT_PUBLIC_BACK_END}/${city.icon}`}
-                          style={{ fontSize: '16px', width: '40px', height: '40px' }}
+                          style={{
+                            fontSize: '16px',
+                            width: '40px',
+                            height: '40px',
+                          }}
                         >
                           {getInitials(city.name)}
                         </Avatar>
-                        <Typography variant="subtitle2" style={{ fontSize: '16px' }}>
+                        <Typography variant='subtitle2' style={{ fontSize: '16px' }}>
                           {city.name}
                         </Typography>
                       </Stack>
@@ -111,16 +115,16 @@ export const CitiesTable = (props) => {
                       <div style={{ display: 'flex', gap: '8px' }}>
                         <div onClick={() => handleEditClick(city)} style={{ cursor: 'pointer' }}>
                           <img
-                            src="/assets/icons/pen-to-square-solid (1).svg"
+                            src='/assets/icons/pen-to-square-solid (1).svg'
                             style={{ width: '22px' }}
-                            alt=""
+                            alt=''
                           />
                         </div>
                         <div onClick={() => handleDeleteClick(city)} style={{ cursor: 'pointer' }}>
                           <img
-                            src="/assets/icons/trash-can-solid.svg"
+                            src='/assets/icons/trash-can-solid.svg'
                             style={{ width: '20px' }}
-                            alt=""
+                            alt=''
                           />
                         </div>
                       </div>
@@ -142,7 +146,7 @@ export const CitiesTable = (props) => {
         </Box>
       </Scrollbar>
       <TablePagination
-        component="div"
+        component='div'
         count={count}
         onPageChange={onPageChange}
         onRowsPerPageChange={onRowsPerPageChange}

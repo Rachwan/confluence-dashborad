@@ -82,15 +82,21 @@ export const SubscribersTable = (props) => {
                     <TableCell style={{ fontSize: '16px' }}>{subscriber.email}</TableCell>
                     <TableCell style={{ fontSize: '16px' }}>{formattedDate}</TableCell>
                     <TableCell>
-                      <div style={{ position: 'relative', left: '20px', width: 'fit-content' }}>
+                      <div
+                        style={{
+                          position: 'relative',
+                          left: '20px',
+                          width: 'fit-content',
+                        }}
+                      >
                         <div
                           onClick={() => handleDeleteClick(subscriber)}
                           style={{ cursor: 'pointer' }}
                         >
                           <img
-                            src="/assets/icons/trash-can-solid.svg"
+                            src='/assets/icons/trash-can-solid.svg'
                             style={{ width: '20px' }}
-                            alt=""
+                            alt=''
                           />
                         </div>
                       </div>
@@ -103,7 +109,7 @@ export const SubscribersTable = (props) => {
         </Box>
       </Scrollbar>
       <TablePagination
-        component="div"
+        component='div'
         count={count}
         onPageChange={onPageChange}
         onRowsPerPageChange={onRowsPerPageChange}

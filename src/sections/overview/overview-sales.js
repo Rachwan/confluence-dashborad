@@ -105,10 +105,10 @@ export const OverviewSales = (props) => {
       <CardHeader
         action={
           <Button
-            color="inherit"
-            size="small"
+            color='inherit'
+            size='small'
             startIcon={
-              <SvgIcon fontSize="small">
+              <SvgIcon fontSize='small'>
                 <ArrowPathIcon />
               </SvgIcon>
             }
@@ -116,21 +116,22 @@ export const OverviewSales = (props) => {
             Sync
           </Button>
         }
-        title="Sales"
+        title='Sales'
       />
       <CardContent>
-        <Chart height={350} options={chartOptions} series={chartSeries} type="bar" width="100%" />
+        <Chart height={350} options={chartOptions} series={chartSeries}
+type='bar' width='100%' />
       </CardContent>
       <Divider />
       <CardActions sx={{ justifyContent: 'flex-end' }}>
         <Button
-          color="inherit"
+          color='inherit'
           endIcon={
-            <SvgIcon fontSize="small">
+            <SvgIcon fontSize='small'>
               <ArrowRightIcon />
             </SvgIcon>
           }
-          size="small"
+          size='small'
         >
           Overview
         </Button>

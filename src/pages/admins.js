@@ -40,6 +40,10 @@ const Page = () => {
     }, [adminsData, page, rowsPerPage])
   }
 
+  // const useAdmins = useCallback((page, rowsPerPage) => {
+  //   return applyPagination(adminsData, page, rowsPerPage);
+  // }, [page, rowsPerPage]);
+
   const useAdminsIds = (admins) => {
     return useMemo(() => {
       return admins.map((admin) => admin.id)
@@ -72,22 +76,22 @@ const Page = () => {
         <title>Admins | Confluence</title>
       </Head>
       <Box
-        component="main"
+        component='main'
         sx={{
           flexGrow: 1,
           py: 8,
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth='xl'>
           <Stack spacing={3}>
-            <Stack direction="row" justifyContent="space-between" spacing={4}>
+            <Stack direction='row' justifyContent='space-between' spacing={4}>
               <Stack spacing={1}>
-                <Typography variant="h4">Admins</Typography>
-                <Stack alignItems="center" direction="row" spacing={1}>
+                <Typography variant='h4'>Admins</Typography>
+                <Stack alignItems='center' direction='row' spacing={1}>
                   <Button
-                    color="inherit"
+                    color='inherit'
                     startIcon={
-                      <SvgIcon fontSize="small">
+                      <SvgIcon fontSize='small'>
                         <ArrowUpOnSquareIcon />
                       </SvgIcon>
                     }
@@ -96,9 +100,9 @@ const Page = () => {
                     Import
                   </Button>
                   <Button
-                    color="inherit"
+                    color='inherit'
                     startIcon={
-                      <SvgIcon fontSize="small">
+                      <SvgIcon fontSize='small'>
                         <ArrowDownOnSquareIcon />
                       </SvgIcon>
                     }
@@ -111,7 +115,7 @@ const Page = () => {
               <div onClick={handleAddClick}>
                 <Button
                   startIcon={
-                    <SvgIcon fontSize="small">
+                    <SvgIcon fontSize='small'>
                       <PlusIcon />
                     </SvgIcon>
                   }
@@ -120,7 +124,7 @@ const Page = () => {
                     backgroundColor: 'var(--second-blue)',
                     borderRadius: '30px',
                   }}
-                  variant="contained"
+                  variant='contained'
                 >
                   Add Admin
                 </Button>

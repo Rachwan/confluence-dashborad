@@ -42,7 +42,7 @@ export const CustomersTable = (props) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell padding="checkbox">
+                <TableCell padding='checkbox'>
                   <Checkbox
                     checked={selectedAll}
                     indeterminate={selectedSome}
@@ -69,7 +69,7 @@ export const CustomersTable = (props) => {
 
                 return (
                   <TableRow hover key={customer.id} selected={isSelected}>
-                    <TableCell padding="checkbox">
+                    <TableCell padding='checkbox'>
                       <Checkbox
                         checked={isSelected}
                         onChange={(event) => {
@@ -82,9 +82,9 @@ export const CustomersTable = (props) => {
                       />
                     </TableCell>
                     <TableCell>
-                      <Stack alignItems="center" direction="row" spacing={2}>
+                      <Stack alignItems='center' direction='row' spacing={2}>
                         <Avatar src={customer.avatar}>{getInitials(customer.name)}</Avatar>
-                        <Typography variant="subtitle2">{customer.name}</Typography>
+                        <Typography variant='subtitle2'>{customer.name}</Typography>
                       </Stack>
                     </TableCell>
                     <TableCell>{customer.email}</TableCell>
@@ -101,7 +101,7 @@ export const CustomersTable = (props) => {
         </Box>
       </Scrollbar>
       <TablePagination
-        component="div"
+        component='div'
         count={count}
         onPageChange={onPageChange}
         onRowsPerPageChange={onRowsPerPageChange}

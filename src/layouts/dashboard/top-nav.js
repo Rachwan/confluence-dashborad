@@ -33,7 +33,7 @@ export const TopNav = (props) => {
   return (
     <>
       <Box
-        component="header"
+        component='header'
         sx={{
           backdropFilter: 'blur(6px)',
           backgroundColor: (theme) => alpha(theme.palette.background.default, 0.8),
@@ -49,19 +49,19 @@ export const TopNav = (props) => {
         }}
       >
         <Stack
-          alignItems="center"
-          direction="row"
-          justifyContent="space-between"
+          alignItems='center'
+          direction='row'
+          justifyContent='space-between'
           spacing={2}
           sx={{
             minHeight: TOP_NAV_HEIGHT,
             px: 2,
           }}
         >
-          <Stack alignItems="center" direction="row" spacing={2}>
+          <Stack alignItems='center' direction='row' spacing={2}>
             {!lgUp && (
               <IconButton onClick={onNavOpen}>
-                <SvgIcon fontSize="small">
+                <SvgIcon fontSize='small'>
                   <Bars3Icon />
                 </SvgIcon>
               </IconButton>
@@ -74,12 +74,12 @@ export const TopNav = (props) => {
               </IconButton>
             </Tooltip> */}
           </Stack>
-          <Stack alignItems="center" direction="row" spacing={2}>
-            <Link href="/notifications" target="_blank">
-              <Tooltip title="Notifications">
+          <Stack alignItems='center' direction='row' spacing={2}>
+            <Link href='/notifications' target='_blank'>
+              <Tooltip title='Notifications'>
                 <IconButton>
-                  <Badge badgeContent={4} color="success" variant="dot">
-                    <SvgIcon fontSize="small">
+                  <Badge badgeContent={4} color='success' variant='dot'>
+                    <SvgIcon fontSize='small'>
                       <BellIcon />
                     </SvgIcon>
                   </Badge>

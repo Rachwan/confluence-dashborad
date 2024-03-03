@@ -66,18 +66,18 @@ const EditCityForm = ({ city, onClose, fetchUpdatedData }) => {
         <h2 style={{ color: 'var(--second-blue)' }}>City Details</h2>
         <form onSubmit={handleSubmit}>
           <TextField
-            label="Name"
-            type="text"
-            name="name"
+            label='Name'
+            type='text'
+            name='name'
             value={formData.name}
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="Enter the City name"
+            margin='normal'
+            placeholder='Enter the City name'
           />
           <Button
-            variant="contained"
-            type="submit"
+            variant='contained'
+            type='submit'
             style={{
               backgroundColor: 'var(--second-blue)',
               color: 'white',

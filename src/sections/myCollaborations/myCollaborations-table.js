@@ -26,7 +26,7 @@ export const MyCollaborationsTable = (props) => {
   const {
     count = 0,
     items = [],
-    onPageChange = () => {},
+    onPageChange = () => { },
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 0,
@@ -97,7 +97,13 @@ export const MyCollaborationsTable = (props) => {
                 <LoadingSection padding={'50px'} />
               ) : items && items.length === 0 && !loading ? (
                 <TableRow>
-                  <TableCell style={{ fontSize: '18px', fontWeight: '500', padding: '50px' }}>
+                  <TableCell
+                    style={{
+                      fontSize: '18px',
+                      fontWeight: '500',
+                      padding: '50px',
+                    }}
+                  >
                     There is no collabs yet!
                   </TableCell>
                 </TableRow>
@@ -120,8 +126,8 @@ export const MyCollaborationsTable = (props) => {
                         </Link>
                       </TableCell> */}
                       <TableCell>
-                        <Stack alignItems="center" direction="row" spacing={2}>
-                          <Typography variant="subtitle2" style={{ fontSize: '16px' }}>
+                        <Stack alignItems='center' direction='row' spacing={2}>
+                          <Typography variant='subtitle2' style={{ fontSize: '16px' }}>
                             {myCollaboration.title}
                           </Typography>
                         </Stack>
@@ -129,7 +135,7 @@ export const MyCollaborationsTable = (props) => {
                       <TableCell>
                         <img
                           src={`${process.env.NEXT_PUBLIC_BACK_END}/${myCollaboration.background}`}
-                          alt=""
+                          alt=''
                           style={{ maxWidth: '125px', maxHeight: '200px' }}
                         />
                       </TableCell>
@@ -146,7 +152,7 @@ export const MyCollaborationsTable = (props) => {
                         </ul>
                       </TableCell>
                       <TableCell style={{ fontSize: '16px' }}>
-                        {myCollaboration.singleTitle}
+                        {myCollaboration.title}
                       </TableCell>
                       <TableCell style={{ fontSize: '16px' }}>
                         <ul
@@ -173,7 +179,7 @@ export const MyCollaborationsTable = (props) => {
                           <li>
                             <img
                               src={`${process.env.NEXT_PUBLIC_BACK_END}/${myCollaboration.firstImage}`}
-                              alt=""
+                              alt=''
                               style={{
                                 maxWidth: '200px',
                                 maxHeight: '200px',
@@ -184,7 +190,7 @@ export const MyCollaborationsTable = (props) => {
                           <li>
                             <img
                               src={`${process.env.NEXT_PUBLIC_BACK_END}/${myCollaboration.secondImage}`}
-                              alt=""
+                              alt=''
                               style={{
                                 maxWidth: '200px',
                                 maxHeight: '200px',
@@ -195,7 +201,7 @@ export const MyCollaborationsTable = (props) => {
                           <li>
                             <img
                               src={`${process.env.NEXT_PUBLIC_BACK_END}/${myCollaboration.thirdImage}`}
-                              alt=""
+                              alt=''
                               style={{
                                 maxWidth: '200px',
                                 maxHeight: '200px',
@@ -206,7 +212,7 @@ export const MyCollaborationsTable = (props) => {
                           <li>
                             <img
                               src={`${process.env.NEXT_PUBLIC_BACK_END}/${myCollaboration.fourthImage}`}
-                              alt=""
+                              alt=''
                               style={{
                                 maxWidth: '200px',
                                 maxHeight: '200px',
@@ -243,9 +249,9 @@ export const MyCollaborationsTable = (props) => {
                             style={{ cursor: 'pointer' }}
                           >
                             <img
-                              src="/assets/icons/pen-to-square-solid (1).svg"
+                              src='/assets/icons/pen-to-square-solid (1).svg'
                               style={{ width: '22px' }}
-                              alt=""
+                              alt=''
                             />
                           </div>
                           <div
@@ -253,9 +259,9 @@ export const MyCollaborationsTable = (props) => {
                             style={{ cursor: 'pointer' }}
                           >
                             <img
-                              src="/assets/icons/trash-can-solid.svg"
+                              src='/assets/icons/trash-can-solid.svg'
                               style={{ width: '20px' }}
-                              alt=""
+                              alt=''
                             />
                           </div>
                         </div>
@@ -278,7 +284,7 @@ export const MyCollaborationsTable = (props) => {
         </Box>
       </Scrollbar>
       <TablePagination
-        component="div"
+        component='div'
         count={count}
         onPageChange={onPageChange}
         onRowsPerPageChange={onRowsPerPageChange}

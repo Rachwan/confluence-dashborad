@@ -89,7 +89,13 @@ export const CategoriesTable = (props) => {
                 <LoadingSection padding={'50px'} />
               ) : items && items.length === 0 && !loading ? (
                 <TableRow>
-                  <TableCell style={{ fontSize: '18px', fontWeight: '500', padding: '50px' }}>
+                  <TableCell
+                    style={{
+                      fontSize: '18px',
+                      fontWeight: '500',
+                      padding: '50px',
+                    }}
+                  >
                     There is no categories yet for no reason!
                   </TableCell>
                 </TableRow>
@@ -107,12 +113,16 @@ export const CategoriesTable = (props) => {
                     <TableRow hover key={category._id} selected={isSelected}>
                       <TableCell style={{ fontSize: '16px' }}>{category._id}</TableCell>
                       <TableCell>
-                        <Stack alignItems="center" direction="row" spacing={2}>
+                        <Stack alignItems='center' direction='row' spacing={2}>
                           <img
                             src={`${process.env.NEXT_PUBLIC_BACK_END}/${category.icon}`}
-                            style={{ fontSize: '16px', width: '40px', height: '40px' }}
+                            style={{
+                              fontSize: '16px',
+                              width: '40px',
+                              height: '40px',
+                            }}
                           />
-                          <Typography variant="subtitle2" style={{ fontSize: '16px' }}>
+                          <Typography variant='subtitle2' style={{ fontSize: '16px' }}>
                             {category.name}
                           </Typography>
                         </Stack>
@@ -120,7 +130,7 @@ export const CategoriesTable = (props) => {
                       <TableCell>
                         <img
                           src={`${process.env.NEXT_PUBLIC_BACK_END}/${category.background}`}
-                          alt=""
+                          alt=''
                           style={{ maxWidth: '125px', maxHeight: '200px' }}
                         />
                       </TableCell>
@@ -133,9 +143,9 @@ export const CategoriesTable = (props) => {
                             style={{ cursor: 'pointer' }}
                           >
                             <img
-                              src="/assets/icons/pen-to-square-solid (1).svg"
+                              src='/assets/icons/pen-to-square-solid (1).svg'
                               style={{ width: '22px' }}
-                              alt=""
+                              alt=''
                             />
                           </div>
                           <div
@@ -144,9 +154,9 @@ export const CategoriesTable = (props) => {
                           >
                             {/* <DeleteIcon /> */}
                             <img
-                              src="/assets/icons/trash-can-solid.svg"
+                              src='/assets/icons/trash-can-solid.svg'
                               style={{ width: '20px' }}
-                              alt=""
+                              alt=''
                             />
                           </div>
                         </div>
@@ -169,7 +179,7 @@ export const CategoriesTable = (props) => {
         </Box>
       </Scrollbar>
       <TablePagination
-        component="div"
+        component='div'
         count={count}
         onPageChange={onPageChange}
         onRowsPerPageChange={onRowsPerPageChange}

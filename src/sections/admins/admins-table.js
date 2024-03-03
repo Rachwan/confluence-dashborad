@@ -79,7 +79,13 @@ export const AdminsTable = (props) => {
                 <LoadingSection padding={'50px'} />
               ) : items && items.length === 0 && !loading ? (
                 <TableRow>
-                  <TableCell style={{ fontSize: '18px', fontWeight: '500', padding: '50px' }}>
+                  <TableCell
+                    style={{
+                      fontSize: '18px',
+                      fontWeight: '500',
+                      padding: '50px',
+                    }}
+                  >
                     There is no admins yet for no reason!
                   </TableCell>
                 </TableRow>
@@ -97,14 +103,18 @@ export const AdminsTable = (props) => {
                     <TableRow hover key={admin._id} selected={isSelected}>
                       <TableCell style={{ fontSize: '16px' }}>{admin._id}</TableCell>
                       <TableCell>
-                        <Stack alignItems="center" direction="row" spacing={2}>
+                        <Stack alignItems='center' direction='row' spacing={2}>
                           <Avatar
                             src={`${process.env.NEXT_PUBLIC_BACK_END}/${admin.profile}`}
-                            style={{ fontSize: '16px', width: '60px', height: '60px' }}
+                            style={{
+                              fontSize: '16px',
+                              width: '60px',
+                              height: '60px',
+                            }}
                           >
                             {getInitials(admin.name)}
                           </Avatar>
-                          <Typography variant="subtitle2" style={{ fontSize: '16px' }}>
+                          <Typography variant='subtitle2' style={{ fontSize: '16px' }}>
                             {admin.name}
                           </Typography>
                         </Stack>
@@ -115,15 +125,21 @@ export const AdminsTable = (props) => {
                       </TableCell>
                       <TableCell style={{ fontSize: '16px' }}>{formattedDate}</TableCell>
                       <TableCell>
-                        <div style={{ position: 'relative', left: '20px', width: 'fit-content' }}>
+                        <div
+                          style={{
+                            position: 'relative',
+                            left: '20px',
+                            width: 'fit-content',
+                          }}
+                        >
                           <div
                             onClick={() => handleDeleteClick(admin)}
                             style={{ cursor: 'pointer' }}
                           >
                             <img
-                              src="/assets/icons/trash-can-solid.svg"
+                              src='/assets/icons/trash-can-solid.svg'
                               style={{ width: '20px' }}
-                              alt=""
+                              alt=''
                             />
                           </div>
                         </div>
@@ -137,7 +153,7 @@ export const AdminsTable = (props) => {
         </Box>
       </Scrollbar>
       <TablePagination
-        component="div"
+        component='div'
         count={count}
         onPageChange={onPageChange}
         onRowsPerPageChange={onRowsPerPageChange}

@@ -33,8 +33,8 @@ const App = (props) => {
       <CacheProvider value={emotionCache}>
         <Head>
           <title>Confluence</title>
-          <meta name="viewport" content="initial-scale=1, width=device-width" />
-          <link rel="icon" href="/favicon.svg" />
+          <meta name='viewport' content='initial-scale=1, width=device-width' />
+          <link rel='icon' href='/favicon.svg' />
         </Head>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <AuthProvider>

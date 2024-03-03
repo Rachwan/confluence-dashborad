@@ -23,6 +23,8 @@ const EditAllCollaborationForm = ({ allCollaboration, onClose, fetchUpdatedData 
     additional: [],
     userId: '',
   })
+  const [selectedPlatforms, setSelectedPlatforms] = useState([])
+  const [additionalItems, setAdditionalItems] = useState([{ name: '', detail: '' }])
 
   const [imagePreviews, setImagePreviews] = useState({
     firstImage: null,
@@ -43,23 +45,28 @@ const EditAllCollaborationForm = ({ allCollaboration, onClose, fetchUpdatedData 
     }))
   }
 
+
   useEffect(() => {
     if (allCollaboration) {
       setFormData({
-        title: allCollaboration.title || '',
-        background: allCollaboration.background || '',
-        description: allCollaboration.description || '',
-        platforms: allCollaboration.platforms || '',
-        images: allCollaboration.images || '',
-        additional: allCollaboration.additional || '',
-        singleTitle: allCollaboration.singleTitle || '',
+        title: allCollaboration?.title || '',
+        background: allCollaboration?.background || null,
+        firstImage: allCollaboration?.firstImage || null,
+        secondImage: allCollaboration?.secondImage || null,
+        thirdImage: allCollaboration?.thirdImage || null,
+        fourthImage: allCollaboration?.fourthImage || null,
+        description: allCollaboration?.description || '',
+        platforms: allCollaboration?.platforms || [],
+        // images: [null],
+        additional: allCollaboration?.additional || [],
       })
+      setSelectedPlatforms(allCollaboration?.platforms || []);
+      setAdditionalItems(allCollaboration?.additional || []);
     }
   }, [allCollaboration])
 
   /* Platforms */
   const [platformsData, setPlatformsData] = useState([])
-  const [selectedPlatforms, setSelectedPlatforms] = useState([])
 
   const fetchPlatformsData = async () => {
     try {
@@ -76,16 +83,20 @@ const EditAllCollaborationForm = ({ allCollaboration, onClose, fetchUpdatedData 
   }, [])
 
   const handlePlatformChange = (platformName) => {
-    setSelectedPlatforms((prevSelected) =>
-      prevSelected.includes(platformName)
-        ? prevSelected.filter((id) => id !== platformName)
-        : [...prevSelected, platformName],
-    )
-    setFormData((prevData) => ({
-      ...prevData,
-      platforms: selectedPlatforms,
-    }))
-  }
+    setSelectedPlatforms((prevSelected) => {
+      const updatedSelected = prevSelected.includes(platformName)
+        ? prevSelected.filter((name) => name !== platformName)
+        : [...prevSelected, platformName];
+
+      setFormData((prevData) => ({
+        ...prevData,
+        platforms: updatedSelected,
+      }));
+
+      return updatedSelected; // Return the updated selected platforms
+    });
+  };
+
   /* --------------------- */
 
   const handleChange = (e) => {
@@ -114,7 +125,6 @@ const EditAllCollaborationForm = ({ allCollaboration, onClose, fetchUpdatedData 
   // ----------------
 
   /* Additionals */
-  const [additionalItems, setAdditionalItems] = useState([{ name: '', detail: '' }])
 
   const handleInputChange = (index, field, value) => {
     const newItems = [...additionalItems]
@@ -162,7 +172,7 @@ const EditAllCollaborationForm = ({ allCollaboration, onClose, fetchUpdatedData 
 
       Swal.fire({
         title: 'Done',
-        text: `${response.data.name} Update it successfully!`,
+        text: `${response?.data?.title} Update it successfully!`,
         icon: 'success',
       })
 
@@ -190,7 +200,7 @@ const EditAllCollaborationForm = ({ allCollaboration, onClose, fetchUpdatedData 
         }}
       >
         <h2 style={{ color: 'var(--second-blue)' }}>Collaboration Details</h2>
-        <form enctype="multipart/form-data" onSubmit={handleSubmit}>
+        <form enctype='multipart/form-data' onSubmit={handleSubmit}>
           <h2
             style={{
               fontSize: '20px',
@@ -204,36 +214,42 @@ const EditAllCollaborationForm = ({ allCollaboration, onClose, fetchUpdatedData 
             For Collaboration Post:
           </h2>
           <TextField
-            label="Title"
-            type="text"
-            name="title"
-            value={formData.title}
+            label='Title'
+            type='text'
+            name='title'
+            value={formData?.title}
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="Enter the main title"
+            margin='normal'
+            placeholder='Enter the main title'
           />
-          <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '12px' }}>
-            <label htmlFor="back" style={{ fontSize: '20px', margin: '15px 0', fontWeight: '500' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              marginBottom: '12px',
+            }}
+          >
+            <label htmlFor='back' style={{ fontSize: '20px', margin: '15px 0', fontWeight: '500' }}>
               Upload a background
             </label>
             <input
-              accept="image/*"
-              type="file"
-              id="back"
-              name="background"
+              accept='image/*'
+              type='file'
+              id='back'
+              name='background'
               onChange={handleBackgroundChange}
             />
           </div>
           <TextField
-            label="Description"
-            type="text"
-            name="description"
+            label='Description'
+            type='text'
+            name='description'
             value={formData.description}
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="Enter the description"
+            margin='normal'
+            placeholder='Enter the description'
           />
           {/* Platforms */}
           <div>
@@ -266,14 +282,11 @@ const EditAllCollaborationForm = ({ allCollaboration, onClose, fetchUpdatedData 
             For Collaboration Details:
           </h2>
           <TextField
-            label="Single Title"
-            type="text"
-            name="singleTitle"
-            value={formData.singleTitle}
-            onChange={handleChange}
+            label='Main title'
+            value={formData.title}
             fullWidth
-            margin="normal"
-            placeholder="Enter the the single title"
+            margin='normal'
+            inputProps={{ readOnly: true }}
           />
           {/* 4 Images */}
           {/* <div>
@@ -317,17 +330,25 @@ const EditAllCollaborationForm = ({ allCollaboration, onClose, fetchUpdatedData 
           {Object.keys(imagePreviews).map((imageKey) => (
             <div
               key={imageKey}
-              style={{ display: 'flex', flexDirection: 'column', marginBottom: '12px' }}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                marginBottom: '12px',
+              }}
             >
               <label
                 htmlFor={imageKey}
-                style={{ fontSize: '20px', margin: '15px 0', fontWeight: '500' }}
+                style={{
+                  fontSize: '20px',
+                  margin: '15px 0',
+                  fontWeight: '500',
+                }}
               >
                 Upload {imageKey.charAt(0).toUpperCase() + imageKey.slice(1)}
               </label>
               <input
-                accept="image/*"
-                type="file"
+                accept='image/*'
+                type='file'
                 id={imageKey}
                 name={imageKey}
                 onChange={(e) => handleImageChange(imageKey, e)}
@@ -354,22 +375,28 @@ const EditAllCollaborationForm = ({ allCollaboration, onClose, fetchUpdatedData 
             {additionalItems.map((item, index) => (
               <div key={index} style={{ marginBottom: '15px' }}>
                 <TextField
-                  label="Name"
+                  label='Name'
                   value={item.name}
                   onChange={(e) => handleInputChange(index, 'name', e.target.value)}
                   fullWidth
-                  placeholder="Enter the the additional name"
+                  placeholder='Enter the the additional name'
                   style={{ marginBottom: '5px' }}
                 />
                 <TextField
-                  label="Detail"
+                  label='Detail'
                   value={item.detail}
                   onChange={(e) => handleInputChange(index, 'detail', e.target.value)}
                   fullWidth
-                  placeholder="Enter the the additional delail"
+                  placeholder='Enter the the additional delail'
                   style={{ marginBottom: '5px' }}
                 />
-                <div style={{ display: 'inline', width: '100%', justifyContent: 'flex-end' }}>
+                <div
+                  style={{
+                    display: 'inline',
+                    width: '100%',
+                    justifyContent: 'flex-end',
+                  }}
+                >
                   <Button
                     style={{ textAlign: 'right', color: 'var(--second-blue)' }}
                     onClick={() => handleRemoveItem(index)}
@@ -379,14 +406,20 @@ const EditAllCollaborationForm = ({ allCollaboration, onClose, fetchUpdatedData 
                 </div>
               </div>
             ))}
-            <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
+            <div
+              style={{
+                display: 'flex',
+                width: '100%',
+                justifyContent: 'flex-end',
+              }}
+            >
               <Button
                 style={{
                   backgroundColor: 'var(--second-blue)',
                   borderRadius: '6px',
                   padding: '5px 10px',
                 }}
-                variant="contained"
+                variant='contained'
                 onClick={handleAddItem}
               >
                 Add Item
@@ -394,8 +427,8 @@ const EditAllCollaborationForm = ({ allCollaboration, onClose, fetchUpdatedData 
             </div>
           </div>
           <Button
-            variant="contained"
-            type="submit"
+            variant='contained'
+            type='submit'
             style={{
               backgroundColor: 'var(--second-blue)',
               color: 'white',

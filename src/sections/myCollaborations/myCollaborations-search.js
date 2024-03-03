@@ -14,14 +14,14 @@ export const MyCollaborationsSearch = ({ onSearch }) => {
   return (
     <Card sx={{ p: 2 }}>
       <OutlinedInput
-        defaultValue=""
+        defaultValue=''
         fullWidth
-        placeholder="Search collaboration"
+        placeholder='Search collaboration'
         value={searchTerm}
         onChange={handleSearchChange}
         startAdornment={
-          <InputAdornment position="start">
-            <SvgIcon color="action" fontSize="small">
+          <InputAdornment position='start'>
+            <SvgIcon color='action' fontSize='small'>
               <MagnifyingGlassIcon />
             </SvgIcon>
           </InputAdornment>

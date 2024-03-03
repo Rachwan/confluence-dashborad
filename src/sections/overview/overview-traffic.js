@@ -82,13 +82,14 @@ export const OverviewTraffic = (props) => {
 
   return (
     <Card sx={sx}>
-      <CardHeader title="Traffic Source" />
+      <CardHeader title='Traffic Source' />
       <CardContent>
-        <Chart height={300} options={chartOptions} series={chartSeries} type="donut" width="100%" />
+        <Chart height={300} options={chartOptions} series={chartSeries}
+type='donut' width='100%' />
         <Stack
-          alignItems="center"
-          direction="row"
-          justifyContent="center"
+          alignItems='center'
+          direction='row'
+          justifyContent='center'
           spacing={2}
           sx={{ mt: 2 }}
         >
@@ -105,10 +106,10 @@ export const OverviewTraffic = (props) => {
                 }}
               >
                 {iconMap[label]}
-                <Typography sx={{ my: 1 }} variant="h6">
+                <Typography sx={{ my: 1 }} variant='h6'>
                   {label}
                 </Typography>
-                <Typography color="text.secondary" variant="subtitle2">
+                <Typography color='text.secondary' variant='subtitle2'>
                   {item}%
                 </Typography>
               </Box>

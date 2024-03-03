@@ -95,48 +95,61 @@ const EditPlatformForm = ({ platform, onClose, fetchUpdatedData }) => {
         <h2 style={{ color: 'var(--second-blue)' }}>Platform Details</h2>
         <form onSubmit={handleSubmit}>
           <TextField
-            label="Name"
-            type="text"
-            name="name"
+            label='Name'
+            type='text'
+            name='name'
             value={formData.name}
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="Enter the platform name"
+            margin='normal'
+            placeholder='Enter the platform name'
           />
 
-          <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '12px' }}>
-            <label htmlFor="icon" style={{ marginTop: '15px', marginBottom: '15px' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              marginBottom: '12px',
+            }}
+          >
+            <label htmlFor='icon' style={{ marginTop: '15px', marginBottom: '15px' }}>
               Upload an icon
             </label>
-            <input accept="image/*" id="icon" type="file" name="icon" onChange={handleIconChange} />
+            <input accept='image/*' id='icon' type='file'
+name='icon' onChange={handleIconChange} />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '12px' }}>
-            <label htmlFor="back" style={{ marginTop: '15px', marginBottom: '15px' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              marginBottom: '12px',
+            }}
+          >
+            <label htmlFor='back' style={{ marginTop: '15px', marginBottom: '15px' }}>
               Upload a background
             </label>
             <input
-              accept="image/*"
-              type="file"
-              id="back"
-              name="background"
+              accept='image/*'
+              type='file'
+              id='back'
+              name='background'
               onChange={handleBackgroundChange}
             />
           </div>
           <TextField
-            label="Active Color"
-            type="text"
-            name="activeColor"
+            label='Active Color'
+            type='text'
+            name='activeColor'
             value={formData.activeColor}
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="Enter the Active Color"
+            margin='normal'
+            placeholder='Enter the Active Color'
           />
 
           <Button
-            variant="contained"
-            type="submit"
+            variant='contained'
+            type='submit'
             style={{
               backgroundColor: 'var(--second-blue)',
               color: 'white',

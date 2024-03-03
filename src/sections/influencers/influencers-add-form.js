@@ -162,72 +162,73 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
         }}
       >
         <h2 style={{ color: 'var(--second-blue)', fontSize: '25px' }}>Influencer Details</h2>
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <form onSubmit={handleSubmit} encType='multipart/form-data'>
           <TextField
-            label="Name"
-            type="text"
-            name="name"
+            label='Name'
+            type='text'
+            name='name'
             value={formData.name}
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="Influencer name"
+            margin='normal'
+            placeholder='Influencer name'
             style={{ fontSize: '20px' }}
           />
           <TextField
-            label="Email"
-            type="email"
-            name="email"
+            label='Email'
+            type='email'
+            name='email'
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="Influencer email"
+            margin='normal'
+            placeholder='Influencer email'
             style={{ fontSize: '20px' }}
           />
           <TextField
-            label="Password"
-            type="password"
-            name="password"
+            label='Password'
+            type='password'
+            name='password'
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="Influencer password"
+            margin='normal'
+            placeholder='Influencer password'
             style={{ fontSize: '20px' }}
           />
           <TextField
-            label="Age"
-            type="text"
-            name="age"
+            label='Age'
+            type='text'
+            name='age'
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="Influencer age"
+            margin='normal'
+            placeholder='Influencer age'
             style={{ fontSize: '20px' }}
           />
           <TextField
-            label="Phone"
-            type="text"
-            name="number"
+            label='Phone'
+            type='text'
+            name='number'
             onChange={handleChange}
             fullWidth
-            margin="normal"
-            placeholder="Influencer number"
+            margin='normal'
+            placeholder='Influencer number'
             style={{ fontSize: '20px' }}
           />
 
           {/* Category */}
-          <div className="select__wrapper">
-            <label className="label" htmlFor="dropdown">
+          <div className='select__wrapper'>
+            <label className='label' htmlFor='dropdown'>
               Category
             </label>
-            <div className="arrow">
-              <select className="select" name="categoryId" id="dropdown" onChange={handleChange}>
-                <option value="" className="option__title">
+            <div className='arrow'>
+              <select className='select' name='categoryId' id='dropdown'
+onChange={handleChange}>
+                <option value='' className='option__title'>
                   Select a Category
                 </option>
                 {categoriesData
                   ? categoriesData.map((category) => (
-                      <option key={category._id} value={category._id} className="option">
+                      <option key={category._id} value={category._id} className='option'>
                         {category.name}
                       </option>
                     ))
@@ -237,18 +238,19 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
           </div>
 
           {/* City */}
-          <div className="select__wrapper">
-            <label className="label" htmlFor="cdropdown">
+          <div className='select__wrapper'>
+            <label className='label' htmlFor='cdropdown'>
               City
             </label>
-            <div className="arrow">
-              <select className="select" name="cityId" id="cdropdown" onChange={handleChange}>
-                <option value="" className="option__title">
+            <div className='arrow'>
+              <select className='select' name='cityId' id='cdropdown'
+onChange={handleChange}>
+                <option value='' className='option__title'>
                   Select a City
                 </option>
                 {citiesData
                   ? citiesData.map((city) => (
-                      <option key={city._id} value={city._id} className="option">
+                      <option key={city._id} value={city._id} className='option'>
                         {city.name}
                       </option>
                     ))
@@ -259,18 +261,18 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
 
           {/* Platforms */}
           <div>
-            <label htmlFor="pdropdown">Platforms</label>
+            <label htmlFor='pdropdown'>Platforms</label>
             {platformsData
               ? platformsData.map((platform, index) => (
                   <>
                     <TextField
                       key={platform._id}
                       label={`${platform.name}`}
-                      type="number"
+                      type='number'
                       name={platform._id}
                       onChange={(e) => handlePlatformsChange(e, platform)}
                       fullWidth
-                      margin="normal"
+                      margin='normal'
                       placeholder={`Number of followers`}
                       style={{ fontSize: '20px' }}
                     />
@@ -280,40 +282,60 @@ const InfluencerAddForm = ({ onClose, fetchUpdatedData }) => {
           </div>
 
           {/* Images */}
-          <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              marginBottom: '20px',
+            }}
+          >
             <label
-              htmlFor="pro"
-              style={{ marginTop: '15px', marginBottom: '10px', fontSize: '20px' }}
+              htmlFor='pro'
+              style={{
+                marginTop: '15px',
+                marginBottom: '10px',
+                fontSize: '20px',
+              }}
             >
               Upload the profile
             </label>
             <input
-              accept="image/*"
-              id="pro"
-              type="file"
-              name="profile"
+              accept='image/*'
+              id='pro'
+              type='file'
+              name='profile'
               onChange={handleProfileChange}
             />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '12px' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              marginBottom: '12px',
+            }}
+          >
             <label
-              htmlFor="back"
-              style={{ marginTop: '15px', marginBottom: '10px', fontSize: '20px' }}
+              htmlFor='back'
+              style={{
+                marginTop: '15px',
+                marginBottom: '10px',
+                fontSize: '20px',
+              }}
             >
               Upload the background
             </label>
             <input
-              accept="image/*"
-              type="file"
-              id="back"
-              name="background"
+              accept='image/*'
+              type='file'
+              id='back'
+              name='background'
               onChange={handleBackgroundChange}
             />
           </div>
 
           <Button
-            variant="contained"
-            type="submit"
+            variant='contained'
+            type='submit'
             style={{
               backgroundColor: 'var(--second-blue)',
               color: 'white',

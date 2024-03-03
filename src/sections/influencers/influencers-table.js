@@ -118,14 +118,18 @@ export const InfluencersTable = (props) => {
                     <TableRow hover key={influencer._id} selected={isSelected}>
                       <TableCell style={{ fontSize: '16px' }}>{influencer._id}</TableCell>
                       <TableCell>
-                        <Stack alignItems="center" direction="row" spacing={2}>
+                        <Stack alignItems='center' direction='row' spacing={2}>
                           <Avatar
                             src={`${process.env.NEXT_PUBLIC_BACK_END}/${influencer.profile}`}
-                            style={{ fontSize: '16px', width: '60px', height: '60px' }}
+                            style={{
+                              fontSize: '16px',
+                              width: '60px',
+                              height: '60px',
+                            }}
                           >
                             {getInitials(influencer.name)}
                           </Avatar>
-                          <Typography variant="subtitle2" style={{ fontSize: '16px' }}>
+                          <Typography variant='subtitle2' style={{ fontSize: '16px' }}>
                             {influencer.name}
                           </Typography>
                         </Stack>
@@ -134,7 +138,7 @@ export const InfluencersTable = (props) => {
                       <TableCell>
                         <img
                           src={`${process.env.NEXT_PUBLIC_BACK_END}/${influencer.background}`}
-                          alt=""
+                          alt=''
                           style={{ maxWidth: '125px', maxHeight: '200px' }}
                         />
                       </TableCell>
@@ -159,9 +163,13 @@ export const InfluencersTable = (props) => {
                                 }}
                               >
                                 <img
-                                  style={{ width: '20px', height: '20px', display: 'flex' }}
+                                  style={{
+                                    width: '20px',
+                                    height: '20px',
+                                    display: 'flex',
+                                  }}
                                   src={`${process.env.NEXT_PUBLIC_BACK_END}/${platform.platformId?.icon}`}
-                                  alt=""
+                                  alt=''
                                 />
                                 : {platform.followers}
                               </p>
@@ -174,7 +182,13 @@ export const InfluencersTable = (props) => {
                       </TableCell>
                       <TableCell style={{ fontSize: '16px' }}>{formattedDate}</TableCell>
                       <TableCell>
-                        <div style={{ position: 'relative', left: '20px', width: 'fit-content' }}>
+                        <div
+                          style={{
+                            position: 'relative',
+                            left: '20px',
+                            width: 'fit-content',
+                          }}
+                        >
                           {/* <div
                                           onClick={() => handleEditClick(influencer)}
                                           style={{ cursor: "pointer" }}
@@ -190,9 +204,9 @@ export const InfluencersTable = (props) => {
                             style={{ cursor: 'pointer' }}
                           >
                             <img
-                              src="/assets/icons/trash-can-solid.svg"
+                              src='/assets/icons/trash-can-solid.svg'
                               style={{ width: '20px' }}
-                              alt=""
+                              alt=''
                             />
                           </div>
                         </div>
@@ -215,7 +229,7 @@ export const InfluencersTable = (props) => {
         </Box>
       </Scrollbar>
       <TablePagination
-        component="div"
+        component='div'
         count={count}
         onPageChange={onPageChange}
         onRowsPerPageChange={onRowsPerPageChange}

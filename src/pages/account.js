@@ -10,16 +10,16 @@ const Page = () => (
       <title>Account | Confluence</title>
     </Head>
     <Box
-      component="main"
+      component='main'
       sx={{
         flexGrow: 1,
         py: 8,
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth='lg'>
         <Stack spacing={3}>
           <div>
-            <Typography variant="h4">Account</Typography>
+            <Typography variant='h4'>Account</Typography>
           </div>
           <div>
             <Grid container spacing={3}>
