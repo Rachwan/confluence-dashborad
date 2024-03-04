@@ -129,6 +129,7 @@ input[type='file']:focus {
 .css-17uk3vh:hover {
   color: white !important;
 }
+.css-kh833x,
 .css-k6zr9g-MuiBadge-badge {
   background-color: var(--second-blue) !important;
 }
@@ -156,4 +157,26 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
 .css-nw5nzo {
   padding-top: 50px !important;
   padding-bottom: 50px !important;
+}
+
+@media (max-width: 600px) {
+  .css-1nswnju-MuiStack-root,
+  .css-1o0vrud {
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+  .css-1nswnju-MuiStack-root > :not(style) ~ :not(style),
+  .css-1o0vrud > :not(style):not(style) {
+    margin: 0 !important;
+  }
+  .css-yvg06v-MuiButtonBase-root-MuiButton-root {
+    width: 100% !important;
+  }
+  .css-jbuu9m {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .css-1slf9vf {
+    width: 100%;
+  }
 }
