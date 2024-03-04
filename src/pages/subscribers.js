@@ -34,7 +34,7 @@ const Page = () => {
   const useSubscribers = (page, rowsPerPage) => {
     return useMemo(() => {
       return applyPagination(subscribersData, page, rowsPerPage)
-    }, [subscribersData, page, rowsPerPage])
+    }, [page, rowsPerPage, subscribersData])
   }
 
   const useSubscribersIds = (subscribers) => {

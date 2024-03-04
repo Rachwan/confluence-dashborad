@@ -6,7 +6,7 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Swal from 'sweetalert2'
 
-const adminAddForm = ({ onClose, fetchUpdatedData }) => {
+const AdminAddForm = ({ onClose, fetchUpdatedData }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -187,4 +187,4 @@ const adminAddForm = ({ onClose, fetchUpdatedData }) => {
   )
 }
 
-export default adminAddForm
+export default AdminAddForm

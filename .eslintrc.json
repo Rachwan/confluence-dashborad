@@ -1,7 +1,10 @@
 {
-  "extends": "next/core-web-vitals",
+  // "extends": "next/core-web-vitals",
+  "extends": ["next", "next/core-web-vitals", "prettier"],
   "rules": {
     "@next/next/no-img-element": "off",
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
     "jsx-a11y/alt-text": "off",
     "react/display-name": "off",
     "react/jsx-max-props-per-line": [
