@@ -22,7 +22,7 @@ export const AdminsTable = (props) => {
   const {
     count = 0,
     items = [],
-    onPageChange = () => {},
+    onPageChange = () => { },
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 0,
@@ -48,7 +48,7 @@ export const AdminsTable = (props) => {
 
           Swal.fire({
             title: 'Deleted!',
-            text: 'Your file has been deleted.',
+            text: `${admin?.name || "The admin"} has been deleted.`,
             icon: 'success',
           })
           onClose()

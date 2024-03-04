@@ -27,7 +27,7 @@ export const CategoriesTable = (props) => {
   const {
     count = 0,
     items = [],
-    onPageChange = () => {},
+    onPageChange = () => { },
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 0,
@@ -58,7 +58,7 @@ export const CategoriesTable = (props) => {
 
           Swal.fire({
             title: 'Deleted!',
-            text: 'Your file has been deleted.',
+            text: `${category?.name || "The category"} has been deleted.`,
             icon: 'success',
           })
           onClose()

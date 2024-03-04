@@ -21,7 +21,7 @@ export const BusinessesTable = (props) => {
   const {
     count = 0,
     items = [],
-    onPageChange = () => {},
+    onPageChange = () => { },
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 0,
@@ -46,7 +46,7 @@ export const BusinessesTable = (props) => {
 
           Swal.fire({
             title: 'Deleted!',
-            text: 'Your file has been deleted.',
+            text: `${business?.name || "The business"} has been deleted.`,
             icon: 'success',
           })
           onClose()

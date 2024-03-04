@@ -61,7 +61,7 @@ export const MyCollaborationsTable = (props) => {
 
           Swal.fire({
             title: 'Deleted!',
-            text: 'Your file has been deleted.',
+            text: `${myCollaboration?.title || "The collaboration"} has been deleted.`,
             icon: 'success',
           })
           onClose()

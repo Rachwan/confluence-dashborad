@@ -27,7 +27,7 @@ export const InfluencersTable = (props) => {
   const {
     count = 0,
     items = [],
-    onPageChange = () => {},
+    onPageChange = () => { },
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 0,
@@ -58,7 +58,7 @@ export const InfluencersTable = (props) => {
 
           Swal.fire({
             title: 'Deleted!',
-            text: 'Your file has been deleted.',
+            text: `${infleuncer?.name || "The influencer"} has been deleted.`,
             icon: 'success',
           })
           onClose()

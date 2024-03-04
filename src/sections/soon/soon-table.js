@@ -17,7 +17,7 @@ export const SoonTable = (props) => {
   const {
     count = 0,
     items = [],
-    onPageChange = () => {},
+    onPageChange = () => { },
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 0,
@@ -42,7 +42,7 @@ export const SoonTable = (props) => {
 
           Swal.fire({
             title: 'Deleted!',
-            text: 'Your file has been deleted.',
+            text: `${soon?.email || "The email"}has been deleted.`,
             icon: 'success',
           })
           onClose()
