@@ -179,4 +179,8 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   .css-1slf9vf {
     width: 100%;
   }
+  .css-1vzw10j {
+    width: auto !important;
+    padding: 20px !important;
+  }
 }
