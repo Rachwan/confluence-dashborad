@@ -1,7 +1,7 @@
 .css-17uk3vh,
 .css-va78e6 {
   /* font-size: 18px !important; */
-  font-size: 17px !important;
+  font-size: 18px !important;
 }
 
 input::file-selector-button {
@@ -133,12 +133,15 @@ input[type='file']:focus {
   background-color: var(--second-blue) !important;
 }
 
+.css-suve4f,
 .css-14xerxl-MuiButtonBase-root-MuiButton-root {
   background-color: #fafafa !important;
   color: var(--second-blue) !important;
   border-radius: 30px !important;
   transition: 0.3s !important;
 }
+
+.css-suve4f:hover,
 .css-14xerxl-MuiButtonBase-root-MuiButton-root:hover {
   background-color: var(--second-blue) !important;
   color: #fafafa !important;
