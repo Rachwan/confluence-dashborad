@@ -1,6 +1,7 @@
 .css-17uk3vh,
 .css-va78e6 {
-  font-size: 18px !important;
+  /* font-size: 18px !important; */
+  font-size: 17px !important;
 }
 
 input::file-selector-button {
@@ -22,6 +23,7 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
   outline: none !important;
 }
 
+.css-18oc00h,
 .css-1uruvu9-MuiInputBase-root-MuiOutlinedInput-root {
   border-radius: 30px !important;
 }

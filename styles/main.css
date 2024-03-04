@@ -33,12 +33,18 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  /* font-family: 'Barlow', sans-serif; */
 }
 html {
   scroll-behavior: smooth;
 }
 body {
-  font-family: 'poppins', sans-serif;
+  font-family:
+    'Barlow',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif !important;
   overflow-x: hidden;
 }
 ul {

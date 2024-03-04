@@ -8,11 +8,17 @@ export const UserProvider = ({ children }) => {
   const [checkUser, setCheckUser] = useState(true)
   const [userUpdated, setUserUpdated] = useState(false)
 
+  // useEffect(() => {
+  //   if (!user || userUpdated) {
+  //     fetchUserData()
+  //   }
+  // }, [user, userUpdated])
+
   useEffect(() => {
-    if (!user || userUpdated) {
-      fetchUserData()
+    if (checkUser) {
+      fetchUserData();
     }
-  }, [user, userUpdated])
+  }, [checkUser, user, userUpdated]);
 
   const fetchUserData = async () => {
     try {
